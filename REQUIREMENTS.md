@@ -76,7 +76,7 @@ This document outlines everything the Gaia Commons Council App 2.0 needs to func
 ### Build-Time Dependencies
 
 #### TypeScript Compiler
-- **Version**: 5.3.3 (installed via npm)
+- **Version**: 5.7.3 (installed via npm)
 - **Why**: Compiles TypeScript source files to JavaScript
 - **Auto-installed**: Yes, via `npm install`
 
@@ -343,13 +343,13 @@ Built-in security features:
 
 ```json
 {
-  "express": "^4.18.2",           // Web framework
-  "cors": "^2.8.5",               // CORS middleware
-  "helmet": "^7.1.0",             // Security headers
-  "morgan": "^1.10.0",            // HTTP request logger
-  "dotenv": "^16.3.1",            // Environment variables
-  "pg": "^8.11.3",                // PostgreSQL client
-  "express-rate-limit": "^7.1.5"  // Rate limiting
+  "express": "4.22.1",           // Web framework
+  "cors": "2.8.6",               // CORS middleware
+  "helmet": "7.2.0",             // Security headers
+  "morgan": "1.10.1",            // HTTP request logger
+  "dotenv": "16.6.1",            // Environment variables
+  "pg": "8.18.0",                // PostgreSQL client
+  "express-rate-limit": "7.5.1"  // Rate limiting
 }
 ```
 
@@ -357,12 +357,17 @@ Built-in security features:
 
 ```json
 {
-  "@types/express": "^4.17.21",   // TypeScript types
-  "@types/cors": "^2.8.17",       // TypeScript types
-  "@types/morgan": "^1.9.9",      // TypeScript types
-  "@types/node": "^20.10.6",      // TypeScript types
-  "@types/pg": "^8.10.9",         // TypeScript types
-  "typescript": "^5.3.3"          // TypeScript compiler
+  "@types/express": "4.17.25",   // TypeScript types
+  "@types/cors": "2.8.17",       // TypeScript types
+  "@types/morgan": "1.9.9",      // TypeScript types
+  "@types/node": "20.19.31",     // TypeScript types
+  "@types/pg": "8.11.0",         // TypeScript types
+  "@types/jest": "30.0.0",       // TypeScript types for Jest
+  "@types/supertest": "6.0.3",   // TypeScript types for Supertest
+  "jest": "30.2.0",              // Testing framework
+  "supertest": "7.2.2",          // HTTP testing
+  "ts-jest": "29.4.6",           // Jest TypeScript preprocessor
+  "typescript": "5.7.3"          // TypeScript compiler
 }
 ```
 
@@ -433,4 +438,5 @@ Once running, these should work:
 ---
 
 **Last Updated**: 2026-02-04  
-**Version**: 5.0.0
+**Version**: 5.0.0  
+**Dependencies Last Updated**: 2026-02-04
