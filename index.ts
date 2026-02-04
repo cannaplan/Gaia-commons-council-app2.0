@@ -38,27 +38,6 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 // ============================================================================
-// ERROR HANDLING
-// ============================================================================
-
-// 404 handler
-app.use((req: Request, res: Response) => {
-  res.status(404).json({
-    status: "error",
-    message: `Route ${req.method} ${req.path} not found`,
-  });
-});
-
-// Global error handler
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.error("Error:", err);
-  res.status(500).json({
-    status: "error",
-    message: err.message || "Internal server error",
-  });
-});
-
-// ============================================================================
 // SERVER STARTUP
 // ============================================================================
 
@@ -76,6 +55,27 @@ async function startServer() {
     // Register all API routes (this also seeds the database)
     const router = await registerRoutes(server);
     app.use(router);
+    
+    // ============================================================================
+    // ERROR HANDLING (must be after routes)
+    // ============================================================================
+    
+    // 404 handler
+    app.use((req: Request, res: Response) => {
+      res.status(404).json({
+        status: "error",
+        message: `Route ${req.method} ${req.path} not found`,
+      });
+    });
+    
+    // Global error handler
+    app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+      console.error("Error:", err);
+      res.status(500).json({
+        status: "error",
+        message: err.message || "Internal server error",
+      });
+    });
     
     server.listen(PORT, () => {
       console.log("");
