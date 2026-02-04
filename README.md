@@ -72,6 +72,29 @@ npm start
 
 Server starts at `http://localhost:3000`
 
+## Quick verification (local)
+
+Start the stack with Docker Compose and verify the health endpoint:
+
+```bash
+# Start app + postgres
+docker compose up
+
+# In another terminal (wait a few seconds for server to start):
+curl http://localhost:3000/api/health
+```
+
+Run the smoke test locally (requires build step):
+
+```bash
+npm install
+npm run build
+# start server in background (or in a separate terminal)
+node ./dist/index.js &
+# run tests
+npm test
+```
+
 ## API Endpoints
 
 ### Core Stats
