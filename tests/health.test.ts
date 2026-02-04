@@ -5,8 +5,6 @@ describe('Health endpoint (smoke)', () => {
     const res = await request('http://localhost:3000').get('/api/health').expect(200);
     expect(res.headers['content-type']).toMatch(/json/);
     expect(res.body).toBeDefined();
-    if (typeof res.body === 'object') {
-      expect(res.body).toHaveProperty('status');
-    }
+    expect(res.body).toHaveProperty('status');
   }, 10000);
 });
