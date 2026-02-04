@@ -1,4 +1,4 @@
-import { pool, query } from "./db";
+import { query } from "./db";
 import {
   IStorage,
   PilotStats,

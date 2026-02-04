@@ -389,123 +389,123 @@ export interface MiningAlternative {
 
 export interface IStorage {
   // Core Stats (Singleton)
-  getPilotStats(): PilotStats | null;
-  setPilotStats(stats: PilotStats): void;
+  getPilotStats(): Promise<PilotStats | null>;
+  setPilotStats(stats: PilotStats): Promise<void>;
   
-  getEndowmentStats(): EndowmentStats | null;
-  setEndowmentStats(stats: EndowmentStats): void;
+  getEndowmentStats(): Promise<EndowmentStats | null>;
+  setEndowmentStats(stats: EndowmentStats): Promise<void>;
   
-  getFinancialMetrics(): FinancialMetrics | null;
-  setFinancialMetrics(metrics: FinancialMetrics): void;
+  getFinancialMetrics(): Promise<FinancialMetrics | null>;
+  setFinancialMetrics(metrics: FinancialMetrics): Promise<void>;
   
-  getClimateMetrics(): ClimateMetrics | null;
-  setClimateMetrics(metrics: ClimateMetrics): void;
+  getClimateMetrics(): Promise<ClimateMetrics | null>;
+  setClimateMetrics(metrics: ClimateMetrics): Promise<void>;
   
-  getLegalFramework(): LegalFramework | null;
-  setLegalFramework(framework: LegalFramework): void;
+  getLegalFramework(): Promise<LegalFramework | null>;
+  setLegalFramework(framework: LegalFramework): Promise<void>;
   
-  getNationwideFoodSecurity(): NationwideFoodSecurity | null;
-  setNationwideFoodSecurity(security: NationwideFoodSecurity): void;
+  getNationwideFoodSecurity(): Promise<NationwideFoodSecurity | null>;
+  setNationwideFoodSecurity(security: NationwideFoodSecurity): Promise<void>;
   
-  getGlobalRegenerationSummary(): GlobalRegenerationSummary | null;
-  setGlobalRegenerationSummary(summary: GlobalRegenerationSummary): void;
+  getGlobalRegenerationSummary(): Promise<GlobalRegenerationSummary | null>;
+  setGlobalRegenerationSummary(summary: GlobalRegenerationSummary): Promise<void>;
   
   // Lists
-  getTimelineEvents(): TimelineEvent[];
-  setTimelineEvents(events: TimelineEvent[]): void;
+  getTimelineEvents(): Promise<TimelineEvent[]>;
+  setTimelineEvents(events: TimelineEvent[]): Promise<void>;
   
-  getSlides(): Slide[];
-  setSlides(slides: Slide[]): void;
+  getSlides(): Promise<Slide[]>;
+  setSlides(slides: Slide[]): Promise<void>;
   
-  getHistoricalFinancials(): HistoricalFinancial[];
-  setHistoricalFinancials(financials: HistoricalFinancial[]): void;
+  getHistoricalFinancials(): Promise<HistoricalFinancial[]>;
+  setHistoricalFinancials(financials: HistoricalFinancial[]): Promise<void>;
   
-  getSchoolClusters(): SchoolCluster[];
-  setSchoolClusters(clusters: SchoolCluster[]): void;
+  getSchoolClusters(): Promise<SchoolCluster[]>;
+  setSchoolClusters(clusters: SchoolCluster[]): Promise<void>;
   
-  getSchools(): School[];
-  setSchools(schools: School[]): void;
+  getSchools(): Promise<School[]>;
+  setSchools(schools: School[]): Promise<void>;
   
-  getScaleProjections(): ScaleProjection[];
-  setScaleProjections(projections: ScaleProjection[]): void;
+  getScaleProjections(): Promise<ScaleProjection[]>;
+  setScaleProjections(projections: ScaleProjection[]): Promise<void>;
   
-  getEnvironmentalImpacts(): EnvironmentalImpact[];
-  setEnvironmentalImpacts(impacts: EnvironmentalImpact[]): void;
+  getEnvironmentalImpacts(): Promise<EnvironmentalImpact[]>;
+  setEnvironmentalImpacts(impacts: EnvironmentalImpact[]): Promise<void>;
   
-  getJobCreations(): JobCreation[];
-  setJobCreations(jobs: JobCreation[]): void;
+  getJobCreations(): Promise<JobCreation[]>;
+  setJobCreations(jobs: JobCreation[]): Promise<void>;
   
-  getEndowmentProjections(): EndowmentProjection[];
-  setEndowmentProjections(projections: EndowmentProjection[]): void;
+  getEndowmentProjections(): Promise<EndowmentProjection[]>;
+  setEndowmentProjections(projections: EndowmentProjection[]): Promise<void>;
   
-  getExpandedJobs(): ExpandedJob[];
-  setExpandedJobs(jobs: ExpandedJob[]): void;
+  getExpandedJobs(): Promise<ExpandedJob[]>;
+  setExpandedJobs(jobs: ExpandedJob[]): Promise<void>;
   
-  getK12Curriculums(): K12Curriculum[];
-  setK12Curriculums(curriculums: K12Curriculum[]): void;
+  getK12Curriculums(): Promise<K12Curriculum[]>;
+  setK12Curriculums(curriculums: K12Curriculum[]): Promise<void>;
   
-  getCoalitionPartners(): CoalitionPartner[];
-  setCoalitionPartners(partners: CoalitionPartner[]): void;
+  getCoalitionPartners(): Promise<CoalitionPartner[]>;
+  setCoalitionPartners(partners: CoalitionPartner[]): Promise<void>;
   
-  getFundingSources(): FundingSource[];
-  setFundingSources(sources: FundingSource[]): void;
+  getFundingSources(): Promise<FundingSource[]>;
+  setFundingSources(sources: FundingSource[]): Promise<void>;
   
-  getTransparencyFeatures(): TransparencyFeature[];
-  setTransparencyFeatures(features: TransparencyFeature[]): void;
+  getTransparencyFeatures(): Promise<TransparencyFeature[]>;
+  setTransparencyFeatures(features: TransparencyFeature[]): Promise<void>;
   
-  getAccountabilityMechanisms(): AccountabilityMechanism[];
-  setAccountabilityMechanisms(mechanisms: AccountabilityMechanism[]): void;
+  getAccountabilityMechanisms(): Promise<AccountabilityMechanism[]>;
+  setAccountabilityMechanisms(mechanisms: AccountabilityMechanism[]): Promise<void>;
   
-  getTribalPartnerships(): TribalPartnership[];
-  setTribalPartnerships(partnerships: TribalPartnership[]): void;
+  getTribalPartnerships(): Promise<TribalPartnership[]>;
+  setTribalPartnerships(partnerships: TribalPartnership[]): Promise<void>;
   
-  getImplementationTimelines(): ImplementationTimeline[];
-  setImplementationTimelines(timelines: ImplementationTimeline[]): void;
+  getImplementationTimelines(): Promise<ImplementationTimeline[]>;
+  setImplementationTimelines(timelines: ImplementationTimeline[]): Promise<void>;
   
-  getPoliticalRoadmaps(): PoliticalRoadmap[];
-  setPoliticalRoadmaps(roadmaps: PoliticalRoadmap[]): void;
+  getPoliticalRoadmaps(): Promise<PoliticalRoadmap[]>;
+  setPoliticalRoadmaps(roadmaps: PoliticalRoadmap[]): Promise<void>;
   
-  getStressTests(): StressTest[];
-  setStressTests(tests: StressTest[]): void;
+  getStressTests(): Promise<StressTest[]>;
+  setStressTests(tests: StressTest[]): Promise<void>;
   
-  getTieredCarbonPricings(): TieredCarbonPricing[];
-  setTieredCarbonPricings(pricings: TieredCarbonPricing[]): void;
+  getTieredCarbonPricings(): Promise<TieredCarbonPricing[]>;
+  setTieredCarbonPricings(pricings: TieredCarbonPricing[]): Promise<void>;
   
-  getRegenerativeAgriculturePractices(): RegenerativeAgriculture[];
-  setRegenerativeAgriculturePractices(practices: RegenerativeAgriculture[]): void;
+  getRegenerativeAgriculturePractices(): Promise<RegenerativeAgriculture[]>;
+  setRegenerativeAgriculturePractices(practices: RegenerativeAgriculture[]): Promise<void>;
   
-  getLaborTransitions(): LaborTransition[];
-  setLaborTransitions(transitions: LaborTransition[]): void;
+  getLaborTransitions(): Promise<LaborTransition[]>;
+  setLaborTransitions(transitions: LaborTransition[]): Promise<void>;
   
-  getPoliticalCoalitions(): PoliticalCoalition[];
-  setPoliticalCoalitions(coalitions: PoliticalCoalition[]): void;
+  getPoliticalCoalitions(): Promise<PoliticalCoalition[]>;
+  setPoliticalCoalitions(coalitions: PoliticalCoalition[]): Promise<void>;
   
-  getPlanetaryBoundaries(): PlanetaryBoundary[];
-  setPlanetaryBoundaries(boundaries: PlanetaryBoundary[]): void;
+  getPlanetaryBoundaries(): Promise<PlanetaryBoundary[]>;
+  setPlanetaryBoundaries(boundaries: PlanetaryBoundary[]): Promise<void>;
   
-  getCalibrationTargets(): CalibrationTarget[];
-  setCalibrationTargets(targets: CalibrationTarget[]): void;
+  getCalibrationTargets(): Promise<CalibrationTarget[]>;
+  setCalibrationTargets(targets: CalibrationTarget[]): Promise<void>;
   
-  getModelMaturities(): ModelMaturity[];
-  setModelMaturities(maturities: ModelMaturity[]): void;
+  getModelMaturities(): Promise<ModelMaturity[]>;
+  setModelMaturities(maturities: ModelMaturity[]): Promise<void>;
   
-  getHistoricalClimateData(): HistoricalClimateData[];
-  setHistoricalClimateData(data: HistoricalClimateData[]): void;
+  getHistoricalClimateData(): Promise<HistoricalClimateData[]>;
+  setHistoricalClimateData(data: HistoricalClimateData[]): Promise<void>;
   
-  getMonteCarloSimulations(): MonteCarloSimulation[];
-  setMonteCarloSimulations(simulations: MonteCarloSimulation[]): void;
+  getMonteCarloSimulations(): Promise<MonteCarloSimulation[]>;
+  setMonteCarloSimulations(simulations: MonteCarloSimulation[]): Promise<void>;
   
-  getScenarioComparisons(): ScenarioComparison[];
-  setScenarioComparisons(comparisons: ScenarioComparison[]): void;
+  getScenarioComparisons(): Promise<ScenarioComparison[]>;
+  setScenarioComparisons(comparisons: ScenarioComparison[]): Promise<void>;
   
-  getOptimizationParams(): OptimizationParam[];
-  setOptimizationParams(params: OptimizationParam[]): void;
+  getOptimizationParams(): Promise<OptimizationParam[]>;
+  setOptimizationParams(params: OptimizationParam[]): Promise<void>;
   
-  getSensitivityAnalyses(): SensitivityAnalysis[];
-  setSensitivityAnalyses(analyses: SensitivityAnalysis[]): void;
+  getSensitivityAnalyses(): Promise<SensitivityAnalysis[]>;
+  setSensitivityAnalyses(analyses: SensitivityAnalysis[]): Promise<void>;
   
-  getMiningAlternatives(): MiningAlternative[];
-  setMiningAlternatives(alternatives: MiningAlternative[]): void;
+  getMiningAlternatives(): Promise<MiningAlternative[]>;
+  setMiningAlternatives(alternatives: MiningAlternative[]): Promise<void>;
 }
 
 // In-Memory Storage Implementation
@@ -555,316 +555,316 @@ export class MemStorage implements IStorage {
   private miningAlternatives: MiningAlternative[] = [];
   
   // Core Stats Methods
-  getPilotStats(): PilotStats | null {
+  async getPilotStats(): Promise<PilotStats | null> {
     return this.pilotStats;
   }
   
-  setPilotStats(stats: PilotStats): void {
+  async setPilotStats(stats: PilotStats): Promise<void> {
     this.pilotStats = stats;
   }
   
-  getEndowmentStats(): EndowmentStats | null {
+  async getEndowmentStats(): Promise<EndowmentStats | null> {
     return this.endowmentStats;
   }
   
-  setEndowmentStats(stats: EndowmentStats): void {
+  async setEndowmentStats(stats: EndowmentStats): Promise<void> {
     this.endowmentStats = stats;
   }
   
-  getFinancialMetrics(): FinancialMetrics | null {
+  async getFinancialMetrics(): Promise<FinancialMetrics | null> {
     return this.financialMetrics;
   }
   
-  setFinancialMetrics(metrics: FinancialMetrics): void {
+  async setFinancialMetrics(metrics: FinancialMetrics): Promise<void> {
     this.financialMetrics = metrics;
   }
   
-  getClimateMetrics(): ClimateMetrics | null {
+  async getClimateMetrics(): Promise<ClimateMetrics | null> {
     return this.climateMetrics;
   }
   
-  setClimateMetrics(metrics: ClimateMetrics): void {
+  async setClimateMetrics(metrics: ClimateMetrics): Promise<void> {
     this.climateMetrics = metrics;
   }
   
-  getLegalFramework(): LegalFramework | null {
+  async getLegalFramework(): Promise<LegalFramework | null> {
     return this.legalFramework;
   }
   
-  setLegalFramework(framework: LegalFramework): void {
+  async setLegalFramework(framework: LegalFramework): Promise<void> {
     this.legalFramework = framework;
   }
   
-  getNationwideFoodSecurity(): NationwideFoodSecurity | null {
+  async getNationwideFoodSecurity(): Promise<NationwideFoodSecurity | null> {
     return this.nationwideFoodSecurity;
   }
   
-  setNationwideFoodSecurity(security: NationwideFoodSecurity): void {
+  async setNationwideFoodSecurity(security: NationwideFoodSecurity): Promise<void> {
     this.nationwideFoodSecurity = security;
   }
   
-  getGlobalRegenerationSummary(): GlobalRegenerationSummary | null {
+  async getGlobalRegenerationSummary(): Promise<GlobalRegenerationSummary | null> {
     return this.globalRegenerationSummary;
   }
   
-  setGlobalRegenerationSummary(summary: GlobalRegenerationSummary): void {
+  async setGlobalRegenerationSummary(summary: GlobalRegenerationSummary): Promise<void> {
     this.globalRegenerationSummary = summary;
   }
   
   // List Methods
-  getTimelineEvents(): TimelineEvent[] {
+  async getTimelineEvents(): Promise<TimelineEvent[]> {
     return this.timelineEvents;
   }
   
-  setTimelineEvents(events: TimelineEvent[]): void {
+  async setTimelineEvents(events: TimelineEvent[]): Promise<void> {
     this.timelineEvents = events;
   }
   
-  getSlides(): Slide[] {
+  async getSlides(): Promise<Slide[]> {
     return this.slides;
   }
   
-  setSlides(slides: Slide[]): void {
+  async setSlides(slides: Slide[]): Promise<void> {
     this.slides = slides;
   }
   
-  getHistoricalFinancials(): HistoricalFinancial[] {
+  async getHistoricalFinancials(): Promise<HistoricalFinancial[]> {
     return this.historicalFinancials;
   }
   
-  setHistoricalFinancials(financials: HistoricalFinancial[]): void {
+  async setHistoricalFinancials(financials: HistoricalFinancial[]): Promise<void> {
     this.historicalFinancials = financials;
   }
   
-  getSchoolClusters(): SchoolCluster[] {
+  async getSchoolClusters(): Promise<SchoolCluster[]> {
     return this.schoolClusters;
   }
   
-  setSchoolClusters(clusters: SchoolCluster[]): void {
+  async setSchoolClusters(clusters: SchoolCluster[]): Promise<void> {
     this.schoolClusters = clusters;
   }
   
-  getSchools(): School[] {
+  async getSchools(): Promise<School[]> {
     return this.schools;
   }
   
-  setSchools(schools: School[]): void {
+  async setSchools(schools: School[]): Promise<void> {
     this.schools = schools;
   }
   
-  getScaleProjections(): ScaleProjection[] {
+  async getScaleProjections(): Promise<ScaleProjection[]> {
     return this.scaleProjections;
   }
   
-  setScaleProjections(projections: ScaleProjection[]): void {
+  async setScaleProjections(projections: ScaleProjection[]): Promise<void> {
     this.scaleProjections = projections;
   }
   
-  getEnvironmentalImpacts(): EnvironmentalImpact[] {
+  async getEnvironmentalImpacts(): Promise<EnvironmentalImpact[]> {
     return this.environmentalImpacts;
   }
   
-  setEnvironmentalImpacts(impacts: EnvironmentalImpact[]): void {
+  async setEnvironmentalImpacts(impacts: EnvironmentalImpact[]): Promise<void> {
     this.environmentalImpacts = impacts;
   }
   
-  getJobCreations(): JobCreation[] {
+  async getJobCreations(): Promise<JobCreation[]> {
     return this.jobCreations;
   }
   
-  setJobCreations(jobs: JobCreation[]): void {
+  async setJobCreations(jobs: JobCreation[]): Promise<void> {
     this.jobCreations = jobs;
   }
   
-  getEndowmentProjections(): EndowmentProjection[] {
+  async getEndowmentProjections(): Promise<EndowmentProjection[]> {
     return this.endowmentProjections;
   }
   
-  setEndowmentProjections(projections: EndowmentProjection[]): void {
+  async setEndowmentProjections(projections: EndowmentProjection[]): Promise<void> {
     this.endowmentProjections = projections;
   }
   
-  getExpandedJobs(): ExpandedJob[] {
+  async getExpandedJobs(): Promise<ExpandedJob[]> {
     return this.expandedJobs;
   }
   
-  setExpandedJobs(jobs: ExpandedJob[]): void {
+  async setExpandedJobs(jobs: ExpandedJob[]): Promise<void> {
     this.expandedJobs = jobs;
   }
   
-  getK12Curriculums(): K12Curriculum[] {
+  async getK12Curriculums(): Promise<K12Curriculum[]> {
     return this.k12Curriculums;
   }
   
-  setK12Curriculums(curriculums: K12Curriculum[]): void {
+  async setK12Curriculums(curriculums: K12Curriculum[]): Promise<void> {
     this.k12Curriculums = curriculums;
   }
   
-  getCoalitionPartners(): CoalitionPartner[] {
+  async getCoalitionPartners(): Promise<CoalitionPartner[]> {
     return this.coalitionPartners;
   }
   
-  setCoalitionPartners(partners: CoalitionPartner[]): void {
+  async setCoalitionPartners(partners: CoalitionPartner[]): Promise<void> {
     this.coalitionPartners = partners;
   }
   
-  getFundingSources(): FundingSource[] {
+  async getFundingSources(): Promise<FundingSource[]> {
     return this.fundingSources;
   }
   
-  setFundingSources(sources: FundingSource[]): void {
+  async setFundingSources(sources: FundingSource[]): Promise<void> {
     this.fundingSources = sources;
   }
   
-  getTransparencyFeatures(): TransparencyFeature[] {
+  async getTransparencyFeatures(): Promise<TransparencyFeature[]> {
     return this.transparencyFeatures;
   }
   
-  setTransparencyFeatures(features: TransparencyFeature[]): void {
+  async setTransparencyFeatures(features: TransparencyFeature[]): Promise<void> {
     this.transparencyFeatures = features;
   }
   
-  getAccountabilityMechanisms(): AccountabilityMechanism[] {
+  async getAccountabilityMechanisms(): Promise<AccountabilityMechanism[]> {
     return this.accountabilityMechanisms;
   }
   
-  setAccountabilityMechanisms(mechanisms: AccountabilityMechanism[]): void {
+  async setAccountabilityMechanisms(mechanisms: AccountabilityMechanism[]): Promise<void> {
     this.accountabilityMechanisms = mechanisms;
   }
   
-  getTribalPartnerships(): TribalPartnership[] {
+  async getTribalPartnerships(): Promise<TribalPartnership[]> {
     return this.tribalPartnerships;
   }
   
-  setTribalPartnerships(partnerships: TribalPartnership[]): void {
+  async setTribalPartnerships(partnerships: TribalPartnership[]): Promise<void> {
     this.tribalPartnerships = partnerships;
   }
   
-  getImplementationTimelines(): ImplementationTimeline[] {
+  async getImplementationTimelines(): Promise<ImplementationTimeline[]> {
     return this.implementationTimelines;
   }
   
-  setImplementationTimelines(timelines: ImplementationTimeline[]): void {
+  async setImplementationTimelines(timelines: ImplementationTimeline[]): Promise<void> {
     this.implementationTimelines = timelines;
   }
   
-  getPoliticalRoadmaps(): PoliticalRoadmap[] {
+  async getPoliticalRoadmaps(): Promise<PoliticalRoadmap[]> {
     return this.politicalRoadmaps;
   }
   
-  setPoliticalRoadmaps(roadmaps: PoliticalRoadmap[]): void {
+  async setPoliticalRoadmaps(roadmaps: PoliticalRoadmap[]): Promise<void> {
     this.politicalRoadmaps = roadmaps;
   }
   
-  getStressTests(): StressTest[] {
+  async getStressTests(): Promise<StressTest[]> {
     return this.stressTests;
   }
   
-  setStressTests(tests: StressTest[]): void {
+  async setStressTests(tests: StressTest[]): Promise<void> {
     this.stressTests = tests;
   }
   
-  getTieredCarbonPricings(): TieredCarbonPricing[] {
+  async getTieredCarbonPricings(): Promise<TieredCarbonPricing[]> {
     return this.tieredCarbonPricings;
   }
   
-  setTieredCarbonPricings(pricings: TieredCarbonPricing[]): void {
+  async setTieredCarbonPricings(pricings: TieredCarbonPricing[]): Promise<void> {
     this.tieredCarbonPricings = pricings;
   }
   
-  getRegenerativeAgriculturePractices(): RegenerativeAgriculture[] {
+  async getRegenerativeAgriculturePractices(): Promise<RegenerativeAgriculture[]> {
     return this.regenerativeAgriculturePractices;
   }
   
-  setRegenerativeAgriculturePractices(practices: RegenerativeAgriculture[]): void {
+  async setRegenerativeAgriculturePractices(practices: RegenerativeAgriculture[]): Promise<void> {
     this.regenerativeAgriculturePractices = practices;
   }
   
-  getLaborTransitions(): LaborTransition[] {
+  async getLaborTransitions(): Promise<LaborTransition[]> {
     return this.laborTransitions;
   }
   
-  setLaborTransitions(transitions: LaborTransition[]): void {
+  async setLaborTransitions(transitions: LaborTransition[]): Promise<void> {
     this.laborTransitions = transitions;
   }
   
-  getPoliticalCoalitions(): PoliticalCoalition[] {
+  async getPoliticalCoalitions(): Promise<PoliticalCoalition[]> {
     return this.politicalCoalitions;
   }
   
-  setPoliticalCoalitions(coalitions: PoliticalCoalition[]): void {
+  async setPoliticalCoalitions(coalitions: PoliticalCoalition[]): Promise<void> {
     this.politicalCoalitions = coalitions;
   }
   
-  getPlanetaryBoundaries(): PlanetaryBoundary[] {
+  async getPlanetaryBoundaries(): Promise<PlanetaryBoundary[]> {
     return this.planetaryBoundaries;
   }
   
-  setPlanetaryBoundaries(boundaries: PlanetaryBoundary[]): void {
+  async setPlanetaryBoundaries(boundaries: PlanetaryBoundary[]): Promise<void> {
     this.planetaryBoundaries = boundaries;
   }
   
-  getCalibrationTargets(): CalibrationTarget[] {
+  async getCalibrationTargets(): Promise<CalibrationTarget[]> {
     return this.calibrationTargets;
   }
   
-  setCalibrationTargets(targets: CalibrationTarget[]): void {
+  async setCalibrationTargets(targets: CalibrationTarget[]): Promise<void> {
     this.calibrationTargets = targets;
   }
   
-  getModelMaturities(): ModelMaturity[] {
+  async getModelMaturities(): Promise<ModelMaturity[]> {
     return this.modelMaturities;
   }
   
-  setModelMaturities(maturities: ModelMaturity[]): void {
+  async setModelMaturities(maturities: ModelMaturity[]): Promise<void> {
     this.modelMaturities = maturities;
   }
   
-  getHistoricalClimateData(): HistoricalClimateData[] {
+  async getHistoricalClimateData(): Promise<HistoricalClimateData[]> {
     return this.historicalClimateData;
   }
   
-  setHistoricalClimateData(data: HistoricalClimateData[]): void {
+  async setHistoricalClimateData(data: HistoricalClimateData[]): Promise<void> {
     this.historicalClimateData = data;
   }
   
-  getMonteCarloSimulations(): MonteCarloSimulation[] {
+  async getMonteCarloSimulations(): Promise<MonteCarloSimulation[]> {
     return this.monteCarloSimulations;
   }
   
-  setMonteCarloSimulations(simulations: MonteCarloSimulation[]): void {
+  async setMonteCarloSimulations(simulations: MonteCarloSimulation[]): Promise<void> {
     this.monteCarloSimulations = simulations;
   }
   
-  getScenarioComparisons(): ScenarioComparison[] {
+  async getScenarioComparisons(): Promise<ScenarioComparison[]> {
     return this.scenarioComparisons;
   }
   
-  setScenarioComparisons(comparisons: ScenarioComparison[]): void {
+  async setScenarioComparisons(comparisons: ScenarioComparison[]): Promise<void> {
     this.scenarioComparisons = comparisons;
   }
   
-  getOptimizationParams(): OptimizationParam[] {
+  async getOptimizationParams(): Promise<OptimizationParam[]> {
     return this.optimizationParams;
   }
   
-  setOptimizationParams(params: OptimizationParam[]): void {
+  async setOptimizationParams(params: OptimizationParam[]): Promise<void> {
     this.optimizationParams = params;
   }
   
-  getSensitivityAnalyses(): SensitivityAnalysis[] {
+  async getSensitivityAnalyses(): Promise<SensitivityAnalysis[]> {
     return this.sensitivityAnalyses;
   }
   
-  setSensitivityAnalyses(analyses: SensitivityAnalysis[]): void {
+  async setSensitivityAnalyses(analyses: SensitivityAnalysis[]): Promise<void> {
     this.sensitivityAnalyses = analyses;
   }
   
-  getMiningAlternatives(): MiningAlternative[] {
+  async getMiningAlternatives(): Promise<MiningAlternative[]> {
     return this.miningAlternatives;
   }
   
-  setMiningAlternatives(alternatives: MiningAlternative[]): void {
+  async setMiningAlternatives(alternatives: MiningAlternative[]): Promise<void> {
     this.miningAlternatives = alternatives;
   }
 }

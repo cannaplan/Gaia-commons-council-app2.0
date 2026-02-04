@@ -74,7 +74,8 @@ async function startServer() {
     }
     
     // Register all API routes (this also seeds the database)
-    await registerRoutes(server, app);
+    const router = await registerRoutes(server);
+    app.use(router);
     
     server.listen(PORT, () => {
       console.log("");
