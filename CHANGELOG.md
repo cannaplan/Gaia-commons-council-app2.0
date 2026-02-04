@@ -8,11 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Testing infrastructure with Jest and Supertest
+- 15 automated tests (storage layer + health endpoint)
+- Test scripts: `npm test`, `npm run test:watch`, `npm run test:coverage`
+- Jest configuration (jest.config.js)
+- Test documentation (tests/README.md)
+- Coverage reporting (42.85% initial coverage)
 - Docker support with Dockerfile and docker-compose.yml
-- GitHub Actions CI/CD pipeline
+- GitHub Actions CI/CD pipeline with test execution
 - NEXT_STEPS.md comprehensive roadmap
 - .dockerignore for optimized Docker builds
 - CHANGELOG.md for tracking changes
+- SUMMARY.md project overview
+- CONTRIBUTING.md contribution guidelines
+
+### Changed
+- Updated CI/CD workflow to run tests (removed continue-on-error)
+- Updated package.json with test scripts
+- Updated NEXT_STEPS.md to reflect completed items
 
 ## [5.0.0] - 2026-02-04
 
