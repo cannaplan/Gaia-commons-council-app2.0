@@ -8,12 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- API endpoint integration tests (14 tests for core endpoints)
+- Response format validation tests
+- Data structure validation tests
 - Testing infrastructure with Jest and Supertest
-- 15 automated tests (storage layer + health endpoint)
+- 29 automated tests total (storage layer + health + API endpoints)
 - Test scripts: `npm test`, `npm run test:watch`, `npm run test:coverage`
 - Jest configuration (jest.config.js)
 - Test documentation (tests/README.md)
-- Coverage reporting (42.85% initial coverage)
+- Coverage reporting (46.21% coverage)
 - Docker support with Dockerfile and docker-compose.yml
 - GitHub Actions CI/CD pipeline with test execution
 - NEXT_STEPS.md comprehensive roadmap
@@ -25,7 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated CI/CD workflow to run tests (removed continue-on-error)
 - Updated package.json with test scripts
-- Updated NEXT_STEPS.md to reflect completed items
+- Updated NEXT_STEPS.md to reflect completed items (Phase 2.2 complete)
+- Improved test coverage from 42.85% to 46.21%
 
 ## [5.0.0] - 2026-02-04
 

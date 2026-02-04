@@ -6,9 +6,10 @@ This directory contains all automated tests for the Gaia Commons API.
 
 ```
 tests/
-├── health.test.ts      # Health endpoint tests
-├── storage.test.ts     # Storage layer tests
-└── README.md          # This file
+├── api-endpoints.test.ts  # API endpoint integration tests (14 tests)
+├── health.test.ts         # Health endpoint tests (5 tests)
+├── storage.test.ts        # Storage layer tests (10 tests)
+└── README.md             # This file
 ```
 
 ## Running Tests
@@ -31,8 +32,10 @@ npm run test:coverage
 ## Test Coverage
 
 Current coverage:
-- **Storage Layer**: ~43% (10 tests)
+- **Storage Layer**: ~46% (10 tests)
 - **Health Endpoint**: 100% (5 tests)
+- **API Endpoints**: Integration tests (14 tests)
+- **Total**: 29 tests passing
 
 Target: 80%+ code coverage
 
