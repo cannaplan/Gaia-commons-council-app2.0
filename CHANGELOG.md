@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated all npm dependencies to latest compatible versions (2026-02-04)
+- Pinned all dependency versions (removed caret `^` ranges) for reproducibility
+- Updated `express` from 4.18.2 to 4.22.1
+- Updated `cors` from 2.8.5 to 2.8.6
+- Updated `dotenv` from 16.3.1 to 16.6.1
+- Updated `helmet` from 7.1.0 to 7.2.0
+- Updated `express-rate-limit` from 7.1.5 to 7.5.1
+- Updated `morgan` from 1.10.0 to 1.10.1
+- Updated `pg` from 8.11.3 to 8.18.0
+- Updated `typescript` from 5.3.3 to 5.7.3
+- Updated `@types/express` from 4.17.21 to 4.17.25
+- Updated `@types/node` from 20.10.6 to 20.19.31
+- Updated `@types/pg` from 8.10.9 to 8.11.0
+- Updated REQUIREMENTS.md with current dependency versions
+
+### Security
+- Verified zero vulnerabilities in updated dependencies via npm audit
+- Verified zero vulnerabilities via GitHub Advisory Database
+
 ### Added
 - API endpoint integration tests (14 tests for core endpoints)
 - Response format validation tests
