@@ -49,15 +49,22 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Run tests (if tests exist)
-        run: npm test || echo "No tests configured yet"
-        continue-on-error: true
+      - name: Run tests
+        run: npm test
         env:
           DB_HOST: localhost
           DB_PORT: 5432
           DB_NAME: gaia_commons_test
           DB_USER: gaia_user
           DB_PASSWORD: test_password
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
 
       - name: Security audit
         run: npm audit --audit-level=high

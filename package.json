@@ -8,7 +8,10 @@
     "dev": "npm run build && npm start",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [
     "gaia",
@@ -21,20 +24,25 @@
   "author": "Gaia Commons Initiative",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",
-    "dotenv": "^16.3.1",
-    "pg": "^8.11.3",
-    "express-rate-limit": "^7.1.5"
+    "pg": "^8.11.3"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
     "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^30.0.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.6",
     "@types/pg": "^8.10.9",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.2.0",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.6",
     "typescript": "^5.3.3"
   },
   "engines": {
