@@ -16,13 +16,12 @@ jobs:
           POSTGRES_DB: gaia_commons_test
           POSTGRES_USER: gaia_user
           POSTGRES_PASSWORD: test_password
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports: ['5432:5432']
 
     steps:
       - name: Checkout
