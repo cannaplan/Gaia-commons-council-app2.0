@@ -2,14 +2,18 @@
 // GAIA COMMONS API v5.0 - Server Entry Point
 // ============================================================================
 
-import express, { Request, Response, NextFunction } from "express";
-import { createServer } from "http";
-import cors from "cors";
-import helmet from "helmet";
-import morgan from "morgan";
-import dotenv from "dotenv";
-import { registerRoutes } from "./routes";
-import { testConnection, closePool } from "./db";
+import express, { Request, Response, NextFunction } from 'express';
+import { createServer } from 'http';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { registerRoutes } from './routes';
+import { testConnection, closePool } from './db';
 
 // Load environment variables
 dotenv.config();
@@ -34,8 +38,27 @@ app.use(cors({
 app.use(morgan("dev"));
 
 // Body parsing
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+
+// ============================================================================
+// API DOCUMENTATION
+// ============================================================================
+
+// Load OpenAPI specification
+const openapiPath = join(__dirname, '..', 'openapi.yaml');
+const openapiFile = readFileSync(openapiPath, 'utf8');
+const openapiSpec = YAML.parse(openapiFile);
+
+// Serve Swagger UI
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(openapiSpec, {
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: 'Gaia Commons API Documentation',
+  })
+);
 
 // ============================================================================
 // SERVER STARTUP
@@ -100,11 +123,9 @@ async function startServer() {
       console.log("║   • GET  /api/timeline         - Timeline events             ║");
       console.log("║   • GET  /api/financials       - Financial metrics           ║");
       console.log("║   • GET  /api/climate          - Climate metrics             ║");
-      console.log("║   • GET  /api/slides           - Slide deck data             ║");
-      console.log("║   • GET  /api/schools          - All schools                 ║");
-      console.log("║   • GET  /api/school-clusters  - School clusters             ║");
-      console.log("║   • GET  /api/scale-projections - Growth projections         ║");
-      console.log("║   • ... and 30+ more endpoints                               ║");
+      console.log("║   • ... and 34+ more endpoints                               ║");
+      console.log("║                                                              ║");
+      console.log(`║   📚 API Documentation: http://localhost:${PORT}/api-docs    ║`);
       console.log("║                                                              ║");
       console.log("╚══════════════════════════════════════════════════════════════╝");
       console.log("");

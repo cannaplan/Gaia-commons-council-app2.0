@@ -2,6 +2,10 @@ import { Router, Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { Server } from 'http';
 import { storage } from './storage';
+import { testConnection } from './db';
+
+// Track server start time for uptime calculation
+const serverStartTime = Date.now();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -348,11 +352,40 @@ export async function registerRoutes(_server: Server) {
   router.use(limiter);
 
   router.get('/api/health', async (_req: Request, res: Response) => {
-    res.json({ 
-      status: 'healthy', 
+    const startTime = Date.now();
+    
+    // Test database connectivity
+    const dbConnected = await testConnection();
+    const dbResponseTime = Date.now() - startTime;
+    
+    // Calculate uptime in seconds
+    const uptime = Math.floor((Date.now() - serverStartTime) / 1000);
+    
+    // Get memory usage
+    const memoryUsage = process.memoryUsage();
+    const heapUsedMB = Math.round(memoryUsage.heapUsed / 1024 / 1024);
+    const heapTotalMB = Math.round(memoryUsage.heapTotal / 1024 / 1024);
+    
+    // Prepare response
+    const healthStatus = {
+      status: dbConnected ? 'healthy' : 'unhealthy',
       timestamp: new Date().toISOString(),
-      version: '5.0.0'
-    });
+      uptime: uptime,
+      database: {
+        connected: dbConnected,
+        responseTime: `${dbResponseTime}ms`,
+      },
+      memory: {
+        heapUsed: `${heapUsedMB}MB`,
+        heapTotal: `${heapTotalMB}MB`,
+      },
+      version: '5.0.0',
+      environment: process.env.NODE_ENV || 'development',
+    };
+    
+    // Return 503 if database is unreachable
+    const statusCode = dbConnected ? 200 : 503;
+    res.status(statusCode).json(healthStatus);
   });
 
   router.get('/api/pilot', async (_req: Request, res: Response) => {
