@@ -6,5 +6,8 @@ describe('Health endpoint (smoke)', () => {
     expect(res.headers['content-type']).toMatch(/json/);
     expect(res.body).toBeDefined();
     expect(res.body).toHaveProperty('status');
+    if (typeof res.body === 'object') {
+      expect(res.body).toHaveProperty('status');
+    }
   }, 10000);
 });

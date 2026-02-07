@@ -60,6 +60,11 @@ async function startServer() {
     // ERROR HANDLING (must be after routes)
     // ============================================================================
 
+    
+    // ============================================================================
+    // ERROR HANDLING (must be after routes)
+    // ============================================================================
+    
     // 404 handler
     app.use((req: Request, res: Response) => {
       res.status(404).json({
@@ -77,6 +82,7 @@ async function startServer() {
       });
     });
 
+    
     server.listen(PORT, () => {
       console.log("");
       console.log("╔══════════════════════════════════════════════════════════════╗");
