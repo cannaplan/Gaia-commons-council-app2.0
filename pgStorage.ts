@@ -1,4 +1,4 @@
-import { query } from "./db";
+import { query } from './db';
 import {
   IStorage,
   PilotStats,
@@ -40,16 +40,15 @@ import {
   OptimizationParam,
   SensitivityAnalysis,
   MiningAlternative,
-} from "./storage";
+} from './storage';
 
 export class PgStorage implements IStorage {
-  
   // ========================================================================
   // Core Stats (Singleton) - Getters
   // ========================================================================
-  
+
   async getPilotStats(): Promise<PilotStats | null> {
-    const result = await query("SELECT * FROM pilot_stats LIMIT 1");
+    const result = await query('SELECT * FROM pilot_stats LIMIT 1');
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return {
@@ -63,7 +62,7 @@ export class PgStorage implements IStorage {
   }
 
   async getEndowmentStats(): Promise<EndowmentStats | null> {
-    const result = await query("SELECT * FROM endowment_stats LIMIT 1");
+    const result = await query('SELECT * FROM endowment_stats LIMIT 1');
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return {
@@ -76,7 +75,7 @@ export class PgStorage implements IStorage {
   }
 
   async getFinancialMetrics(): Promise<FinancialMetrics | null> {
-    const result = await query("SELECT * FROM financial_metrics LIMIT 1");
+    const result = await query('SELECT * FROM financial_metrics LIMIT 1');
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return {
@@ -90,7 +89,7 @@ export class PgStorage implements IStorage {
   }
 
   async getClimateMetrics(): Promise<ClimateMetrics | null> {
-    const result = await query("SELECT * FROM climate_metrics LIMIT 1");
+    const result = await query('SELECT * FROM climate_metrics LIMIT 1');
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return {
@@ -104,7 +103,7 @@ export class PgStorage implements IStorage {
   }
 
   async getLegalFramework(): Promise<LegalFramework | null> {
-    const result = await query("SELECT * FROM legal_framework LIMIT 1");
+    const result = await query('SELECT * FROM legal_framework LIMIT 1');
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return {
@@ -118,7 +117,7 @@ export class PgStorage implements IStorage {
   }
 
   async getNationwideFoodSecurity(): Promise<NationwideFoodSecurity | null> {
-    const result = await query("SELECT * FROM nationwide_food_security LIMIT 1");
+    const result = await query('SELECT * FROM nationwide_food_security LIMIT 1');
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return {
@@ -132,7 +131,7 @@ export class PgStorage implements IStorage {
   }
 
   async getGlobalRegenerationSummary(): Promise<GlobalRegenerationSummary | null> {
-    const result = await query("SELECT * FROM global_regeneration_summary LIMIT 1");
+    const result = await query('SELECT * FROM global_regeneration_summary LIMIT 1');
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
     return {
@@ -150,65 +149,113 @@ export class PgStorage implements IStorage {
   // ========================================================================
 
   async setPilotStats(stats: PilotStats): Promise<void> {
-    await query("DELETE FROM pilot_stats");
+    await query('DELETE FROM pilot_stats');
     await query(
       `INSERT INTO pilot_stats (total_schools, total_students, greenhouse_area, launch_date, regional_hubs, avg_greenhouse_size)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [stats.totalSchools, stats.totalStudents, stats.greenhouseArea, stats.launchDate, stats.regionalHubs, stats.avgGreenhouseSize]
+      [
+        stats.totalSchools,
+        stats.totalStudents,
+        stats.greenhouseArea,
+        stats.launchDate,
+        stats.regionalHubs,
+        stats.avgGreenhouseSize,
+      ]
     );
   }
 
   async setEndowmentStats(stats: EndowmentStats): Promise<void> {
-    await query("DELETE FROM endowment_stats");
+    await query('DELETE FROM endowment_stats');
     await query(
       `INSERT INTO endowment_stats (principal, annual_distribution, greenhouses_funded, growth_rate, target_year)
        VALUES ($1, $2, $3, $4, $5)`,
-      [stats.principal, stats.annualDistribution, stats.greenhousesFunded, stats.growthRate, stats.targetYear]
+      [
+        stats.principal,
+        stats.annualDistribution,
+        stats.greenhousesFunded,
+        stats.growthRate,
+        stats.targetYear,
+      ]
     );
   }
 
   async setFinancialMetrics(metrics: FinancialMetrics): Promise<void> {
-    await query("DELETE FROM financial_metrics");
+    await query('DELETE FROM financial_metrics');
     await query(
       `INSERT INTO financial_metrics (total_investment, operating_costs, revenue_streams, roi, break_even_year, net_present_value)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [metrics.totalInvestment, metrics.operatingCosts, metrics.revenueStreams, metrics.roi, metrics.breakEvenYear, metrics.netPresentValue]
+      [
+        metrics.totalInvestment,
+        metrics.operatingCosts,
+        metrics.revenueStreams,
+        metrics.roi,
+        metrics.breakEvenYear,
+        metrics.netPresentValue,
+      ]
     );
   }
 
   async setClimateMetrics(metrics: ClimateMetrics): Promise<void> {
-    await query("DELETE FROM climate_metrics");
+    await query('DELETE FROM climate_metrics');
     await query(
       `INSERT INTO climate_metrics (carbon_sequestered, water_saved, solar_generated, biodiversity_count, soil_health_score, waste_reduction)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [metrics.carbonSequestered, metrics.waterSaved, metrics.solarGenerated, metrics.biodiversityCount, metrics.soilHealthScore, metrics.wasteReduction]
+      [
+        metrics.carbonSequestered,
+        metrics.waterSaved,
+        metrics.solarGenerated,
+        metrics.biodiversityCount,
+        metrics.soilHealthScore,
+        metrics.wasteReduction,
+      ]
     );
   }
 
   async setLegalFramework(framework: LegalFramework): Promise<void> {
-    await query("DELETE FROM legal_framework");
+    await query('DELETE FROM legal_framework');
     await query(
       `INSERT INTO legal_framework (structure, governance_model, land_ownership, tax_status, compliance_framework, stakeholder_rights)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [framework.structure, framework.governanceModel, framework.landOwnership, framework.taxStatus, framework.complianceFramework, framework.stakeholderRights]
+      [
+        framework.structure,
+        framework.governanceModel,
+        framework.landOwnership,
+        framework.taxStatus,
+        framework.complianceFramework,
+        framework.stakeholderRights,
+      ]
     );
   }
 
   async setNationwideFoodSecurity(security: NationwideFoodSecurity): Promise<void> {
-    await query("DELETE FROM nationwide_food_security");
+    await query('DELETE FROM nationwide_food_security');
     await query(
       `INSERT INTO nationwide_food_security (meals_served, nutrition_score, local_food_percent, food_deserts_covered, emergency_reserve, distribution_network)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [security.mealsServed, security.nutritionScore, security.localFoodPercent, security.foodDesertsCovered, security.emergencyReserve, security.distributionNetwork]
+      [
+        security.mealsServed,
+        security.nutritionScore,
+        security.localFoodPercent,
+        security.foodDesertsCovered,
+        security.emergencyReserve,
+        security.distributionNetwork,
+      ]
     );
   }
 
   async setGlobalRegenerationSummary(summary: GlobalRegenerationSummary): Promise<void> {
-    await query("DELETE FROM global_regeneration_summary");
+    await query('DELETE FROM global_regeneration_summary');
     await query(
       `INSERT INTO global_regeneration_summary (total_countries, global_schools, total_carbon_offset, water_conserved, biodiversity_protected, employment_created)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [summary.totalCountries, summary.globalSchools, summary.totalCarbonOffset, summary.waterConserved, summary.biodiversityProtected, summary.employmentCreated]
+      [
+        summary.totalCountries,
+        summary.globalSchools,
+        summary.totalCarbonOffset,
+        summary.waterConserved,
+        summary.biodiversityProtected,
+        summary.employmentCreated,
+      ]
     );
   }
 
@@ -217,8 +264,8 @@ export class PgStorage implements IStorage {
   // ========================================================================
 
   async getTimelineEvents(): Promise<TimelineEvent[]> {
-    const result = await query("SELECT * FROM timeline_events ORDER BY year, quarter");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM timeline_events ORDER BY year, quarter');
+    return result.rows.map((row) => ({
       id: row.id,
       year: row.year,
       quarter: row.quarter,
@@ -230,8 +277,8 @@ export class PgStorage implements IStorage {
   }
 
   async getSlides(): Promise<Slide[]> {
-    const result = await query("SELECT * FROM slides ORDER BY slide_number");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM slides ORDER BY slide_number');
+    return result.rows.map((row) => ({
       id: row.id,
       slideNumber: row.slide_number,
       title: row.title,
@@ -243,8 +290,8 @@ export class PgStorage implements IStorage {
   }
 
   async getHistoricalFinancials(): Promise<HistoricalFinancial[]> {
-    const result = await query("SELECT * FROM historical_financials ORDER BY year");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM historical_financials ORDER BY year');
+    return result.rows.map((row) => ({
       id: row.id,
       year: row.year,
       revenue: row.revenue,
@@ -257,8 +304,8 @@ export class PgStorage implements IStorage {
   }
 
   async getSchoolClusters(): Promise<SchoolCluster[]> {
-    const result = await query("SELECT * FROM school_clusters ORDER BY name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM school_clusters ORDER BY name');
+    return result.rows.map((row) => ({
       id: row.id,
       name: row.name,
       region: row.region,
@@ -270,8 +317,8 @@ export class PgStorage implements IStorage {
   }
 
   async getSchools(): Promise<School[]> {
-    const result = await query("SELECT * FROM schools ORDER BY name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM schools ORDER BY name');
+    return result.rows.map((row) => ({
       id: row.id,
       name: row.name,
       district: row.district,
@@ -284,8 +331,8 @@ export class PgStorage implements IStorage {
   }
 
   async getScaleProjections(): Promise<ScaleProjection[]> {
-    const result = await query("SELECT * FROM scale_projections ORDER BY year");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM scale_projections ORDER BY year');
+    return result.rows.map((row) => ({
       id: row.id,
       year: row.year,
       schools: row.schools,
@@ -298,8 +345,8 @@ export class PgStorage implements IStorage {
   }
 
   async getEnvironmentalImpacts(): Promise<EnvironmentalImpact[]> {
-    const result = await query("SELECT * FROM environmental_impact ORDER BY category");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM environmental_impact ORDER BY category');
+    return result.rows.map((row) => ({
       id: row.id,
       category: row.category,
       metric: row.metric,
@@ -311,8 +358,8 @@ export class PgStorage implements IStorage {
   }
 
   async getJobCreations(): Promise<JobCreation[]> {
-    const result = await query("SELECT * FROM job_creation ORDER BY category");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM job_creation ORDER BY category');
+    return result.rows.map((row) => ({
       id: row.id,
       category: row.category,
       jobType: row.job_type,
@@ -324,8 +371,8 @@ export class PgStorage implements IStorage {
   }
 
   async getEndowmentProjections(): Promise<EndowmentProjection[]> {
-    const result = await query("SELECT * FROM endowment_projections ORDER BY year");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM endowment_projections ORDER BY year');
+    return result.rows.map((row) => ({
       id: row.id,
       year: row.year,
       principal: row.principal,
@@ -337,8 +384,8 @@ export class PgStorage implements IStorage {
   }
 
   async getExpandedJobs(): Promise<ExpandedJob[]> {
-    const result = await query("SELECT * FROM expanded_jobs ORDER BY sector");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM expanded_jobs ORDER BY sector');
+    return result.rows.map((row) => ({
       id: row.id,
       sector: row.sector,
       jobType: row.job_type,
@@ -350,8 +397,8 @@ export class PgStorage implements IStorage {
   }
 
   async getK12Curriculums(): Promise<K12Curriculum[]> {
-    const result = await query("SELECT * FROM k12_curriculum ORDER BY grade_level");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM k12_curriculum ORDER BY grade_level');
+    return result.rows.map((row) => ({
       id: row.id,
       gradeLevel: row.grade_level,
       moduleName: row.module_name,
@@ -363,8 +410,8 @@ export class PgStorage implements IStorage {
   }
 
   async getCoalitionPartners(): Promise<CoalitionPartner[]> {
-    const result = await query("SELECT * FROM coalition_partners ORDER BY organization");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM coalition_partners ORDER BY organization');
+    return result.rows.map((row) => ({
       id: row.id,
       organization: row.organization,
       partnerType: row.partner_type,
@@ -376,8 +423,8 @@ export class PgStorage implements IStorage {
   }
 
   async getFundingSources(): Promise<FundingSource[]> {
-    const result = await query("SELECT * FROM funding_sources ORDER BY source_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM funding_sources ORDER BY source_name');
+    return result.rows.map((row) => ({
       id: row.id,
       sourceName: row.source_name,
       fundingType: row.funding_type,
@@ -389,8 +436,8 @@ export class PgStorage implements IStorage {
   }
 
   async getTransparencyFeatures(): Promise<TransparencyFeature[]> {
-    const result = await query("SELECT * FROM transparency_features ORDER BY feature_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM transparency_features ORDER BY feature_name');
+    return result.rows.map((row) => ({
       id: row.id,
       featureName: row.feature_name,
       description: row.description,
@@ -401,8 +448,8 @@ export class PgStorage implements IStorage {
   }
 
   async getAccountabilityMechanisms(): Promise<AccountabilityMechanism[]> {
-    const result = await query("SELECT * FROM accountability_mechanisms ORDER BY mechanism");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM accountability_mechanisms ORDER BY mechanism');
+    return result.rows.map((row) => ({
       id: row.id,
       mechanism: row.mechanism,
       description: row.description,
@@ -413,8 +460,8 @@ export class PgStorage implements IStorage {
   }
 
   async getTribalPartnerships(): Promise<TribalPartnership[]> {
-    const result = await query("SELECT * FROM tribal_partnerships ORDER BY tribe_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM tribal_partnerships ORDER BY tribe_name');
+    return result.rows.map((row) => ({
       id: row.id,
       tribeName: row.tribe_name,
       location: row.location,
@@ -426,8 +473,8 @@ export class PgStorage implements IStorage {
   }
 
   async getImplementationTimelines(): Promise<ImplementationTimeline[]> {
-    const result = await query("SELECT * FROM implementation_timeline ORDER BY start_date");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM implementation_timeline ORDER BY start_date');
+    return result.rows.map((row) => ({
       id: row.id,
       phase: row.phase,
       startDate: row.start_date,
@@ -439,8 +486,8 @@ export class PgStorage implements IStorage {
   }
 
   async getPoliticalRoadmaps(): Promise<PoliticalRoadmap[]> {
-    const result = await query("SELECT * FROM political_roadmap ORDER BY target_date");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM political_roadmap ORDER BY target_date');
+    return result.rows.map((row) => ({
       id: row.id,
       milestone: row.milestone,
       targetDate: row.target_date,
@@ -452,8 +499,8 @@ export class PgStorage implements IStorage {
   }
 
   async getStressTests(): Promise<StressTest[]> {
-    const result = await query("SELECT * FROM stress_tests ORDER BY scenario_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM stress_tests ORDER BY scenario_name');
+    return result.rows.map((row) => ({
       id: row.id,
       scenarioName: row.scenario_name,
       stressType: row.stress_type,
@@ -465,8 +512,8 @@ export class PgStorage implements IStorage {
   }
 
   async getTieredCarbonPricings(): Promise<TieredCarbonPricing[]> {
-    const result = await query("SELECT * FROM tiered_carbon_pricing ORDER BY tier");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM tiered_carbon_pricing ORDER BY tier');
+    return result.rows.map((row) => ({
       id: row.id,
       tier: row.tier,
       pricePerTon: row.price_per_ton,
@@ -478,8 +525,8 @@ export class PgStorage implements IStorage {
   }
 
   async getRegenerativeAgriculturePractices(): Promise<RegenerativeAgriculture[]> {
-    const result = await query("SELECT * FROM regenerative_agriculture ORDER BY practice");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM regenerative_agriculture ORDER BY practice');
+    return result.rows.map((row) => ({
       id: row.id,
       practice: row.practice,
       description: row.description,
@@ -491,8 +538,8 @@ export class PgStorage implements IStorage {
   }
 
   async getLaborTransitions(): Promise<LaborTransition[]> {
-    const result = await query("SELECT * FROM labor_transition ORDER BY sector");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM labor_transition ORDER BY sector');
+    return result.rows.map((row) => ({
       id: row.id,
       sector: row.sector,
       currentJobs: row.current_jobs,
@@ -504,8 +551,8 @@ export class PgStorage implements IStorage {
   }
 
   async getPoliticalCoalitions(): Promise<PoliticalCoalition[]> {
-    const result = await query("SELECT * FROM political_coalition ORDER BY group_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM political_coalition ORDER BY group_name');
+    return result.rows.map((row) => ({
       id: row.id,
       group: row.group_name,
       alignment: row.alignment,
@@ -517,8 +564,8 @@ export class PgStorage implements IStorage {
   }
 
   async getPlanetaryBoundaries(): Promise<PlanetaryBoundary[]> {
-    const result = await query("SELECT * FROM planetary_boundaries ORDER BY boundary");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM planetary_boundaries ORDER BY boundary');
+    return result.rows.map((row) => ({
       id: row.id,
       boundary: row.boundary,
       currentStatus: row.current_status,
@@ -530,8 +577,8 @@ export class PgStorage implements IStorage {
   }
 
   async getCalibrationTargets(): Promise<CalibrationTarget[]> {
-    const result = await query("SELECT * FROM calibration_targets ORDER BY target_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM calibration_targets ORDER BY target_name');
+    return result.rows.map((row) => ({
       id: row.id,
       targetName: row.target_name,
       targetValue: row.target_value,
@@ -543,8 +590,8 @@ export class PgStorage implements IStorage {
   }
 
   async getModelMaturities(): Promise<ModelMaturity[]> {
-    const result = await query("SELECT * FROM model_maturity ORDER BY component");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM model_maturity ORDER BY component');
+    return result.rows.map((row) => ({
       id: row.id,
       component: row.component,
       maturityLevel: row.maturity_level,
@@ -556,8 +603,8 @@ export class PgStorage implements IStorage {
   }
 
   async getHistoricalClimateData(): Promise<HistoricalClimateData[]> {
-    const result = await query("SELECT * FROM historical_climate_data ORDER BY year");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM historical_climate_data ORDER BY year');
+    return result.rows.map((row) => ({
       id: row.id,
       year: row.year,
       avgTemperature: row.avg_temperature,
@@ -569,8 +616,8 @@ export class PgStorage implements IStorage {
   }
 
   async getMonteCarloSimulations(): Promise<MonteCarloSimulation[]> {
-    const result = await query("SELECT * FROM monte_carlo_simulations ORDER BY simulation_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM monte_carlo_simulations ORDER BY simulation_name');
+    return result.rows.map((row) => ({
       id: row.id,
       simulationName: row.simulation_name,
       iterations: row.iterations,
@@ -582,8 +629,8 @@ export class PgStorage implements IStorage {
   }
 
   async getScenarioComparisons(): Promise<ScenarioComparison[]> {
-    const result = await query("SELECT * FROM scenario_comparisons ORDER BY scenario_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM scenario_comparisons ORDER BY scenario_name');
+    return result.rows.map((row) => ({
       id: row.id,
       scenarioName: row.scenario_name,
       policyApproach: row.policy_approach,
@@ -595,8 +642,8 @@ export class PgStorage implements IStorage {
   }
 
   async getOptimizationParams(): Promise<OptimizationParam[]> {
-    const result = await query("SELECT * FROM optimization_params ORDER BY parameter_name");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM optimization_params ORDER BY parameter_name');
+    return result.rows.map((row) => ({
       id: row.id,
       parameterName: row.parameter_name,
       currentValue: row.current_value,
@@ -608,8 +655,8 @@ export class PgStorage implements IStorage {
   }
 
   async getSensitivityAnalyses(): Promise<SensitivityAnalysis[]> {
-    const result = await query("SELECT * FROM sensitivity_analysis ORDER BY variable");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM sensitivity_analysis ORDER BY variable');
+    return result.rows.map((row) => ({
       id: row.id,
       variable: row.variable,
       baselineValue: row.baseline_value,
@@ -621,8 +668,8 @@ export class PgStorage implements IStorage {
   }
 
   async getMiningAlternatives(): Promise<MiningAlternative[]> {
-    const result = await query("SELECT * FROM mining_alternatives ORDER BY material");
-    return result.rows.map(row => ({
+    const result = await query('SELECT * FROM mining_alternatives ORDER BY material');
+    return result.rows.map((row) => ({
       id: row.id,
       material: row.material,
       alternative: row.alternative,
@@ -638,7 +685,7 @@ export class PgStorage implements IStorage {
   // ========================================================================
 
   async setTimelineEvents(events: TimelineEvent[]): Promise<void> {
-    await query("DELETE FROM timeline_events");
+    await query('DELETE FROM timeline_events');
     for (const event of events) {
       await query(
         `INSERT INTO timeline_events (year, quarter, milestone, description, status, impact)
@@ -649,342 +696,560 @@ export class PgStorage implements IStorage {
   }
 
   async setSlides(slides: Slide[]): Promise<void> {
-    await query("DELETE FROM slides");
+    await query('DELETE FROM slides');
     for (const slide of slides) {
       await query(
         `INSERT INTO slides (slide_number, title, subtitle, content, visual_type, key_metrics)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [slide.slideNumber, slide.title, slide.subtitle, slide.content, slide.visualType, JSON.stringify(slide.keyMetrics)]
+        [
+          slide.slideNumber,
+          slide.title,
+          slide.subtitle,
+          slide.content,
+          slide.visualType,
+          JSON.stringify(slide.keyMetrics),
+        ]
       );
     }
   }
 
   async setHistoricalFinancials(financials: HistoricalFinancial[]): Promise<void> {
-    await query("DELETE FROM historical_financials");
+    await query('DELETE FROM historical_financials');
     for (const financial of financials) {
       await query(
         `INSERT INTO historical_financials (year, revenue, expenses, net_income, assets, liabilities, equity)
          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-        [financial.year, financial.revenue, financial.expenses, financial.netIncome, financial.assets, financial.liabilities, financial.equity]
+        [
+          financial.year,
+          financial.revenue,
+          financial.expenses,
+          financial.netIncome,
+          financial.assets,
+          financial.liabilities,
+          financial.equity,
+        ]
       );
     }
   }
 
   async setSchoolClusters(clusters: SchoolCluster[]): Promise<void> {
-    await query("DELETE FROM school_clusters");
+    await query('DELETE FROM school_clusters');
     for (const cluster of clusters) {
       await query(
         `INSERT INTO school_clusters (name, region, schools, students, coordinator, launch_date)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [cluster.name, cluster.region, cluster.schools, cluster.students, cluster.coordinator, cluster.launchDate]
+        [
+          cluster.name,
+          cluster.region,
+          cluster.schools,
+          cluster.students,
+          cluster.coordinator,
+          cluster.launchDate,
+        ]
       );
     }
   }
 
   async setSchools(schools: School[]): Promise<void> {
-    await query("DELETE FROM schools");
+    await query('DELETE FROM schools');
     for (const school of schools) {
       await query(
         `INSERT INTO schools (name, district, state, students, greenhouse_size, cluster_id, status)
          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-        [school.name, school.district, school.state, school.students, school.greenhouseSize, school.clusterId, school.status]
+        [
+          school.name,
+          school.district,
+          school.state,
+          school.students,
+          school.greenhouseSize,
+          school.clusterId,
+          school.status,
+        ]
       );
     }
   }
 
   async setScaleProjections(projections: ScaleProjection[]): Promise<void> {
-    await query("DELETE FROM scale_projections");
+    await query('DELETE FROM scale_projections');
     for (const projection of projections) {
       await query(
         `INSERT INTO scale_projections (year, schools, students, investment, greenhouses, employment_created, carbon_offset)
          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-        [projection.year, projection.schools, projection.students, projection.investment, projection.greenhouses, projection.employmentCreated, projection.carbonOffset]
+        [
+          projection.year,
+          projection.schools,
+          projection.students,
+          projection.investment,
+          projection.greenhouses,
+          projection.employmentCreated,
+          projection.carbonOffset,
+        ]
       );
     }
   }
 
   async setEnvironmentalImpacts(impacts: EnvironmentalImpact[]): Promise<void> {
-    await query("DELETE FROM environmental_impact");
+    await query('DELETE FROM environmental_impact');
     for (const impact of impacts) {
       await query(
         `INSERT INTO environmental_impact (category, metric, current_value, projected_value, unit, methodology)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [impact.category, impact.metric, impact.currentValue, impact.projectedValue, impact.unit, impact.methodology]
+        [
+          impact.category,
+          impact.metric,
+          impact.currentValue,
+          impact.projectedValue,
+          impact.unit,
+          impact.methodology,
+        ]
       );
     }
   }
 
   async setJobCreations(jobs: JobCreation[]): Promise<void> {
-    await query("DELETE FROM job_creation");
+    await query('DELETE FROM job_creation');
     for (const job of jobs) {
       await query(
         `INSERT INTO job_creation (category, job_type, positions, avg_salary, skills_required, growth_rate)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [job.category, job.jobType, job.positions, job.avgSalary, JSON.stringify(job.skillsRequired), job.growthRate]
+        [
+          job.category,
+          job.jobType,
+          job.positions,
+          job.avgSalary,
+          JSON.stringify(job.skillsRequired),
+          job.growthRate,
+        ]
       );
     }
   }
 
   async setEndowmentProjections(projections: EndowmentProjection[]): Promise<void> {
-    await query("DELETE FROM endowment_projections");
+    await query('DELETE FROM endowment_projections');
     for (const projection of projections) {
       await query(
         `INSERT INTO endowment_projections (year, principal, returns, distributions, growth_rate, assumptions)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [projection.year, projection.principal, projection.returns, projection.distributions, projection.growthRate, projection.assumptions]
+        [
+          projection.year,
+          projection.principal,
+          projection.returns,
+          projection.distributions,
+          projection.growthRate,
+          projection.assumptions,
+        ]
       );
     }
   }
 
   async setExpandedJobs(jobs: ExpandedJob[]): Promise<void> {
-    await query("DELETE FROM expanded_jobs");
+    await query('DELETE FROM expanded_jobs');
     for (const job of jobs) {
       await query(
         `INSERT INTO expanded_jobs (sector, job_type, indirect_positions, multiplier_effect, region, description)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [job.sector, job.jobType, job.indirectPositions, job.multiplierEffect, job.region, job.description]
+        [
+          job.sector,
+          job.jobType,
+          job.indirectPositions,
+          job.multiplierEffect,
+          job.region,
+          job.description,
+        ]
       );
     }
   }
 
   async setK12Curriculums(curriculums: K12Curriculum[]): Promise<void> {
-    await query("DELETE FROM k12_curriculum");
+    await query('DELETE FROM k12_curriculum');
     for (const curriculum of curriculums) {
       await query(
         `INSERT INTO k12_curriculum (grade_level, module_name, subject, hours_required, learning_objectives, assessment_type)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [curriculum.gradeLevel, curriculum.moduleName, curriculum.subject, curriculum.hoursRequired, JSON.stringify(curriculum.learningObjectives), curriculum.assessmentType]
+        [
+          curriculum.gradeLevel,
+          curriculum.moduleName,
+          curriculum.subject,
+          curriculum.hoursRequired,
+          JSON.stringify(curriculum.learningObjectives),
+          curriculum.assessmentType,
+        ]
       );
     }
   }
 
   async setCoalitionPartners(partners: CoalitionPartner[]): Promise<void> {
-    await query("DELETE FROM coalition_partners");
+    await query('DELETE FROM coalition_partners');
     for (const partner of partners) {
       await query(
         `INSERT INTO coalition_partners (organization, partner_type, contribution, commitment, contact_person, active_date)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [partner.organization, partner.partnerType, partner.contribution, partner.commitment, partner.contactPerson, partner.activeDate]
+        [
+          partner.organization,
+          partner.partnerType,
+          partner.contribution,
+          partner.commitment,
+          partner.contactPerson,
+          partner.activeDate,
+        ]
       );
     }
   }
 
   async setFundingSources(sources: FundingSource[]): Promise<void> {
-    await query("DELETE FROM funding_sources");
+    await query('DELETE FROM funding_sources');
     for (const source of sources) {
       await query(
         `INSERT INTO funding_sources (source_name, funding_type, amount, status, terms, timeline)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [source.sourceName, source.fundingType, source.amount, source.status, source.terms, source.timeline]
+        [
+          source.sourceName,
+          source.fundingType,
+          source.amount,
+          source.status,
+          source.terms,
+          source.timeline,
+        ]
       );
     }
   }
 
   async setTransparencyFeatures(features: TransparencyFeature[]): Promise<void> {
-    await query("DELETE FROM transparency_features");
+    await query('DELETE FROM transparency_features');
     for (const feature of features) {
       await query(
         `INSERT INTO transparency_features (feature_name, description, implementation, access_level, update_frequency)
          VALUES ($1, $2, $3, $4, $5)`,
-        [feature.featureName, feature.description, feature.implementation, feature.accessLevel, feature.updateFrequency]
+        [
+          feature.featureName,
+          feature.description,
+          feature.implementation,
+          feature.accessLevel,
+          feature.updateFrequency,
+        ]
       );
     }
   }
 
   async setAccountabilityMechanisms(mechanisms: AccountabilityMechanism[]): Promise<void> {
-    await query("DELETE FROM accountability_mechanisms");
+    await query('DELETE FROM accountability_mechanisms');
     for (const mechanism of mechanisms) {
       await query(
         `INSERT INTO accountability_mechanisms (mechanism, description, frequency, stakeholders, enforcement_method)
          VALUES ($1, $2, $3, $4, $5)`,
-        [mechanism.mechanism, mechanism.description, mechanism.frequency, JSON.stringify(mechanism.stakeholders), mechanism.enforcementMethod]
+        [
+          mechanism.mechanism,
+          mechanism.description,
+          mechanism.frequency,
+          JSON.stringify(mechanism.stakeholders),
+          mechanism.enforcementMethod,
+        ]
       );
     }
   }
 
   async setTribalPartnerships(partnerships: TribalPartnership[]): Promise<void> {
-    await query("DELETE FROM tribal_partnerships");
+    await query('DELETE FROM tribal_partnerships');
     for (const partnership of partnerships) {
       await query(
         `INSERT INTO tribal_partnerships (tribe_name, location, partnership_type, focus, benefits_shared, cultural_integration)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [partnership.tribeName, partnership.location, partnership.partnershipType, partnership.focus, partnership.benefitsShared, partnership.culturalIntegration]
+        [
+          partnership.tribeName,
+          partnership.location,
+          partnership.partnershipType,
+          partnership.focus,
+          partnership.benefitsShared,
+          partnership.culturalIntegration,
+        ]
       );
     }
   }
 
   async setImplementationTimelines(timelines: ImplementationTimeline[]): Promise<void> {
-    await query("DELETE FROM implementation_timeline");
+    await query('DELETE FROM implementation_timeline');
     for (const timeline of timelines) {
       await query(
         `INSERT INTO implementation_timeline (phase, start_date, end_date, deliverables, milestones, dependencies)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [timeline.phase, timeline.startDate, timeline.endDate, JSON.stringify(timeline.deliverables), JSON.stringify(timeline.milestones), timeline.dependencies]
+        [
+          timeline.phase,
+          timeline.startDate,
+          timeline.endDate,
+          JSON.stringify(timeline.deliverables),
+          JSON.stringify(timeline.milestones),
+          timeline.dependencies,
+        ]
       );
     }
   }
 
   async setPoliticalRoadmaps(roadmaps: PoliticalRoadmap[]): Promise<void> {
-    await query("DELETE FROM political_roadmap");
+    await query('DELETE FROM political_roadmap');
     for (const roadmap of roadmaps) {
       await query(
         `INSERT INTO political_roadmap (milestone, target_date, strategy, stakeholders, success_metrics, risk_level)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [roadmap.milestone, roadmap.targetDate, roadmap.strategy, JSON.stringify(roadmap.stakeholders), roadmap.successMetrics, roadmap.riskLevel]
+        [
+          roadmap.milestone,
+          roadmap.targetDate,
+          roadmap.strategy,
+          JSON.stringify(roadmap.stakeholders),
+          roadmap.successMetrics,
+          roadmap.riskLevel,
+        ]
       );
     }
   }
 
   async setStressTests(tests: StressTest[]): Promise<void> {
-    await query("DELETE FROM stress_tests");
+    await query('DELETE FROM stress_tests');
     for (const test of tests) {
       await query(
         `INSERT INTO stress_tests (scenario_name, stress_type, severity, impact_description, mitigation_strategy, recovery_time)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [test.scenarioName, test.stressType, test.severity, test.impactDescription, test.mitigationStrategy, test.recoveryTime]
+        [
+          test.scenarioName,
+          test.stressType,
+          test.severity,
+          test.impactDescription,
+          test.mitigationStrategy,
+          test.recoveryTime,
+        ]
       );
     }
   }
 
   async setTieredCarbonPricings(pricings: TieredCarbonPricing[]): Promise<void> {
-    await query("DELETE FROM tiered_carbon_pricing");
+    await query('DELETE FROM tiered_carbon_pricing');
     for (const pricing of pricings) {
       await query(
         `INSERT INTO tiered_carbon_pricing (tier, price_per_ton, volume_threshold, applicability, incentives, adjustment_schedule)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [pricing.tier, pricing.pricePerTon, pricing.volumeThreshold, pricing.applicability, pricing.incentives, pricing.adjustmentSchedule]
+        [
+          pricing.tier,
+          pricing.pricePerTon,
+          pricing.volumeThreshold,
+          pricing.applicability,
+          pricing.incentives,
+          pricing.adjustmentSchedule,
+        ]
       );
     }
   }
 
   async setRegenerativeAgriculturePractices(practices: RegenerativeAgriculture[]): Promise<void> {
-    await query("DELETE FROM regenerative_agriculture");
+    await query('DELETE FROM regenerative_agriculture');
     for (const practice of practices) {
       await query(
         `INSERT INTO regenerative_agriculture (practice, description, carbon_sequestration, soil_health_improvement, water_conservation, implementation_cost)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [practice.practice, practice.description, practice.carbonSequestration, practice.soilHealthImprovement, practice.waterConservation, practice.implementationCost]
+        [
+          practice.practice,
+          practice.description,
+          practice.carbonSequestration,
+          practice.soilHealthImprovement,
+          practice.waterConservation,
+          practice.implementationCost,
+        ]
       );
     }
   }
 
   async setLaborTransitions(transitions: LaborTransition[]): Promise<void> {
-    await query("DELETE FROM labor_transition");
+    await query('DELETE FROM labor_transition');
     for (const transition of transitions) {
       await query(
         `INSERT INTO labor_transition (sector, current_jobs, projected_jobs, retraining_required, timeline_months, support_programs)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [transition.sector, transition.currentJobs, transition.projectedJobs, transition.retrainingRequired, transition.timelineMonths, JSON.stringify(transition.supportPrograms)]
+        [
+          transition.sector,
+          transition.currentJobs,
+          transition.projectedJobs,
+          transition.retrainingRequired,
+          transition.timelineMonths,
+          JSON.stringify(transition.supportPrograms),
+        ]
       );
     }
   }
 
   async setPoliticalCoalitions(coalitions: PoliticalCoalition[]): Promise<void> {
-    await query("DELETE FROM political_coalition");
+    await query('DELETE FROM political_coalition');
     for (const coalition of coalitions) {
       await query(
         `INSERT INTO political_coalition (group_name, alignment, size, key_issues, engagement_strategy, influence)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [coalition.group, coalition.alignment, coalition.size, JSON.stringify(coalition.keyIssues), coalition.engagementStrategy, coalition.influence]
+        [
+          coalition.group,
+          coalition.alignment,
+          coalition.size,
+          JSON.stringify(coalition.keyIssues),
+          coalition.engagementStrategy,
+          coalition.influence,
+        ]
       );
     }
   }
 
   async setPlanetaryBoundaries(boundaries: PlanetaryBoundary[]): Promise<void> {
-    await query("DELETE FROM planetary_boundaries");
+    await query('DELETE FROM planetary_boundaries');
     for (const boundary of boundaries) {
       await query(
         `INSERT INTO planetary_boundaries (boundary, current_status, threshold, current_value, trend_direction, gaia_impact)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [boundary.boundary, boundary.currentStatus, boundary.threshold, boundary.currentValue, boundary.trendDirection, boundary.gaiaImpact]
+        [
+          boundary.boundary,
+          boundary.currentStatus,
+          boundary.threshold,
+          boundary.currentValue,
+          boundary.trendDirection,
+          boundary.gaiaImpact,
+        ]
       );
     }
   }
 
   async setCalibrationTargets(targets: CalibrationTarget[]): Promise<void> {
-    await query("DELETE FROM calibration_targets");
+    await query('DELETE FROM calibration_targets');
     for (const target of targets) {
       await query(
         `INSERT INTO calibration_targets (target_name, target_value, current_value, calibration_method, accuracy, validation_source)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [target.targetName, target.targetValue, target.currentValue, target.calibrationMethod, target.accuracy, target.validationSource]
+        [
+          target.targetName,
+          target.targetValue,
+          target.currentValue,
+          target.calibrationMethod,
+          target.accuracy,
+          target.validationSource,
+        ]
       );
     }
   }
 
   async setModelMaturities(maturities: ModelMaturity[]): Promise<void> {
-    await query("DELETE FROM model_maturity");
+    await query('DELETE FROM model_maturity');
     for (const maturity of maturities) {
       await query(
         `INSERT INTO model_maturity (component, maturity_level, data_quality, validation_status, uncertainty_range, improvement_needed)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [maturity.component, maturity.maturityLevel, maturity.dataQuality, maturity.validationStatus, maturity.uncertaintyRange, maturity.improvementNeeded]
+        [
+          maturity.component,
+          maturity.maturityLevel,
+          maturity.dataQuality,
+          maturity.validationStatus,
+          maturity.uncertaintyRange,
+          maturity.improvementNeeded,
+        ]
       );
     }
   }
 
   async setHistoricalClimateData(data: HistoricalClimateData[]): Promise<void> {
-    await query("DELETE FROM historical_climate_data");
+    await query('DELETE FROM historical_climate_data');
     for (const item of data) {
       await query(
         `INSERT INTO historical_climate_data (year, avg_temperature, precipitation, extreme_events, co2_levels, sea_level_change)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [item.year, item.avgTemperature, item.precipitation, item.extremeEvents, item.co2Levels, item.seaLevelChange]
+        [
+          item.year,
+          item.avgTemperature,
+          item.precipitation,
+          item.extremeEvents,
+          item.co2Levels,
+          item.seaLevelChange,
+        ]
       );
     }
   }
 
   async setMonteCarloSimulations(simulations: MonteCarloSimulation[]): Promise<void> {
-    await query("DELETE FROM monte_carlo_simulations");
+    await query('DELETE FROM monte_carlo_simulations');
     for (const simulation of simulations) {
       await query(
         `INSERT INTO monte_carlo_simulations (simulation_name, iterations, mean_outcome, standard_deviation, confidence_interval, assumptions)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [simulation.simulationName, simulation.iterations, simulation.meanOutcome, simulation.standardDeviation, simulation.confidenceInterval, simulation.assumptions]
+        [
+          simulation.simulationName,
+          simulation.iterations,
+          simulation.meanOutcome,
+          simulation.standardDeviation,
+          simulation.confidenceInterval,
+          simulation.assumptions,
+        ]
       );
     }
   }
 
   async setScenarioComparisons(comparisons: ScenarioComparison[]): Promise<void> {
-    await query("DELETE FROM scenario_comparisons");
+    await query('DELETE FROM scenario_comparisons');
     for (const comparison of comparisons) {
       await query(
         `INSERT INTO scenario_comparisons (scenario_name, policy_approach, climate_outcome, economic_cost, social_benefit, feasibility)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [comparison.scenarioName, comparison.policyApproach, comparison.climateOutcome, comparison.economicCost, comparison.socialBenefit, comparison.feasibility]
+        [
+          comparison.scenarioName,
+          comparison.policyApproach,
+          comparison.climateOutcome,
+          comparison.economicCost,
+          comparison.socialBenefit,
+          comparison.feasibility,
+        ]
       );
     }
   }
 
   async setOptimizationParams(params: OptimizationParam[]): Promise<void> {
-    await query("DELETE FROM optimization_params");
+    await query('DELETE FROM optimization_params');
     for (const param of params) {
       await query(
         `INSERT INTO optimization_params (parameter_name, current_value, optimal_range, sensitivity, adjustment_impact, constraints)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [param.parameterName, param.currentValue, param.optimalRange, param.sensitivity, param.adjustmentImpact, param.constraints]
+        [
+          param.parameterName,
+          param.currentValue,
+          param.optimalRange,
+          param.sensitivity,
+          param.adjustmentImpact,
+          param.constraints,
+        ]
       );
     }
   }
 
   async setSensitivityAnalyses(analyses: SensitivityAnalysis[]): Promise<void> {
-    await query("DELETE FROM sensitivity_analysis");
+    await query('DELETE FROM sensitivity_analysis');
     for (const analysis of analyses) {
       await query(
         `INSERT INTO sensitivity_analysis (variable, baseline_value, sensitivity_coefficient, impact_on_outcome, critical_threshold, confidence_level)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [analysis.variable, analysis.baselineValue, analysis.sensitivityCoefficient, analysis.impactOnOutcome, analysis.criticalThreshold, analysis.confidenceLevel]
+        [
+          analysis.variable,
+          analysis.baselineValue,
+          analysis.sensitivityCoefficient,
+          analysis.impactOnOutcome,
+          analysis.criticalThreshold,
+          analysis.confidenceLevel,
+        ]
       );
     }
   }
 
   async setMiningAlternatives(alternatives: MiningAlternative[]): Promise<void> {
-    await query("DELETE FROM mining_alternatives");
+    await query('DELETE FROM mining_alternatives');
     for (const alternative of alternatives) {
       await query(
         `INSERT INTO mining_alternatives (material, alternative, performance_ratio, cost_ratio, environmental_benefit, scalability)
          VALUES ($1, $2, $3, $4, $5, $6)`,
-        [alternative.material, alternative.alternative, alternative.performanceRatio, alternative.costRatio, alternative.environmentalBenefit, alternative.scalability]
+        [
+          alternative.material,
+          alternative.alternative,
+          alternative.performanceRatio,
+          alternative.costRatio,
+          alternative.environmentalBenefit,
+          alternative.scalability,
+        ]
       );
     }
   }

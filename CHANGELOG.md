@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+
 - Updated all npm dependencies to latest compatible versions (2026-02-04)
 - Pinned all dependency versions (removed caret `^` ranges) for reproducibility
 - Updated `express` from 4.18.2 to 4.22.1
@@ -24,10 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated REQUIREMENTS.md with current dependency versions
 
 ### Security
+
 - Verified zero vulnerabilities in updated dependencies via npm audit
 - Verified zero vulnerabilities via GitHub Advisory Database
 
 ### Added
+
 - API endpoint integration tests (14 tests for core endpoints)
 - Response format validation tests
 - Data structure validation tests
@@ -46,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CONTRIBUTING.md contribution guidelines
 
 ### Changed
+
 - Updated CI/CD workflow to run tests (removed continue-on-error)
 - Updated package.json with test scripts
 - Updated NEXT_STEPS.md to reflect completed items (Phase 2.2 complete)
@@ -54,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.0.0] - 2026-02-04
 
 ### Added
+
 - Complete Express.js API with 40 REST endpoints
 - PostgreSQL database integration with 39 tables
 - TypeScript support with full type safety
@@ -74,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Morgan HTTP request logging
 
 ### Technical Details
+
 - Node.js 18+ runtime
 - PostgreSQL 14+ database
 - Express.js 4.18.2 web framework
@@ -81,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 110+ npm packages (0 vulnerabilities)
 
 ### API Endpoints
+
 - Core Stats: /api/health, /api/pilot, /api/endowment, /api/financials, /api/climate
 - Timeline: /api/timeline, /api/implementation-timeline, /api/political-roadmap
 - Education: /api/schools, /api/school-clusters, /api/k12-curriculum, /api/slides
@@ -92,6 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Global: /api/global-regeneration-summary, /api/political-coalition, /api/mining-alternatives
 
 ### Database Schema
+
 - 39 PostgreSQL tables across 8 categories
 - Singleton tables for core stats
 - List tables for collections
@@ -99,6 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Timestamps on all tables
 
 ### Security
+
 - Helmet.js security headers
 - CORS middleware
 - Rate limiting (100 requests per 15 minutes)

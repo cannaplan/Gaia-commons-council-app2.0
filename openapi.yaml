@@ -1,0 +1,931 @@
+openapi: 3.0.0
+info:
+  title: Gaia Commons API
+  version: 5.0.0
+  description: |
+    Transforming education through regenerative agriculture.
+    
+    The Gaia Commons API powers a revolutionary initiative to transform education through school-based 
+    regenerative agriculture. This API provides comprehensive access to data across education, economics, 
+    environment, and governance domains.
+  contact:
+    name: Gaia Commons Initiative
+    url: https://github.com/cannaplan/Gaia-commons-council-app2.0
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:3000
+    description: Development server
+  - url: https://api.gaiacommons.org
+    description: Production server (example)
+
+tags:
+  - name: Health
+    description: Health check and system status
+  - name: Core Stats
+    description: Core program statistics and metrics
+  - name: Timeline
+    description: Project timeline and roadmap
+  - name: Education
+    description: Schools and curriculum data
+  - name: Economics
+    description: Financial projections and funding
+  - name: Environment
+    description: Environmental impact and sustainability
+  - name: Employment
+    description: Job creation and labor transition
+  - name: Governance
+    description: Legal framework and partnerships
+  - name: Analysis
+    description: Statistical analysis and modeling
+
+paths:
+  /api/health:
+    get:
+      tags:
+        - Health
+      summary: Health check endpoint
+      description: Returns the health status of the API
+      operationId: getHealth
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  message:
+                    type: string
+                    example: API is running
+
+  /api/pilot:
+    get:
+      tags:
+        - Core Stats
+      summary: Get pilot program statistics
+      description: Returns comprehensive statistics about the pilot program
+      operationId: getPilotStats
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PilotStats'
+
+  /api/endowment:
+    get:
+      tags:
+        - Core Stats
+      summary: Get endowment metrics
+      description: Returns endowment fund metrics and projections
+      operationId: getEndowmentStats
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndowmentStats'
+
+  /api/financials:
+    get:
+      tags:
+        - Core Stats
+      summary: Get financial metrics
+      description: Returns overall financial metrics and ROI
+      operationId: getFinancialMetrics
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialMetrics'
+
+  /api/climate:
+    get:
+      tags:
+        - Core Stats
+      summary: Get climate metrics
+      description: Returns climate impact metrics
+      operationId: getClimateMetrics
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClimateMetrics'
+
+  /api/timeline:
+    get:
+      tags:
+        - Timeline
+      summary: Get timeline events
+      description: Returns major project milestones and timeline
+      operationId: getTimelineEvents
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimelineEvent'
+
+  /api/implementation-timeline:
+    get:
+      tags:
+        - Timeline
+      summary: Get implementation timeline
+      description: Returns detailed implementation phases and timelines
+      operationId: getImplementationTimeline
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImplementationTimeline'
+
+  /api/political-roadmap:
+    get:
+      tags:
+        - Timeline
+      summary: Get political roadmap
+      description: Returns political milestones and strategies
+      operationId: getPoliticalRoadmap
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoliticalRoadmap'
+
+  /api/schools:
+    get:
+      tags:
+        - Education
+      summary: Get all schools
+      description: Returns list of all participating schools
+      operationId: getSchools
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/School'
+
+  /api/school-clusters:
+    get:
+      tags:
+        - Education
+      summary: Get school clusters
+      description: Returns regional school clusters and hubs
+      operationId: getSchoolClusters
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/k12-curriculum:
+    get:
+      tags:
+        - Education
+      summary: Get K-12 curriculum
+      description: Returns curriculum modules and educational content
+      operationId: getK12Curriculum
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/slides:
+    get:
+      tags:
+        - Education
+      summary: Get presentation slides
+      description: Returns slide deck data for presentations
+      operationId: getSlides
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/scale-projections:
+    get:
+      tags:
+        - Economics
+      summary: Get scale projections
+      description: Returns growth and scaling projections
+      operationId: getScaleProjections
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/historical-financials:
+    get:
+      tags:
+        - Economics
+      summary: Get historical financials
+      description: Returns historical financial data
+      operationId: getHistoricalFinancials
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/endowment-projections:
+    get:
+      tags:
+        - Economics
+      summary: Get endowment projections
+      description: Returns future endowment projections
+      operationId: getEndowmentProjections
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/funding-sources:
+    get:
+      tags:
+        - Economics
+      summary: Get funding sources
+      description: Returns breakdown of funding sources
+      operationId: getFundingSources
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/environmental-impact:
+    get:
+      tags:
+        - Environment
+      summary: Get environmental impact
+      description: Returns comprehensive environmental impact metrics
+      operationId: getEnvironmentalImpact
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/regenerative-agriculture:
+    get:
+      tags:
+        - Environment
+      summary: Get regenerative agriculture practices
+      description: Returns data on regenerative agriculture practices
+      operationId: getRegenerativeAgriculture
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/tiered-carbon-pricing:
+    get:
+      tags:
+        - Environment
+      summary: Get tiered carbon pricing
+      description: Returns carbon pricing tier information
+      operationId: getTieredCarbonPricing
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/nationwide-food-security:
+    get:
+      tags:
+        - Environment
+      summary: Get nationwide food security metrics
+      description: Returns food security metrics and distribution data
+      operationId: getNationwideFoodSecurity
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NationwideFoodSecurity'
+
+  /api/planetary-boundaries:
+    get:
+      tags:
+        - Environment
+      summary: Get planetary boundaries
+      description: Returns planetary health and boundary metrics
+      operationId: getPlanetaryBoundaries
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/historical-climate-data:
+    get:
+      tags:
+        - Environment
+      summary: Get historical climate data
+      description: Returns historical climate impact data
+      operationId: getHistoricalClimateData
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/job-creation:
+    get:
+      tags:
+        - Employment
+      summary: Get job creation data
+      description: Returns job creation metrics and projections
+      operationId: getJobCreation
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/expanded-jobs:
+    get:
+      tags:
+        - Employment
+      summary: Get expanded job categories
+      description: Returns detailed job category breakdown
+      operationId: getExpandedJobs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/labor-transition:
+    get:
+      tags:
+        - Employment
+      summary: Get labor transition data
+      description: Returns labor transition and retraining data
+      operationId: getLaborTransition
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/legal-framework:
+    get:
+      tags:
+        - Governance
+      summary: Get legal framework
+      description: Returns legal structure and governance model
+      operationId: getLegalFramework
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegalFramework'
+
+  /api/coalition-partners:
+    get:
+      tags:
+        - Governance
+      summary: Get coalition partners
+      description: Returns list of coalition partners and stakeholders
+      operationId: getCoalitionPartners
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/tribal-partnerships:
+    get:
+      tags:
+        - Governance
+      summary: Get tribal partnerships
+      description: Returns tribal partnership data
+      operationId: getTribalPartnerships
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/transparency-features:
+    get:
+      tags:
+        - Governance
+      summary: Get transparency features
+      description: Returns transparency and accountability features
+      operationId: getTransparencyFeatures
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/accountability-mechanisms:
+    get:
+      tags:
+        - Governance
+      summary: Get accountability mechanisms
+      description: Returns accountability mechanisms and oversight structures
+      operationId: getAccountabilityMechanisms
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/stress-tests:
+    get:
+      tags:
+        - Analysis
+      summary: Get stress test results
+      description: Returns financial and operational stress test scenarios
+      operationId: getStressTests
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/monte-carlo-simulations:
+    get:
+      tags:
+        - Analysis
+      summary: Get Monte Carlo simulations
+      description: Returns Monte Carlo simulation results
+      operationId: getMonteCarloSimulations
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/scenario-comparisons:
+    get:
+      tags:
+        - Analysis
+      summary: Get scenario comparisons
+      description: Returns comparative scenario analysis
+      operationId: getScenarioComparisons
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/sensitivity-analysis:
+    get:
+      tags:
+        - Analysis
+      summary: Get sensitivity analysis
+      description: Returns sensitivity analysis for key variables
+      operationId: getSensitivityAnalysis
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/optimization-params:
+    get:
+      tags:
+        - Analysis
+      summary: Get optimization parameters
+      description: Returns model optimization parameters
+      operationId: getOptimizationParams
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/calibration-targets:
+    get:
+      tags:
+        - Analysis
+      summary: Get calibration targets
+      description: Returns model calibration targets
+      operationId: getCalibrationTargets
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/model-maturity:
+    get:
+      tags:
+        - Analysis
+      summary: Get model maturity assessment
+      description: Returns assessment of model maturity and reliability
+      operationId: getModelMaturity
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/global-regeneration-summary:
+    get:
+      tags:
+        - Core Stats
+      summary: Get global regeneration summary
+      description: Returns global-scale regeneration impact summary
+      operationId: getGlobalRegenerationSummary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalRegenerationSummary'
+
+  /api/political-coalition:
+    get:
+      tags:
+        - Governance
+      summary: Get political coalition data
+      description: Returns political coalition and support data
+      operationId: getPoliticalCoalition
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+  /api/mining-alternatives:
+    get:
+      tags:
+        - Environment
+      summary: Get mining alternatives
+      description: Returns alternative approaches to resource extraction
+      operationId: getMiningAlternatives
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+components:
+  schemas:
+    PilotStats:
+      type: object
+      properties:
+        totalSchools:
+          type: integer
+          example: 6
+        totalStudents:
+          type: integer
+          example: 5630
+        greenhouseArea:
+          type: integer
+          example: 34650
+        launchDate:
+          type: string
+          format: date
+          example: "2026-01-01"
+        regionalHubs:
+          type: integer
+          example: 3
+        avgGreenhouseSize:
+          type: integer
+          example: 5775
+
+    EndowmentStats:
+      type: object
+      properties:
+        principal:
+          type: number
+          example: 5000000000
+        annualDistribution:
+          type: number
+          example: 225000000
+        greenhousesFunded:
+          type: integer
+          example: 1200
+        growthRate:
+          type: string
+          example: "4.5-7%"
+        targetYear:
+          type: integer
+          example: 2030
+
+    FinancialMetrics:
+      type: object
+      properties:
+        totalInvestment:
+          type: number
+          example: 5000000000
+        operatingCosts:
+          type: number
+          example: 850000000
+        revenueStreams:
+          type: number
+          example: 1200000000
+        roi:
+          type: number
+          example: 0.41
+        breakEvenYear:
+          type: integer
+          example: 2028
+        netPresentValue:
+          type: number
+          example: 3200000000
+
+    ClimateMetrics:
+      type: object
+      properties:
+        carbonSequestered:
+          type: number
+          example: 12500
+        waterSaved:
+          type: number
+          example: 45000000
+        solarGenerated:
+          type: number
+          example: 2800000
+        biodiversityCount:
+          type: integer
+          example: 145
+        soilHealthScore:
+          type: number
+          example: 8.7
+        wasteReduction:
+          type: number
+          example: 78.5
+
+    TimelineEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+        year:
+          type: integer
+        quarter:
+          type: string
+        milestone:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        impact:
+          type: string
+
+    ImplementationTimeline:
+      type: object
+      properties:
+        id:
+          type: integer
+        phase:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        deliverables:
+          type: array
+          items:
+            type: string
+        milestones:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: string
+
+    PoliticalRoadmap:
+      type: object
+      properties:
+        id:
+          type: integer
+        milestone:
+          type: string
+        targetDate:
+          type: string
+        strategy:
+          type: string
+        stakeholders:
+          type: array
+          items:
+            type: string
+        successMetrics:
+          type: string
+        riskLevel:
+          type: string
+
+    School:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: string
+        students:
+          type: integer
+        greenhouseSize:
+          type: integer
+        launchDate:
+          type: string
+          format: date
+        regionalHub:
+          type: string
+
+    LegalFramework:
+      type: object
+      properties:
+        structure:
+          type: string
+        governanceModel:
+          type: string
+        landOwnership:
+          type: string
+        taxStatus:
+          type: string
+        complianceFramework:
+          type: string
+        stakeholderRights:
+          type: string
+
+    NationwideFoodSecurity:
+      type: object
+      properties:
+        mealsServed:
+          type: number
+        nutritionScore:
+          type: number
+        localFoodPercent:
+          type: number
+        foodDesertsCovered:
+          type: integer
+        emergencyReserve:
+          type: number
+        distributionNetwork:
+          type: string
+
+    GlobalRegenerationSummary:
+      type: object
+      properties:
+        totalCountries:
+          type: integer
+        globalSchools:
+          type: integer
+        totalCarbonOffset:
+          type: number
+        waterConserved:
+          type: number
+        biodiversityProtected:
+          type: integer
+        employmentCreated:
+          type: integer

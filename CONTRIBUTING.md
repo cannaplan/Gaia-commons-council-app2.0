@@ -32,13 +32,15 @@ This project and everyone participating in it is governed by our Code of Conduct
    # Configure .env with your database credentials
    ```
 4. **Set up the database**:
+
    ```bash
    # Using Docker (recommended)
    docker-compose up -d postgres
-   
+
    # Or manually
    psql -U gaia_user -d gaia_commons -f schema.sql
    ```
+
 5. **Run the application**:
    ```bash
    npm run dev
@@ -98,6 +100,7 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 ```
 
 Types:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -107,6 +110,7 @@ Types:
 - `chore`: Maintenance tasks
 
 Examples:
+
 ```
 feat(api): add DELETE endpoint for schools
 
@@ -179,48 +183,87 @@ Increased timeout to 5 seconds for slower networks.
 npm test
 
 # Run specific test file
-npm test -- user.test.ts
+npm test -- health.test.ts
 
 # Run with coverage
 npm run test:coverage
 
 # Watch mode
 npm run test:watch
+
+# Run linting and formatting checks
+npm run lint
+npm run format:check
+
+# Run all quality checks
+npm run validate
 ```
 
 ### Writing Tests
 
 - **Write tests for all new features**
-- **Maintain test coverage above 80%**
+- **Maintain test coverage above 60%** (target 80%+)
 - **Use descriptive test names**
 - **Follow AAA pattern**: Arrange, Act, Assert
+- **Test edge cases and error scenarios**
+
+The project uses:
+
+- **Jest** for test framework
+- **Supertest** for API endpoint testing
+- **ts-jest** for TypeScript support
 
 Example:
+
 ```typescript
 describe('getUserById', () => {
   it('should return user when valid ID is provided', async () => {
     // Arrange
     const userId = 1;
     const expectedUser = { id: 1, name: 'John Doe' };
-    
+
     // Act
     const result = await getUserById(userId);
-    
+
     // Assert
     expect(result).toEqual(expectedUser);
   });
-  
+
   it('should return null when user does not exist', async () => {
     // Arrange
     const userId = 999;
-    
+
     // Act
     const result = await getUserById(userId);
-    
+
     // Assert
     expect(result).toBeNull();
   });
 });
+```
+
+### Code Quality Checks
+
+Before submitting a PR, ensure:
+
+```bash
+# TypeScript compilation passes
+npm run build
+
+# Type checking passes
+npm run typecheck
+
+# Linting passes
+npm run lint
+
+# Code is formatted
+npm run format
+
+# All tests pass
+npm test
+
+# Or run everything at once
+npm run validate
 ```
 
 ## Documentation
@@ -232,6 +275,7 @@ describe('getUserById', () => {
 - **Include inline comments** for complex logic
 
 Example JSDoc:
+
 ```typescript
 /**
  * Retrieves a user by their ID
@@ -258,18 +302,22 @@ async function getUserById(userId: number): Promise<User | null> {
 
 ```markdown
 ## Description
+
 Brief description of what this PR does.
 
 ## Type of Change
+
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Documentation update
 
 ## Testing
+
 Describe how you tested your changes.
 
 ## Checklist
+
 - [ ] My code follows the project's coding standards
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
@@ -280,6 +328,7 @@ Describe how you tested your changes.
 - [ ] Any dependent changes have been merged and published
 
 ## Screenshots (if applicable)
+
 Add screenshots to help explain your changes.
 ```
 

@@ -10,8 +10,13 @@
     "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
     "test": "jest --runInBand",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:watch": "jest --watch --runInBand",
+    "test:coverage": "jest --coverage --runInBand",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"**/*.{ts,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,json,md}\"",
+    "validate": "npm run typecheck && npm run lint && npm run format:check && npm test"
   },
   "keywords": [
     "gaia",
@@ -30,7 +35,10 @@
     "express-rate-limit": "7.5.1",
     "helmet": "7.2.0",
     "morgan": "1.10.1",
-    "pg": "8.18.0"
+    "pg": "8.18.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "@types/cors": "2.8.17",
@@ -40,7 +48,13 @@
     "@types/node": "20.19.31",
     "@types/pg": "8.11.0",
     "@types/supertest": "6.0.3",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
     "jest": "30.2.0",
+    "prettier": "^3.8.1",
     "supertest": "7.2.2",
     "ts-jest": "29.4.6",
     "typescript": "5.7.3"

@@ -13,15 +13,15 @@ This document provides guidance for AI coding agents working on the Gaia Commons
 
 ## Technology Stack
 
-| Component | Technology |
-|-----------|-----------|
-| Runtime | Node.js 18+ |
-| Language | TypeScript 5.7 (strict mode) |
-| Framework | Express.js 4.22 |
-| Database | PostgreSQL 14+ |
-| Testing | Jest 30.2 + Supertest 7.2 |
-| Package Manager | npm |
-| Security | Helmet, CORS, express-rate-limit |
+| Component       | Technology                       |
+| --------------- | -------------------------------- |
+| Runtime         | Node.js 18+                      |
+| Language        | TypeScript 5.7 (strict mode)     |
+| Framework       | Express.js 4.22                  |
+| Database        | PostgreSQL 14+                   |
+| Testing         | Jest 30.2 + Supertest 7.2        |
+| Package Manager | npm                              |
+| Security        | Helmet, CORS, express-rate-limit |
 
 ## Quick Start for Development
 
@@ -109,7 +109,7 @@ npm run test:coverage
 - **Semicolons**: Required at end of statements
 - **Line length**: Prefer keeping lines under 100 characters
 - **Arrow functions**: Use for inline/callback functions
-- **Import organization**: 
+- **Import organization**:
   1. External packages (express, cors, etc.)
   2. Internal modules (./routes, ./db, etc.)
   3. Type imports (interfaces, types)
@@ -168,9 +168,9 @@ The middleware order in `index.ts` matters:
 // Global error handler signature (note unused params with underscore)
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error('❌ Error:', err);
-  res.status(500).json({ 
-    status: 'error', 
-    message: err.message || 'Internal server error' 
+  res.status(500).json({
+    status: 'error',
+    message: err.message || 'Internal server error',
   });
 });
 ```
@@ -192,17 +192,18 @@ The project uses an **interface-based abstraction** pattern:
 
 ```typescript
 // Environment variables with defaults
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=gaia_commons
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-DB_POOL_MAX=20
-DB_IDLE_TIMEOUT=30000
-DB_CONNECTION_TIMEOUT=2000
+DB_HOST = localhost;
+DB_PORT = 5432;
+DB_NAME = gaia_commons;
+DB_USER = your_db_user;
+DB_PASSWORD = your_db_password;
+DB_POOL_MAX = 20;
+DB_IDLE_TIMEOUT = 30000;
+DB_CONNECTION_TIMEOUT = 2000;
 ```
 
 **Important patterns**:
+
 - Pool errors trigger `process.exit(-1)` (fail-fast)
 - Connection testing returns boolean, logs with emoji (✅/❌)
 - Server startup requires successful database connection
@@ -226,6 +227,7 @@ setSchools(schools: School[]): Promise<void>
 ```
 
 **Key characteristics**:
+
 - No filtering or pagination - full datasets returned
 - No individual CRUD (no update, delete, or create for single items)
 - All methods are async, even in-memory implementation
@@ -252,7 +254,7 @@ describe('Endpoint Group', () => {
   it('should return expected data', async () => {
     // Arrange, Act, Assert pattern
     const response = await request(app).get('/api/endpoint');
-    
+
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('propertyName');
     expect(typeof response.body.field).toBe('number');
@@ -379,6 +381,7 @@ The project uses GitHub Actions (`.github/workflows/ci.yml`):
 7. Run tests (`npm test`)
 
 **Environment for CI**:
+
 ```yaml
 DB_HOST: localhost
 DB_PORT: 5432
@@ -406,7 +409,8 @@ docker compose up
 
 **Problem**: Strict mode can cause type errors
 
-**Solution**: 
+**Solution**:
+
 - Use proper types, avoid `any`
 - Add type assertions only when necessary: `value as Type`
 - Use `unknown` for truly unknown types, then narrow with type guards
@@ -418,6 +422,7 @@ docker compose up
 **Symptoms**: "❌ Database connection failed" message
 
 **Solutions**:
+
 1. Verify PostgreSQL is running: `pg_isready`
 2. Check `.env` credentials match database
 3. Ensure database exists: `psql -l`
@@ -429,6 +434,7 @@ docker compose up
 **Problem**: Tests timeout or have race conditions
 
 **Solutions**:
+
 - Always use `--runInBand` flag (already in package.json)
 - Increase timeout for slow tests: `jest.setTimeout(10000)`
 - Ensure proper cleanup in `afterAll()` hooks
@@ -439,6 +445,7 @@ docker compose up
 **Problem**: `Error: listen EADDRINUSE :::3000`
 
 **Solutions**:
+
 ```bash
 # Find process using port 3000
 lsof -i :3000
@@ -455,6 +462,7 @@ PORT=3001 npm start
 **Problem**: `Cannot find module` errors
 
 **Solutions**:
+
 - Ensure `npm install` has been run
 - Check `tsconfig.json` has correct `moduleResolution: "node"`
 - Verify imports use correct file extensions (none for .ts files)
@@ -465,6 +473,7 @@ PORT=3001 npm start
 **Problem**: Jest can't find TypeScript files or has transform errors
 
 **Solution**: The project uses `ts-jest`:
+
 ```javascript
 // jest.config.cjs
 module.exports = {
@@ -502,6 +511,7 @@ async getPilotStats(): Promise<PilotStats | null>
 ### Updating Documentation
 
 When making changes, update:
+
 - `README.md` - For API changes, setup changes, or new features
 - `CHANGELOG.md` - Following Keep a Changelog format
 - `CONTRIBUTING.md` - For new development workflows or standards
@@ -589,6 +599,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 ## When to Ask for Help
 
 If you encounter:
+
 - Unclear requirements or specifications
 - Complex architectural decisions
 - Security concerns
