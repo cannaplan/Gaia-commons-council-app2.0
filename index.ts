@@ -51,10 +51,15 @@ async function startServer() {
       console.error("❌ Cannot start server without database connection");
       process.exit(1);
     }
-    
+
     // Register all API routes (this also seeds the database)
     const router = await registerRoutes(server);
     app.use(router);
+
+    // ============================================================================
+    // ERROR HANDLING (must be after routes)
+    // ============================================================================
+
     
     // ============================================================================
     // ERROR HANDLING (must be after routes)
@@ -67,7 +72,7 @@ async function startServer() {
         message: `Route ${req.method} ${req.path} not found`,
       });
     });
-    
+
     // Global error handler
     app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
       console.error("Error:", err);
@@ -76,6 +81,7 @@ async function startServer() {
         message: err.message || "Internal server error",
       });
     });
+
     
     server.listen(PORT, () => {
       console.log("");
