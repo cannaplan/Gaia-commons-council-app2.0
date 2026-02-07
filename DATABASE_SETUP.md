@@ -18,12 +18,14 @@ The API now uses **PostgreSQL** for persistent data storage. This guide will hel
 ### 1. Install PostgreSQL
 
 **macOS (Homebrew):**
+
 ```bash
 brew install postgresql
 brew services start postgresql
 ```
 
 **Ubuntu/Debian:**
+
 ```bash
 sudo apt-get update
 sudo apt-get install postgresql postgresql-contrib
@@ -64,6 +66,7 @@ psql -U gaia_user -d gaia_commons -f schema.sql
 ```
 
 Or with password prompt:
+
 ```bash
 psql -U gaia_user -d gaia_commons -W -f schema.sql
 ```
@@ -81,6 +84,7 @@ nano .env
 ```
 
 Example `.env`:
+
 ```
 DB_HOST=localhost
 DB_PORT=5432
@@ -111,29 +115,34 @@ node dist/index.js
 ### Tables Created (39 total)
 
 #### Core Stats (4 tables)
+
 - `pilot_stats` - Pilot program statistics
 - `endowment_stats` - Endowment fund metrics
 - `financial_metrics` - Financial performance
 - `climate_metrics` - Environmental impact metrics
 
 #### Timeline & Planning (3 tables)
+
 - `timeline_events` - Milestone events
 - `implementation_timeline` - Rollout phases
 - `political_roadmap` - Political milestones
 
 #### Education (4 tables)
+
 - `school_clusters` - Regional school groups
 - `schools` - Individual schools
 - `k12_curriculum` - Curriculum modules
 - `slides` - Presentation slides
 
 #### Economics (4 tables)
+
 - `scale_projections` - Growth projections
 - `historical_financials` - Past financial data
 - `endowment_projections` - Endowment forecasts
 - `funding_sources` - Funding breakdown
 
 #### Environment (6 tables)
+
 - `environmental_impact` - Impact metrics
 - `regenerative_agriculture` - Farming practices
 - `tiered_carbon_pricing` - Carbon pricing tiers
@@ -142,11 +151,13 @@ node dist/index.js
 - `historical_climate_data` - Climate history
 
 #### Employment (3 tables)
+
 - `job_creation` - Direct jobs
 - `expanded_jobs` - Indirect jobs
 - `labor_transition` - Sector transitions
 
 #### Governance (5 tables)
+
 - `legal_framework` - Legal structure
 - `coalition_partners` - Partner organizations
 - `tribal_partnerships` - Indigenous partnerships
@@ -154,6 +165,7 @@ node dist/index.js
 - `accountability_mechanisms` - Accountability systems
 
 #### Analysis (8 tables)
+
 - `stress_tests` - Risk scenarios
 - `monte_carlo_simulations` - Probability models
 - `scenario_comparisons` - Policy scenarios
@@ -164,6 +176,7 @@ node dist/index.js
 - `mining_alternatives` - Material alternatives
 
 #### Global (2 tables)
+
 - `global_regeneration_summary` - Global impact
 - `political_coalition` - Political alignment
 
@@ -184,6 +197,7 @@ DB_CONNECTION_TIMEOUT=2000  # Connection timeout 2s
 ## Troubleshooting
 
 ### Connection Refused
+
 ```bash
 # Check if PostgreSQL is running
 sudo service postgresql status  # Linux
@@ -191,18 +205,21 @@ brew services list | grep postgresql  # macOS
 ```
 
 ### Authentication Failed
+
 ```bash
 # Reset password
 sudo -u postgres psql -c "ALTER USER gaia_user WITH PASSWORD 'new_password';"
 ```
 
 ### Permission Denied
+
 ```bash
 # Grant schema permissions
 sudo -u postgres psql -d gaia_commons -c "GRANT ALL ON SCHEMA public TO gaia_user;"
 ```
 
 ### Tables Not Found
+
 ```bash
 # Re-run schema
 psql -U gaia_user -d gaia_commons -f schema.sql
@@ -215,12 +232,13 @@ psql -U gaia_user -d gaia_commons -f schema.sql
 If you need to run without PostgreSQL temporarily:
 
 1. Edit `routes.ts`:
+
 ```typescript
 // Change this:
-import { pgStorage as storage } from "./pgStorage";
+import { pgStorage as storage } from './pgStorage';
 
 // To this:
-import { storage } from "./storage";
+import { storage } from './storage';
 ```
 
 2. Comment out database connection test in `index.ts`

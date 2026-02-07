@@ -92,15 +92,14 @@ describe('Error Handling Tests', () => {
         .post('/api/health')
         .set('Content-Type', 'application/json')
         .send('{"invalid": json}');
-      
+
       // Should return an error status
       expect(response.status).toBeGreaterThanOrEqual(400);
     });
 
     it('should handle requests with missing content-type', async () => {
-      const response = await request(app)
-        .get('/api/health');
-      
+      const response = await request(app).get('/api/health');
+
       expect(response.status).toBeLessThan(500);
     });
   });
@@ -131,9 +130,9 @@ describe('Error Handling Tests', () => {
       for (let i = 0; i < 5; i++) {
         requests.push(request(app).get('/api/health'));
       }
-      
+
       const responses = await Promise.all(requests);
-      responses.forEach(response => {
+      responses.forEach((response) => {
         expect(response.status).toBeLessThan(500);
       });
     });
@@ -172,7 +171,7 @@ describe('Error Handling Tests', () => {
       await request(app).get('/api/health');
       const endTime = Date.now();
       const responseTime = endTime - startTime;
-      
+
       expect(responseTime).toBeLessThan(1000); // Should respond within 1 second
     });
 
@@ -181,7 +180,7 @@ describe('Error Handling Tests', () => {
       await request(app).get('/api/nonexistent');
       const endTime = Date.now();
       const responseTime = endTime - startTime;
-      
+
       expect(responseTime).toBeLessThan(1000);
     });
   });

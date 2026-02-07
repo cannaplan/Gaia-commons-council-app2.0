@@ -3,31 +3,31 @@
 // PostgreSQL connection pool setup
 // ============================================================================
 
-import { Pool, PoolClient } from "pg";
-import dotenv from "dotenv";
+import { Pool, PoolClient } from 'pg';
+import dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config();
 
 // Database configuration
 const poolConfig = {
-  host: process.env.DB_HOST || "localhost",
-  port: parseInt(process.env.DB_PORT || "5432"),
-  database: process.env.DB_NAME || "gaia_commons",
-  user: process.env.DB_USER || "gaia_user",
-  password: process.env.DB_PASSWORD || "gaia_password",
+  host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT || '5432'),
+  database: process.env.DB_NAME || 'gaia_commons',
+  user: process.env.DB_USER || 'gaia_user',
+  password: process.env.DB_PASSWORD || 'gaia_password',
   // Connection pool settings
-  max: parseInt(process.env.DB_POOL_MAX || "20"),
-  idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT || "30000"),
-  connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || "2000"),
+  max: parseInt(process.env.DB_POOL_MAX || '20'),
+  idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT || '30000'),
+  connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || '2000'),
 };
 
 // Create connection pool
 export const pool = new Pool(poolConfig);
 
 // Handle pool errors
-pool.on("error", (err) => {
-  console.error("Unexpected database pool error:", err);
+pool.on('error', (err) => {
+  console.error('Unexpected database pool error:', err);
   process.exit(-1);
 });
 
@@ -35,26 +35,26 @@ pool.on("error", (err) => {
 export async function testConnection(): Promise<boolean> {
   try {
     const client = await pool.connect();
-    const result = await client.query("SELECT NOW()");
-    console.log("✅ Database connected:", result.rows[0].now);
+    const result = await client.query('SELECT NOW()');
+    console.log('✅ Database connected:', result.rows[0].now);
     client.release();
     return true;
   } catch (err) {
-    console.error("❌ Database connection failed:", err);
+    console.error('❌ Database connection failed:', err);
     return false;
   }
 }
 
 // Execute a query with automatic client release
-export async function query(text: string, params?: any[]) {
+export async function query(text: string, params?: unknown[]) {
   const start = Date.now();
   try {
     const result = await pool.query(text, params);
     const duration = Date.now() - start;
-    console.log("Executed query", { text: text.substring(0, 50), duration, rows: result.rowCount });
+    console.log('Executed query', { text: text.substring(0, 50), duration, rows: result.rowCount });
     return result;
   } catch (err) {
-    console.error("Query error:", err);
+    console.error('Query error:', err);
     throw err;
   }
 }
@@ -66,8 +66,8 @@ export async function getClient(): Promise<PoolClient> {
 
 // Initialize database (run schema)
 export async function initializeDatabase(): Promise<void> {
-  console.log("Initializing database...");
-  
+  console.log('Initializing database...');
+
   // Check if tables exist
   const result = await query(`
     SELECT EXISTS (
@@ -76,19 +76,19 @@ export async function initializeDatabase(): Promise<void> {
       AND table_name = 'pilot_stats'
     );
   `);
-  
+
   const tablesExist = result.rows[0].exists;
-  
+
   if (!tablesExist) {
-    console.log("Tables not found. Please run schema.sql to create tables.");
-    console.log("psql -U your_user -d your_db -f schema.sql");
+    console.log('Tables not found. Please run schema.sql to create tables.');
+    console.log('psql -U your_user -d your_db -f schema.sql');
   } else {
-    console.log("✅ Database tables verified");
+    console.log('✅ Database tables verified');
   }
 }
 
 // Close pool (for graceful shutdown)
 export async function closePool(): Promise<void> {
   await pool.end();
-  console.log("Database pool closed");
+  console.log('Database pool closed');
 }

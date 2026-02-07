@@ -15,16 +15,19 @@ tests/
 ## Running Tests
 
 ### Run All Tests
+
 ```bash
 npm test
 ```
 
 ### Run Tests in Watch Mode
+
 ```bash
 npm run test:watch
 ```
 
 ### Run Tests with Coverage Report
+
 ```bash
 npm run test:coverage
 ```
@@ -32,6 +35,7 @@ npm run test:coverage
 ## Test Coverage
 
 Current coverage:
+
 - **Storage Layer**: ~46% (10 tests)
 - **Health Endpoint**: 100% (5 tests)
 - **API Endpoints**: Integration tests (14 tests)
@@ -67,16 +71,19 @@ describe('Feature Name', () => {
 ## Test Categories
 
 ### Unit Tests
+
 - Test individual functions and modules
 - Mock all external dependencies
 - Fast execution (< 1 second)
 
 ### Integration Tests (Future)
+
 - Test API endpoints end-to-end
 - Use test database
 - Test request/response flow
 
 ### E2E Tests (Future)
+
 - Test complete user workflows
 - Use test database with seed data
 - Validate business logic
@@ -84,6 +91,7 @@ describe('Feature Name', () => {
 ## CI/CD Integration
 
 Tests run automatically on:
+
 - Every push to GitHub
 - Every pull request
 - Via GitHub Actions workflow
@@ -93,11 +101,13 @@ Tests run automatically on:
 ### Tests Failing Locally
 
 1. **Ensure dependencies are installed**:
+
    ```bash
    npm install
    ```
 
 2. **Rebuild TypeScript**:
+
    ```bash
    npm run build
    ```
@@ -107,6 +117,7 @@ Tests run automatically on:
 ### Coverage Not Generating
 
 Run with verbose output:
+
 ```bash
 npm run test:coverage -- --verbose
 ```

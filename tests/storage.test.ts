@@ -72,7 +72,7 @@ describe('Storage Layer Tests', () => {
         regionalHubs: 2,
         avgGreenhouseSize: 5000,
       };
-      
+
       await expect(storage.setPilotStats(testStats)).resolves.not.toThrow();
     });
 
@@ -88,7 +88,7 @@ describe('Storage Layer Tests', () => {
           impact: 'high',
         },
       ];
-      
+
       await storage.setTimelineEvents(testEvents);
       const events = await storage.getTimelineEvents();
       expect(events.length).toBeGreaterThan(0);

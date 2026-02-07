@@ -29,13 +29,15 @@ const server = createServer(app);
 app.use(helmet());
 
 // CORS - allow all origins in development
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 // Request logging
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 
 // Body parsing
 app.use(express.json({ limit: '10mb' }));
@@ -71,7 +73,7 @@ async function startServer() {
     // Test database connection first
     const dbConnected = await testConnection();
     if (!dbConnected) {
-      console.error("❌ Cannot start server without database connection");
+      console.error('❌ Cannot start server without database connection');
       process.exit(1);
     }
 
@@ -83,55 +85,53 @@ async function startServer() {
     // ERROR HANDLING (must be after routes)
     // ============================================================================
 
-    
     // ============================================================================
     // ERROR HANDLING (must be after routes)
     // ============================================================================
-    
+
     // 404 handler
     app.use((req: Request, res: Response) => {
       res.status(404).json({
-        status: "error",
+        status: 'error',
         message: `Route ${req.method} ${req.path} not found`,
       });
     });
 
     // Global error handler
     app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-      console.error("Error:", err);
+      console.error('Error:', err);
       res.status(500).json({
-        status: "error",
-        message: err.message || "Internal server error",
+        status: 'error',
+        message: err.message || 'Internal server error',
       });
     });
 
-    
     server.listen(PORT, () => {
-      console.log("");
-      console.log("╔══════════════════════════════════════════════════════════════╗");
-      console.log("║                                                              ║");
-      console.log("║           🌿 GAIA COMMONS API v5.0 🌿                        ║");
-      console.log("║                                                              ║");
-      console.log("║   Transforming education through regenerative agriculture    ║");
-      console.log("║                                                              ║");
+      console.log('');
+      console.log('╔══════════════════════════════════════════════════════════════╗');
+      console.log('║                                                              ║');
+      console.log('║           🌿 GAIA COMMONS API v5.0 🌿                        ║');
+      console.log('║                                                              ║');
+      console.log('║   Transforming education through regenerative agriculture    ║');
+      console.log('║                                                              ║');
       console.log(`║   Server running on http://localhost:${PORT}                 ║`);
-      console.log("║                                                              ║");
-      console.log("║   Endpoints:                                                 ║");
-      console.log("║   • GET  /api/health           - Health check                ║");
-      console.log("║   • GET  /api/pilot            - Pilot program stats         ║");
-      console.log("║   • GET  /api/endowment        - Endowment metrics           ║");
-      console.log("║   • GET  /api/timeline         - Timeline events             ║");
-      console.log("║   • GET  /api/financials       - Financial metrics           ║");
-      console.log("║   • GET  /api/climate          - Climate metrics             ║");
-      console.log("║   • ... and 34+ more endpoints                               ║");
-      console.log("║                                                              ║");
+      console.log('║                                                              ║');
+      console.log('║   Endpoints:                                                 ║');
+      console.log('║   • GET  /api/health           - Health check                ║');
+      console.log('║   • GET  /api/pilot            - Pilot program stats         ║');
+      console.log('║   • GET  /api/endowment        - Endowment metrics           ║');
+      console.log('║   • GET  /api/timeline         - Timeline events             ║');
+      console.log('║   • GET  /api/financials       - Financial metrics           ║');
+      console.log('║   • GET  /api/climate          - Climate metrics             ║');
+      console.log('║   • ... and 34+ more endpoints                               ║');
+      console.log('║                                                              ║');
       console.log(`║   📚 API Documentation: http://localhost:${PORT}/api-docs    ║`);
-      console.log("║                                                              ║");
-      console.log("╚══════════════════════════════════════════════════════════════╝");
-      console.log("");
+      console.log('║                                                              ║');
+      console.log('╚══════════════════════════════════════════════════════════════╝');
+      console.log('');
     });
   } catch (error) {
-    console.error("Failed to start server:", error);
+    console.error('Failed to start server:', error);
     process.exit(1);
   }
 }
@@ -139,20 +139,20 @@ async function startServer() {
 startServer();
 
 // Graceful shutdown
-process.on("SIGTERM", async () => {
-  console.log("SIGTERM received, shutting down gracefully...");
+process.on('SIGTERM', async () => {
+  console.log('SIGTERM received, shutting down gracefully...');
   server.close(async () => {
     await closePool();
-    console.log("Server closed");
+    console.log('Server closed');
     process.exit(0);
   });
 });
 
-process.on("SIGINT", async () => {
-  console.log("SIGINT received, shutting down gracefully...");
+process.on('SIGINT', async () => {
+  console.log('SIGINT received, shutting down gracefully...');
   server.close(async () => {
     await closePool();
-    console.log("Server closed");
+    console.log('Server closed');
     process.exit(0);
   });
 });

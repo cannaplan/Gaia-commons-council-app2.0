@@ -3,9 +3,11 @@
 Transforming education through regenerative agriculture.
 
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-blue)](https://www.postgresql.org/)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/cannaplan/Gaia-commons-council-app2.0/ci.yml?branch=main&label=CI)](https://github.com/cannaplan/Gaia-commons-council-app2.0/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 ## Overview
 
@@ -23,7 +25,10 @@ The Gaia Commons API powers a revolutionary initiative to transform education th
 - 🗄️ **PostgreSQL database** with 39 tables
 - 🔐 **Rate limiting** (100 requests per 15 minutes)
 - 📊 **Comprehensive seed data** for development
-- 🐳 **Ready for containerization**
+- 🐳 **Docker support** for easy deployment
+- 📚 **Interactive API documentation** with Swagger UI
+- 🧪 **Comprehensive test suite** with 60%+ coverage
+- ✨ **Code quality tools** (ESLint, Prettier, TypeScript strict mode)
 
 ## Quick Start
 
@@ -98,35 +103,39 @@ npm test
 ## API Endpoints
 
 ### Core Stats
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Health check |
-| GET | `/api/pilot` | Pilot program stats |
-| GET | `/api/endowment` | Endowment metrics |
-| GET | `/api/financials` | Financial metrics |
-| GET | `/api/climate` | Climate metrics |
+
+| Method | Endpoint          | Description         |
+| ------ | ----------------- | ------------------- |
+| GET    | `/api/health`     | Health check        |
+| GET    | `/api/pilot`      | Pilot program stats |
+| GET    | `/api/endowment`  | Endowment metrics   |
+| GET    | `/api/financials` | Financial metrics   |
+| GET    | `/api/climate`    | Climate metrics     |
 
 ### Education
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/schools` | All schools |
-| GET | `/api/school-clusters` | School clusters |
-| GET | `/api/k12-curriculum` | Curriculum modules |
-| GET | `/api/slides` | Slide deck data |
+
+| Method | Endpoint               | Description        |
+| ------ | ---------------------- | ------------------ |
+| GET    | `/api/schools`         | All schools        |
+| GET    | `/api/school-clusters` | School clusters    |
+| GET    | `/api/k12-curriculum`  | Curriculum modules |
+| GET    | `/api/slides`          | Slide deck data    |
 
 ### Economics
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/scale-projections` | Growth projections |
-| GET | `/api/funding-sources` | Funding breakdown |
-| GET | `/api/endowment-projections` | Endowment forecasts |
+
+| Method | Endpoint                     | Description         |
+| ------ | ---------------------------- | ------------------- |
+| GET    | `/api/scale-projections`     | Growth projections  |
+| GET    | `/api/funding-sources`       | Funding breakdown   |
+| GET    | `/api/endowment-projections` | Endowment forecasts |
 
 ### Environment
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/environmental-impact` | Impact metrics |
-| GET | `/api/regenerative-agriculture` | Farming practices |
-| GET | `/api/planetary-boundaries` | Planetary health |
+
+| Method | Endpoint                        | Description       |
+| ------ | ------------------------------- | ----------------- |
+| GET    | `/api/environmental-impact`     | Impact metrics    |
+| GET    | `/api/regenerative-agriculture` | Farming practices |
+| GET    | `/api/planetary-boundaries`     | Planetary health  |
 
 **...and 25+ more endpoints!**
 
@@ -165,24 +174,115 @@ The API uses **39 PostgreSQL tables**:
 
 ## Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PORT` | Server port | 3000 |
-| `DB_HOST` | Database host | localhost |
-| `DB_PORT` | Database port | 5432 |
-| `DB_NAME` | Database name | gaia_commons |
-| `DB_USER` | Database user | gaia_user |
-| `DB_PASSWORD` | Database password | - |
-| `DB_POOL_MAX` | Max connections | 20 |
+| Variable      | Description       | Default      |
+| ------------- | ----------------- | ------------ |
+| `PORT`        | Server port       | 3000         |
+| `DB_HOST`     | Database host     | localhost    |
+| `DB_PORT`     | Database port     | 5432         |
+| `DB_NAME`     | Database name     | gaia_commons |
+| `DB_USER`     | Database user     | gaia_user    |
+| `DB_PASSWORD` | Database password | -            |
+| `DB_POOL_MAX` | Max connections   | 20           |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Build and run (development) |
-| `npm run build` | Compile TypeScript |
-| `npm start` | Run compiled server |
-| `npm run typecheck` | Type check without emit |
+| Command                 | Description                                    |
+| ----------------------- | ---------------------------------------------- |
+| `npm run dev`           | Build and run (development)                    |
+| `npm run build`         | Compile TypeScript                             |
+| `npm start`             | Run compiled server                            |
+| `npm run typecheck`     | Type check without emit                        |
+| `npm test`              | Run test suite                                 |
+| `npm run test:watch`    | Run tests in watch mode                        |
+| `npm run test:coverage` | Run tests with coverage report                 |
+| `npm run lint`          | Lint code with ESLint                          |
+| `npm run lint:fix`      | Lint and auto-fix issues                       |
+| `npm run format`        | Format code with Prettier                      |
+| `npm run format:check`  | Check code formatting                          |
+| `npm run validate`      | Run all checks (typecheck, lint, format, test) |
+
+## API Documentation
+
+Interactive API documentation is available via Swagger UI:
+
+- **Local**: `http://localhost:3000/api-docs`
+- **Production**: `https://your-domain.com/api-docs`
+
+The Swagger UI provides:
+
+- Complete endpoint documentation for all 40 REST endpoints
+- Request/response schemas
+- Interactive "Try it out" functionality
+- Example requests and responses
+
+Alternatively, view the [OpenAPI specification](./openapi.yaml) directly.
+
+## Code Quality
+
+This project maintains high code quality standards:
+
+### Linting
+
+```bash
+# Check for issues
+npm run lint
+
+# Auto-fix issues
+npm run lint:fix
+```
+
+ESLint is configured with TypeScript support and follows recommended best practices.
+
+### Formatting
+
+```bash
+# Format all files
+npm run format
+
+# Check formatting
+npm run format:check
+```
+
+Prettier ensures consistent code style across the project (2 spaces, single quotes, trailing commas).
+
+### Type Safety
+
+```bash
+# Type check
+npm run typecheck
+```
+
+TypeScript strict mode is enabled for maximum type safety.
+
+### Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run with coverage
+npm run test:coverage
+
+# Watch mode
+npm run test:watch
+```
+
+The project includes:
+
+- **67+ unit and integration tests**
+- **60%+ code coverage**
+- Tests for all 40 API endpoints
+- Error handling and edge case testing
+
+### Validation
+
+Run all quality checks at once:
+
+```bash
+npm run validate
+```
+
+This runs typecheck, lint, format check, and tests in sequence.
 
 ## Deployment
 
@@ -217,11 +317,23 @@ docker run -p 3000:3000 --env-file .env gaia-commons-api
 
 ## Contributing
 
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
+
+- Code style and conventions
+- Commit message standards (Conventional Commits)
+- Pull request process
+- Testing requirements
+- Development workflow
+
+Quick start:
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+3. Make your changes following our code standards
+4. Run `npm run validate` to ensure all checks pass
+5. Commit changes (`git commit -m 'feat: add amazing feature'`)
+6. Push to branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request using our PR template
 
 ## Quick Verification (Local)
 

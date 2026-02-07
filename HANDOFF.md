@@ -37,80 +37,89 @@ npm run dev
 ## 📡 API Endpoints (40 total)
 
 ### Core Stats
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Health check |
-| GET | `/api/pilot` | Pilot program stats (6 schools, 5,630 students) |
-| GET | `/api/endowment` | Endowment metrics ($5B, $225M annual) |
-| GET | `/api/financials` | Financial metrics |
-| GET | `/api/climate` | Climate metrics |
+
+| Method | Endpoint          | Description                                     |
+| ------ | ----------------- | ----------------------------------------------- |
+| GET    | `/api/health`     | Health check                                    |
+| GET    | `/api/pilot`      | Pilot program stats (6 schools, 5,630 students) |
+| GET    | `/api/endowment`  | Endowment metrics ($5B, $225M annual)           |
+| GET    | `/api/financials` | Financial metrics                               |
+| GET    | `/api/climate`    | Climate metrics                                 |
 
 ### Timeline & Planning
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/timeline` | 9 milestone events (2024-2030) |
-| GET | `/api/implementation-timeline` | 5-phase rollout plan |
-| GET | `/api/political-roadmap` | 6 political milestones |
+
+| Method | Endpoint                       | Description                    |
+| ------ | ------------------------------ | ------------------------------ |
+| GET    | `/api/timeline`                | 9 milestone events (2024-2030) |
+| GET    | `/api/implementation-timeline` | 5-phase rollout plan           |
+| GET    | `/api/political-roadmap`       | 6 political milestones         |
 
 ### Education
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/schools` | 6 pilot schools |
-| GET | `/api/school-clusters` | 3 regional hubs |
-| GET | `/api/k12-curriculum` | 6 curriculum modules |
-| GET | `/api/slides` | 8-slide deck data |
+
+| Method | Endpoint               | Description          |
+| ------ | ---------------------- | -------------------- |
+| GET    | `/api/schools`         | 6 pilot schools      |
+| GET    | `/api/school-clusters` | 3 regional hubs      |
+| GET    | `/api/k12-curriculum`  | 6 curriculum modules |
+| GET    | `/api/slides`          | 8-slide deck data    |
 
 ### Economics & Scale
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/scale-projections` | Growth to 10,000 schools by 2030 |
-| GET | `/api/historical-financials` | 5 years of financial data |
-| GET | `/api/endowment-projections` | 5-year endowment growth |
-| GET | `/api/funding-sources` | 6 funding sources ($5B total) |
+
+| Method | Endpoint                     | Description                      |
+| ------ | ---------------------------- | -------------------------------- |
+| GET    | `/api/scale-projections`     | Growth to 10,000 schools by 2030 |
+| GET    | `/api/historical-financials` | 5 years of financial data        |
+| GET    | `/api/endowment-projections` | 5-year endowment growth          |
+| GET    | `/api/funding-sources`       | 6 funding sources ($5B total)    |
 
 ### Environment
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/environmental-impact` | 6 impact categories |
-| GET | `/api/regenerative-agriculture` | 6 farming practices |
-| GET | `/api/tiered-carbon-pricing` | 4 pricing tiers |
-| GET | `/api/nationwide-food-security` | Food security metrics |
-| GET | `/api/planetary-boundaries` | 6 planetary boundaries |
-| GET | `/api/historical-climate-data` | 6 years climate data |
+
+| Method | Endpoint                        | Description            |
+| ------ | ------------------------------- | ---------------------- |
+| GET    | `/api/environmental-impact`     | 6 impact categories    |
+| GET    | `/api/regenerative-agriculture` | 6 farming practices    |
+| GET    | `/api/tiered-carbon-pricing`    | 4 pricing tiers        |
+| GET    | `/api/nationwide-food-security` | Food security metrics  |
+| GET    | `/api/planetary-boundaries`     | 6 planetary boundaries |
+| GET    | `/api/historical-climate-data`  | 6 years climate data   |
 
 ### Employment
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/job-creation` | 5 direct job categories |
-| GET | `/api/expanded-jobs` | 5 indirect job categories |
-| GET | `/api/labor-transition` | 4 sector transitions |
+
+| Method | Endpoint                | Description               |
+| ------ | ----------------------- | ------------------------- |
+| GET    | `/api/job-creation`     | 5 direct job categories   |
+| GET    | `/api/expanded-jobs`    | 5 indirect job categories |
+| GET    | `/api/labor-transition` | 4 sector transitions      |
 
 ### Governance & Partnerships
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/legal-framework` | Community Land Trust structure |
-| GET | `/api/coalition-partners` | 6 coalition partners |
-| GET | `/api/tribal-partnerships` | 5 tribal nation partnerships |
-| GET | `/api/transparency-features` | 5 transparency mechanisms |
-| GET | `/api/accountability-mechanisms` | 5 accountability systems |
+
+| Method | Endpoint                         | Description                    |
+| ------ | -------------------------------- | ------------------------------ |
+| GET    | `/api/legal-framework`           | Community Land Trust structure |
+| GET    | `/api/coalition-partners`        | 6 coalition partners           |
+| GET    | `/api/tribal-partnerships`       | 5 tribal nation partnerships   |
+| GET    | `/api/transparency-features`     | 5 transparency mechanisms      |
+| GET    | `/api/accountability-mechanisms` | 5 accountability systems       |
 
 ### Analysis & Modeling
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/stress-tests` | 5 risk scenarios |
-| GET | `/api/monte-carlo-simulations` | 4 probability scenarios |
-| GET | `/api/scenario-comparisons` | 4 policy scenarios |
-| GET | `/api/sensitivity-analysis` | 5 sensitivity variables |
-| GET | `/api/optimization-params` | 5 optimization parameters |
-| GET | `/api/calibration-targets` | 5 calibration targets |
-| GET | `/api/model-maturity` | 5 model components |
+
+| Method | Endpoint                       | Description               |
+| ------ | ------------------------------ | ------------------------- |
+| GET    | `/api/stress-tests`            | 5 risk scenarios          |
+| GET    | `/api/monte-carlo-simulations` | 4 probability scenarios   |
+| GET    | `/api/scenario-comparisons`    | 4 policy scenarios        |
+| GET    | `/api/sensitivity-analysis`    | 5 sensitivity variables   |
+| GET    | `/api/optimization-params`     | 5 optimization parameters |
+| GET    | `/api/calibration-targets`     | 5 calibration targets     |
+| GET    | `/api/model-maturity`          | 5 model components        |
 
 ### Global & Resources
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/global-regeneration-summary` | Global impact summary |
-| GET | `/api/political-coalition` | 6 political groups |
-| GET | `/api/mining-alternatives` | 5 material alternatives |
+
+| Method | Endpoint                           | Description             |
+| ------ | ---------------------------------- | ----------------------- |
+| GET    | `/api/global-regeneration-summary` | Global impact summary   |
+| GET    | `/api/political-coalition`         | 6 political groups      |
+| GET    | `/api/mining-alternatives`         | 5 material alternatives |
 
 ---
 
@@ -174,66 +183,76 @@ SensitivityAnalysis[], MiningAlternative[]
 ## 📊 Sample Data Highlights
 
 ### Pilot Program
+
 - **6 schools** across 3 regional hubs
 - **5,630 students** participating
 - **34,650 sq ft** of greenhouse space
 - Launched **January 2026**
 
 ### Endowment
+
 - **$5 billion** principal by 2030
 - **$225 million** annual distribution
 - **1,200 greenhouses** funded
 - **4.5-7%** growth rate trajectory
 
 ### Climate Impact
+
 - **12,500 tons** carbon sequestered/year
 - **45 million gallons** water saved/year
 - **2.8 million kWh** solar generated/year
 - **145 species** biodiversity count
 
 ### Scale Plan
-| Year | Schools | Students | Investment |
-|------|---------|----------|------------|
-| 2026 | 6 | 5,630 | $125M |
-| 2027 | 50 | 45,000 | $450M |
-| 2028 | 200 | 180,000 | $1.2B |
-| 2029 | 1,000 | 900,000 | $2.8B |
-| 2030 | 10,000 | 9,000,000 | $5B |
+
+| Year | Schools | Students  | Investment |
+| ---- | ------- | --------- | ---------- |
+| 2026 | 6       | 5,630     | $125M      |
+| 2027 | 50      | 45,000    | $450M      |
+| 2028 | 200     | 180,000   | $1.2B      |
+| 2029 | 1,000   | 900,000   | $2.8B      |
+| 2030 | 10,000  | 9,000,000 | $5B        |
 
 ---
 
 ## 🛣️ Next Steps (Priority Order)
 
 ### 1. Database Migration (High Priority)
+
 - Replace `MemStorage` with PostgreSQL/SQLite
 - Add ORM (Prisma/TypeORM/Drizzle)
 - Create migration scripts
 - Add connection pooling
 
 ### 2. Authentication & Security
+
 - JWT or session-based auth
 - API key management
 - Role-based access control (RBAC)
 - OAuth integration
 
 ### 3. Testing
+
 - Unit tests (Jest/Vitest)
 - Integration tests for all endpoints
 - Load testing
 - E2E tests
 
 ### 4. Documentation
+
 - OpenAPI/Swagger spec
 - API documentation site
 - Developer onboarding guide
 
 ### 5. Deployment
+
 - Docker containerization
 - CI/CD pipeline (GitHub Actions)
 - Cloud deployment (AWS/GCP/Azure)
 - Monitoring (Datadog/New Relic)
 
 ### 6. Features
+
 - WebSocket for real-time updates
 - GraphQL endpoint
 - Admin dashboard
@@ -243,12 +262,12 @@ SensitivityAnalysis[], MiningAlternative[]
 
 ## 🔗 Key Files Reference
 
-| File | Purpose | Lines |
-|------|---------|-------|
-| `index.ts` | Server bootstrap | ~95 |
-| `routes.ts` | API routes + seeding | ~750 |
-| `storage.ts` | Types + storage impl | ~900 |
-| `package.json` | Dependencies | ~40 |
+| File           | Purpose              | Lines |
+| -------------- | -------------------- | ----- |
+| `index.ts`     | Server bootstrap     | ~95   |
+| `routes.ts`    | API routes + seeding | ~750  |
+| `storage.ts`   | Types + storage impl | ~900  |
+| `package.json` | Dependencies         | ~40   |
 
 ---
 
@@ -270,5 +289,5 @@ When starting fresh, paste this summary:
 
 ---
 
-*Generated: 2026-02-04*  
-*Version: 5.0.0*
+_Generated: 2026-02-04_  
+_Version: 5.0.0_
