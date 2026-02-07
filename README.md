@@ -223,31 +223,31 @@ docker run -p 3000:3000 --env-file .env gaia-commons-api
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## Quick verification (local)
+## Quick Verification (Local)
 
 ### Using Docker Compose
 
 ```bash
-# Start the application with Docker Compose
+# Start the services
 docker compose up
 
 # In another terminal, verify the health endpoint
 curl http://localhost:3000/api/health
 ```
 
-### Building and Running Tests Locally
+### Running Tests Locally
 
 ```bash
 # Install dependencies
 npm install
 
-# Build the application
+# Build the project
 npm run build
 
-# Start the server (requires PostgreSQL running)
+# Start the server in one terminal
 npm start
 
-# In another terminal, run the smoke tests
+# In another terminal, run the tests
 npm test
 ```
 

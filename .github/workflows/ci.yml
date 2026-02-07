@@ -33,7 +33,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -41,24 +41,15 @@ jobs:
       - name: Start server (background)
         run: |
           nohup node ./dist/index.js > ./server.log 2>&1 &
-          # give server a few seconds to start
           sleep 5
-          
-          # Wait for server to be ready
-          for i in {1..10}; do
-            if curl -f http://localhost:3000/api/health > /dev/null 2>&1; then
-              echo "Server is ready!"
-              break
-            fi
-            echo "Waiting for server... ($i/10)"
-            sleep 2
-          done
         env:
           DB_HOST: localhost
           DB_PORT: 5432
           DB_NAME: gaia_commons_test
           DB_USER: gaia_user
           DB_PASSWORD: test_password
+          PORT: 3000
+          NODE_ENV: test
 
       - name: Run tests
         run: npm test
