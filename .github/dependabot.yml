@@ -1,9 +1,6 @@
-# Note: Labels are currently commented out because they don't exist yet.
-# To enable labels, create them in GitHub first (see .github/LABELS.md):
-#   - "dependencies" - for all dependency updates
-#   - "automated" - for automated PRs
-#   - "github-actions" - for GitHub Actions updates
-# Then uncomment the labels sections below.
+# Note: Labels are automatically created by the setup-labels.yml workflow.
+# The workflow runs on push to main and can also be triggered manually.
+# If labels don't exist yet, run the workflow manually from the Actions tab.
 
 version: 2
 updates:
@@ -19,9 +16,9 @@ updates:
       include: "scope"
     assignees:
       - "cannaplan"
-    # labels:
-    #   - "dependencies"
-    #   - "automated"
+    labels:
+      - "dependencies"
+      - "automated"
     open-pull-requests-limit: 10
     versioning-strategy: auto
 
@@ -37,7 +34,7 @@ updates:
       include: "scope"
     assignees:
       - "cannaplan"
-    # labels:
-    #   - "dependencies"
-    #   - "github-actions"
+    labels:
+      - "dependencies"
+      - "github-actions"
     open-pull-requests-limit: 5
