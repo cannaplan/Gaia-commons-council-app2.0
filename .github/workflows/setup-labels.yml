@@ -24,7 +24,7 @@ jobs:
 
       - name: Create 'dependencies' label
         continue-on-error: true # Don't fail if label already exists
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             try {
@@ -46,7 +46,7 @@ jobs:
 
       - name: Create 'automated' label
         continue-on-error: true
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             try {
@@ -68,7 +68,7 @@ jobs:
 
       - name: Create 'github-actions' label
         continue-on-error: true
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             try {
