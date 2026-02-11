@@ -1,65 +1,15 @@
 {
-  "name": "gaia-commons-api",
-  "version": "5.0.0",
-  "description": "Gaia Commons API - Transforming education through regenerative agriculture",
-  "main": "dist/index.js",
-  "type": "commonjs",
+  "name": "your-package-name",
+  "version": "1.0.0",
+  "description": "your package description",
+  "main": "index.js",
   "scripts": {
-    "dev": "npm run build && npm start",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit",
-    "test": "jest --runInBand",
-    "test:watch": "jest --watch --runInBand",
-    "test:coverage": "jest --coverage --runInBand",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
-    "format": "prettier --write \"**/*.{ts,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,json,md}\"",
-    "validate": "npm run typecheck && npm run lint && npm run format:check && npm test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "gaia",
-    "commons",
-    "education",
-    "regenerative",
-    "agriculture",
-    "api"
-  ],
-  "author": "Gaia Commons Initiative",
-  "license": "MIT",
   "dependencies": {
-    "cors": "2.8.6",
-    "dotenv": "17.2.4",
-    "express": "5.2.1",
-    "express-rate-limit": "8.2.1",
-    "helmet": "8.1.0",
-    "morgan": "1.10.1",
-    "pg": "8.18.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1",
-    "yaml": "^2.8.2"
+    "helmet": "8.1.0"
   },
   "devDependencies": {
-    "@types/cors": "2.8.19",
-    "@types/express": "5.0.6",
-    "@types/jest": "30.0.0",
-    "@types/morgan": "1.9.10",
-    "@types/node": "25.2.2",
-    "@types/pg": "8.16.0",
-    "@types/supertest": "6.0.3",
-    "@types/swagger-ui-express": "^4.1.8",
-    "@typescript-eslint/eslint-plugin": "^8.54.0",
-    "@typescript-eslint/parser": "^8.54.0",
-    "eslint": "^10.0.0",
-    "eslint-config-prettier": "^10.1.8",
-    "jest": "30.2.0",
-    "prettier": "^3.8.1",
-    "supertest": "7.2.2",
-    "ts-jest": "29.4.6",
-    "typescript": "5.9.3"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "eslint": "^9.0.0"
   }
 }
