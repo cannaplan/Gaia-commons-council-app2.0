@@ -48,9 +48,16 @@ jobs:
                 });
                 console.log(`✅ Created label: ${label.name}`);
               } catch (error) {
-                if (error.status === 422) {
+                const isAlreadyExistsError =
+                  error.status === 422 &&
+                  error.response &&
+                  Array.isArray(error.response.data?.errors) &&
+                  error.response.data.errors.some(e => e?.code === 'already_exists');
+
+                if (isAlreadyExistsError) {
                   console.log(`ℹ️ Label already exists: ${label.name}`);
                 } else {
+                  console.error(`❌ Failed to create label "${label.name}":`, error);
                   throw error;
                 }
               }
