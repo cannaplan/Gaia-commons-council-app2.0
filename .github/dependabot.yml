@@ -1,9 +1,10 @@
-# Note: Labels are currently commented out because they don't exist yet.
-# To enable labels, create them in GitHub first (see .github/LABELS.md):
+# Note: Labels are currently commented out as a precaution.
+# The workflow .github/workflows/setup-labels.yml automatically creates these labels.
+# Once the workflow runs and labels are created, these can be uncommented:
 #   - "dependencies" - for all dependency updates
 #   - "automated" - for automated PRs
 #   - "github-actions" - for GitHub Actions updates
-# Then uncomment the labels sections below.
+# See .github/LABELS.md for more information.
 
 version: 2
 updates:
