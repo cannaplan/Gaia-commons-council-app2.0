@@ -14,9 +14,9 @@ The repository includes a GitHub Actions workflow (`.github/workflows/setup-labe
 
 ### How It Works
 
-1. The workflow runs automatically when pushed to the main branch
-2. It can also be triggered manually from the Actions tab
-3. It creates all three required labels with the correct colors and descriptions
+1. The workflow runs automatically when changes to `.github/workflows/setup-labels.yml` are pushed to the `main` branch
+2. For other changes (e.g., code-only commits), it does not auto-run and must be triggered manually from the Actions tab
+3. When it runs, it creates all three required labels with the correct colors and descriptions
 4. If a label already exists, the workflow skips it (no errors)
 
 ### Manual Trigger

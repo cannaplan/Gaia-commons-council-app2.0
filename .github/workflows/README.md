@@ -41,7 +41,6 @@ Automatically creates the required labels for Dependabot to use.
 
 **Required permissions:**
 - `issues: write` - to create labels
-- `pull-requests: write` - to manage PR labels
 
 ## Adding New Workflows
 
