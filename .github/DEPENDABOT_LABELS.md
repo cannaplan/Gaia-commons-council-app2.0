@@ -1,4 +1,4 @@
-# Dependabot Labels Fix
+# Dependabot Labels - Automated Setup
 
 ## Problem
 
@@ -8,13 +8,29 @@ Dependabot was reporting an error because the following labels were referenced i
 - `dependencies`
 - `github-actions`
 
-## Solution
+## Solution: Automated Workflow
 
-The labels references have been removed from `.github/dependabot.yml` to prevent Dependabot errors. Labels are optional in Dependabot configuration.
+We've created a **GitHub Actions workflow** that automatically creates these labels:
 
-## If You Want to Use Labels
+**`.github/workflows/setup-labels.yml`**
 
-If you want Dependabot to automatically add labels to its pull requests:
+This workflow:
+- ✅ Runs automatically when pushed to main branch (when this file is merged)
+- ✅ Can be manually triggered from GitHub Actions UI
+- ✅ Creates all three required labels if they don't exist
+- ✅ Safe to run multiple times (won't fail if labels already exist)
+- ✅ Requires no manual intervention
+
+### How to Use
+
+1. **Automatic (Recommended)**: The workflow runs when this PR is merged to main
+2. **Manual Trigger**: Go to `Actions` → `Setup Dependabot Labels` → `Run workflow`
+
+Once the workflow completes, the labels will exist and Dependabot won't report errors anymore.
+
+## Alternative Manual Methods
+
+If you prefer to create labels manually (instead of using the automated workflow), you can:
 
 ### Option 1: Using GitHub CLI (Recommended)
 
