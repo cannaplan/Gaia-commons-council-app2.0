@@ -1,6 +1,6 @@
-# Note: Labels are automatically created by the setup-labels.yml workflow.
-# The workflow runs on push to main and can also be triggered manually.
-# If labels don't exist yet, run the workflow manually from the Actions tab.
+# Note: Labels are managed by the setup-labels.yml workflow.
+# That workflow runs automatically on pushes to main only when .github/workflows/setup-labels.yml changes,
+# and it can also be triggered manually from the Actions tab if labels need to be (re)created.
 
 version: 2
 updates:
