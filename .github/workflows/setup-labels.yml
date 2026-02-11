@@ -16,65 +16,43 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Create dependencies label
+      - name: Create required labels
         uses: actions/github-script@v7
         with:
           script: |
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+            const labels = [
+              {
                 name: 'dependencies',
                 description: 'Pull requests that update dependencies',
                 color: '0366d6'
-              });
-              console.log('✅ Created label: dependencies');
-            } catch (error) {
-              if (error.status === 422) {
-                console.log('ℹ️ Label already exists: dependencies');
-              } else {
-                throw error;
-              }
-            }
-
-      - name: Create automated label
-        uses: actions/github-script@v7
-        with:
-          script: |
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+              },
+              {
                 name: 'automated',
                 description: 'Automated pull requests',
                 color: 'ededed'
-              });
-              console.log('✅ Created label: automated');
-            } catch (error) {
-              if (error.status === 422) {
-                console.log('ℹ️ Label already exists: automated');
-              } else {
-                throw error;
-              }
-            }
-
-      - name: Create github-actions label
-        uses: actions/github-script@v7
-        with:
-          script: |
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+              },
+              {
                 name: 'github-actions',
                 description: 'Pull requests that update GitHub Actions',
                 color: '000000'
-              });
-              console.log('✅ Created label: github-actions');
-            } catch (error) {
-              if (error.status === 422) {
-                console.log('ℹ️ Label already exists: github-actions');
-              } else {
-                throw error;
+              }
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  description: label.description,
+                  color: label.color
+                });
+                console.log(`✅ Created label: ${label.name}`);
+              } catch (error) {
+                if (error.status === 422) {
+                  console.log(`ℹ️ Label already exists: ${label.name}`);
+                } else {
+                  throw error;
+                }
               }
             }
