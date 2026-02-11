@@ -2,7 +2,8 @@
 # Script to create GitHub labels for Dependabot
 # This script requires GitHub CLI (gh) to be installed and authenticated
 #
-# Usage: ./create-labels.sh
+# Usage: ./create-labels.sh [owner/repo]
+#        If owner/repo is not provided, it will auto-detect from git remote
 #
 # Note: Labels have been removed from dependabot.yml to avoid errors.
 # If you want to use labels with Dependabot, run this script first,
@@ -10,9 +11,20 @@
 
 set -e
 
-REPO="cannaplan/Gaia-commons-council-app2.0"
+# Get repository from argument or auto-detect from git remote
+if [ -n "$1" ]; then
+  REPO="$1"
+else
+  # Auto-detect from git remote origin
+  REPO=$(git remote get-url origin | sed -e 's/.*github.com[:/]\(.*\)\.git/\1/' -e 's/.*github.com[:/]\(.*\)/\1/')
+  if [ -z "$REPO" ]; then
+    echo "Error: Could not auto-detect repository. Please provide owner/repo as argument."
+    echo "Usage: $0 owner/repo"
+    exit 1
+  fi
+fi
 
-echo "Creating GitHub labels for Dependabot..."
+echo "Creating GitHub labels for repository: $REPO"
 
 # Create 'dependencies' label
 gh label create "dependencies" \
