@@ -1,9 +1,9 @@
-# Dependabot configuration for automated dependency updates
-# Note: If you want to use custom labels, create them in GitHub first:
+# Note: Labels are currently commented out because they don't exist yet.
+# To enable labels, create them in GitHub first (see .github/LABELS.md):
 #   - "dependencies" - for all dependency updates
 #   - "automated" - for automated PRs
 #   - "github-actions" - for GitHub Actions updates
-# For now, labels are commented out to avoid errors with missing labels
+# Then uncomment the labels sections below.
 
 version: 2
 updates:

@@ -23,7 +23,7 @@ To use labels with Dependabot, you need to create them in your GitHub repository
 
 ## How to Create Labels
 
-You can create these labels in two ways:
+You can create these labels in multiple ways:
 
 ### Option 1: GitHub Web Interface
 
