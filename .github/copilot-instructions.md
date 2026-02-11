@@ -368,6 +368,36 @@ npm run build
 # Creates .js, .d.ts, and .js.map files
 ```
 
+### Code Quality Checks
+
+Before committing changes, run these commands to ensure code quality:
+
+```bash
+# Type checking (without building)
+npm run typecheck
+
+# Linting
+npm run lint
+
+# Auto-fix linting issues
+npm run lint:fix
+
+# Format code with Prettier
+npm run format
+
+# Check formatting without modifying files
+npm run format:check
+
+# Run all validation checks (typecheck + lint + format + test)
+npm run validate
+```
+
+**Required Before Each Commit**:
+
+- Run `npm run lint:fix` to fix any linting issues
+- Run `npm run format` to ensure consistent code formatting
+- Run `npm run validate` for a complete check before pushing
+
 ### CI Pipeline
 
 The project uses GitHub Actions (`.github/workflows/ci.yml`):
