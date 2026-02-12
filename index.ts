@@ -12,6 +12,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yaml';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { randomUUID } from 'crypto';
 import { registerRoutes } from './routes';
 import { testConnection, closePool } from './db';
 
@@ -21,9 +22,48 @@ dotenv.config();
 const app = express();
 const server = createServer(app);
 
+// Track active connections for graceful shutdown
+const connections = new Set<NodeJS.Socket>();
+
+server.on('connection', (conn: NodeJS.Socket) => {
+  connections.add(conn);
+  conn.on('close', () => {
+    connections.delete(conn);
+  });
+});
+
 // ============================================================================
 // MIDDLEWARE
 // ============================================================================
+
+// Request ID middleware for tracing
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const requestId = randomUUID();
+  res.setHeader('X-Request-Id', requestId);
+  // Store request ID for logging
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (req as any).requestId = requestId;
+  next();
+});
+
+// Request timeout middleware (30 seconds default)
+const REQUEST_TIMEOUT = parseInt(process.env.REQUEST_TIMEOUT || '30000');
+app.use((_req: Request, res: Response, next: NextFunction) => {
+  const timeout = setTimeout(() => {
+    if (!res.headersSent) {
+      res.status(408).json({
+        status: 'error',
+        message: 'Request timeout',
+      });
+    }
+  }, REQUEST_TIMEOUT);
+
+  res.on('finish', () => {
+    clearTimeout(timeout);
+  });
+
+  next();
+});
 
 // Security headers
 app.use(helmet());
@@ -99,10 +139,17 @@ async function startServer() {
 
     // Global error handler
     app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-      console.error('Error:', err);
+      console.error('❌ Error:', err);
+
+      // Log stack trace in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Stack trace:', err.stack);
+      }
+
       res.status(500).json({
         status: 'error',
         message: err.message || 'Internal server error',
+        ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
       });
     });
 
@@ -141,18 +188,56 @@ startServer();
 // Graceful shutdown
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, shutting down gracefully...');
+
+  // Stop accepting new connections
   server.close(async () => {
+    console.log('Server stopped accepting new connections');
+
+    // Close database pool
     await closePool();
-    console.log('Server closed');
+
+    console.log('✅ Server closed gracefully');
     process.exit(0);
+  });
+
+  // Force close after 10 seconds
+  setTimeout(() => {
+    console.error('⚠️  Forced shutdown after timeout');
+    process.exit(1);
+  }, 10000);
+
+  // Close existing connections
+  connections.forEach((conn) => {
+    if ('destroy' in conn && typeof conn.destroy === 'function') {
+      conn.destroy();
+    }
   });
 });
 
 process.on('SIGINT', async () => {
   console.log('SIGINT received, shutting down gracefully...');
+
+  // Stop accepting new connections
   server.close(async () => {
+    console.log('Server stopped accepting new connections');
+
+    // Close database pool
     await closePool();
-    console.log('Server closed');
+
+    console.log('✅ Server closed gracefully');
     process.exit(0);
+  });
+
+  // Force close after 10 seconds
+  setTimeout(() => {
+    console.error('⚠️  Forced shutdown after timeout');
+    process.exit(1);
+  }, 10000);
+
+  // Close existing connections
+  connections.forEach((conn) => {
+    if ('destroy' in conn && typeof conn.destroy === 'function') {
+      conn.destroy();
+    }
   });
 });

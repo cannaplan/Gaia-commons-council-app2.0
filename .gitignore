@@ -16,8 +16,7 @@ build/
 .env.local
 .env.*.local
 
-# IDE
-.vscode/
+# IDE (excluding .vscode as we track recommended settings)
 .idea/
 *.swp
 *.swo

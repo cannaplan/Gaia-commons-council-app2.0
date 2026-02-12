@@ -1969,6 +1969,56 @@ export async function registerRoutes(_server: Server) {
     res.json(alternatives);
   });
 
+  // ============================================================================
+  // MONITORING & HEALTH ENDPOINTS
+  // ============================================================================
+
+  // Kubernetes readiness probe
+  router.get('/api/ready', async (_req: Request, res: Response) => {
+    try {
+      const dbConnected = await testConnection(1, 500);
+      if (dbConnected) {
+        res.status(200).json({ status: 'ready', timestamp: new Date().toISOString() });
+      } else {
+        res.status(503).json({ status: 'not ready', reason: 'database unavailable' });
+      }
+    } catch (err) {
+      res.status(503).json({ status: 'not ready', error: err instanceof Error ? err.message : 'unknown error' });
+    }
+  });
+
+  // Kubernetes liveness probe
+  router.get('/api/live', (_req: Request, res: Response) => {
+    const uptime = Math.floor((Date.now() - serverStartTime) / 1000);
+    res.status(200).json({
+      status: 'alive',
+      uptime: `${uptime}s`,
+      timestamp: new Date().toISOString()
+    });
+  });
+
+  // Metrics endpoint for monitoring
+  router.get('/api/metrics', async (_req: Request, res: Response) => {
+    const { checkHealth } = await import('./db');
+    const health = await checkHealth();
+    const uptime = Math.floor((Date.now() - serverStartTime) / 1000);
+
+    res.json({
+      uptime: uptime,
+      database: {
+        healthy: health.healthy,
+        latency: health.latency,
+        pool: health.metrics,
+      },
+      memory: {
+        used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+        total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+        rss: Math.round(process.memoryUsage().rss / 1024 / 1024),
+      },
+      timestamp: new Date().toISOString(),
+    });
+  });
+
   await seedDatabase();
 
   return router;
