@@ -5,6 +5,7 @@ This document explains the labels used by Dependabot and how they are created.
 ## Automatic Label Creation
 
 The required labels are **automatically created** by the GitHub Actions workflow `.github/workflows/setup-labels.yml`. This workflow:
+
 - Runs automatically when pushed to main branch
 - Can be manually triggered from the Actions tab
 - Creates all required Dependabot labels if they don't exist
@@ -14,16 +15,19 @@ The required labels are **automatically created** by the GitHub Actions workflow
 The following labels are used by Dependabot:
 
 ### 1. dependencies
+
 - **Name**: `dependencies`
 - **Description**: Pull requests that update a dependency file
 - **Color**: `#0366d6` (blue)
 
 ### 2. automated
+
 - **Name**: `automated`
 - **Description**: Automated pull requests from bots
 - **Color**: `#fbca04` (yellow)
 
 ### 3. github-actions
+
 - **Name**: `github-actions`
 - **Description**: Pull requests that update GitHub Actions workflows
 - **Color**: `#2088ff` (light blue)
@@ -33,6 +37,7 @@ The following labels are used by Dependabot:
 ### Automatic (Recommended)
 
 The labels are automatically created by the workflow `.github/workflows/setup-labels.yml`:
+
 1. The workflow runs when this file is pushed to the main branch
 2. You can also manually trigger it from the GitHub Actions tab
 3. Labels are created automatically - no manual intervention needed
@@ -96,8 +101,8 @@ After creating the labels in your repository, you can uncomment the `labels:` se
 
 # To:
 labels:
-  - "dependencies"
-  - "automated"
+  - 'dependencies'
+  - 'automated'
 ```
 
 ## Current Status

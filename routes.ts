@@ -1983,7 +1983,9 @@ export async function registerRoutes(_server: Server) {
         res.status(503).json({ status: 'not ready', reason: 'database unavailable' });
       }
     } catch (err) {
-      res.status(503).json({ status: 'not ready', error: err instanceof Error ? err.message : 'unknown error' });
+      res
+        .status(503)
+        .json({ status: 'not ready', error: err instanceof Error ? err.message : 'unknown error' });
     }
   });
 
@@ -1993,7 +1995,7 @@ export async function registerRoutes(_server: Server) {
     res.status(200).json({
       status: 'alive',
       uptime: `${uptime}s`,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   });
 

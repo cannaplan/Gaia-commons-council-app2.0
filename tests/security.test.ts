@@ -59,9 +59,7 @@ describe('Security Tests', () => {
 
   describe('CORS', () => {
     it('should include CORS headers', async () => {
-      const response = await request(app)
-        .get('/api/health')
-        .set('Origin', 'http://localhost:3000');
+      const response = await request(app).get('/api/health').set('Origin', 'http://localhost:3000');
 
       expect(response.headers).toHaveProperty('access-control-allow-origin');
     });
@@ -100,9 +98,7 @@ describe('Security Tests', () => {
   describe('Input Validation', () => {
     it('should handle large JSON payloads within limit', async () => {
       const largePayload = { data: 'x'.repeat(1024 * 1024) }; // 1MB
-      const response = await request(app)
-        .post('/api/health')
-        .send(largePayload);
+      const response = await request(app).post('/api/health').send(largePayload);
 
       // Should handle without crashing (may return 404 for POST to health)
       expect(response.status).toBeLessThan(500);
@@ -138,9 +134,7 @@ describe('Security Tests', () => {
 
     it('should handle server errors gracefully', async () => {
       // Try to trigger an error with invalid data
-      const response = await request(app)
-        .post('/api/health')
-        .send({ invalid: 'data' });
+      const response = await request(app).post('/api/health').send({ invalid: 'data' });
 
       expect(response.status).toBeLessThan(500);
       expect(response.body).toHaveProperty('status');
