@@ -14,9 +14,9 @@ jobs:
     permissions:
       issues: write
 
-    steps:
-      - name: Create required labels
-        uses: actions/github-script@v7
+      - name: Create 'dependencies' label
+        continue-on-error: true # Don't fail if label already exists
+        uses: actions/github-script@v8
         with:
           script: |
             const labels = [
@@ -24,13 +24,47 @@ jobs:
                 name: 'dependencies',
                 description: 'Pull requests that update dependencies',
                 color: '0366d6'
-              },
-              {
+              });
+              console.log('✅ Created label: dependencies');
+            } catch (error) {
+              if (error.status === 422) {
+                console.log('ℹ️  Label already exists: dependencies');
+              } else {
+                throw error;
+              }
+            }
+
+      - name: Create 'automated' label
+        continue-on-error: true
+        uses: actions/github-script@v8
+        with:
+          script: |
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 name: 'automated',
                 description: 'Automated pull requests',
                 color: 'ededed'
-              },
-              {
+              });
+              console.log('✅ Created label: automated');
+            } catch (error) {
+              if (error.status === 422) {
+                console.log('ℹ️  Label already exists: automated');
+              } else {
+                throw error;
+              }
+            }
+
+      - name: Create 'github-actions' label
+        continue-on-error: true
+        uses: actions/github-script@v8
+        with:
+          script: |
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 name: 'github-actions',
                 description: 'Pull requests that update GitHub Actions',
                 color: '000000'
