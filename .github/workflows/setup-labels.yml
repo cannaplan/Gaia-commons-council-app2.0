@@ -1,10 +1,7 @@
-name: Setup Dependabot Labels
-
-# This workflow creates the required labels for Dependabot PRs
-# Run this workflow once to set up the labels, then they can be used in dependabot.yml
+name: Setup Repository Labels
 
 on:
-  workflow_dispatch: # Allows manual triggering from GitHub Actions UI
+  workflow_dispatch: # Allow manual trigger
   push:
     branches:
       - main
@@ -13,90 +10,55 @@ on:
 
 jobs:
   create-labels:
-    name: Create Required Labels
     runs-on: ubuntu-latest
     permissions:
-      issues: write # Required to create labels
-      
+      issues: write
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Create 'dependencies' label
-        continue-on-error: true # Don't fail if label already exists
+      - name: Create required labels
         uses: actions/github-script@v7
         with:
           script: |
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+            const labels = [
+              {
                 name: 'dependencies',
-                description: 'Pull requests that update a dependency file',
+                description: 'Pull requests that update dependencies',
                 color: '0366d6'
-              });
-              console.log('✅ Created label: dependencies');
-            } catch (error) {
-              if (error.status === 422) {
-                console.log('ℹ️  Label already exists: dependencies');
-              } else {
-                throw error;
-              }
-            }
-
-      - name: Create 'automated' label
-        continue-on-error: true
-        uses: actions/github-script@v7
-        with:
-          script: |
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+              },
+              {
                 name: 'automated',
-                description: 'Automated pull requests from bots',
+                description: 'Automated pull requests',
                 color: 'ededed'
-              });
-              console.log('✅ Created label: automated');
-            } catch (error) {
-              if (error.status === 422) {
-                console.log('ℹ️  Label already exists: automated');
-              } else {
-                throw error;
-              }
-            }
-
-      - name: Create 'github-actions' label
-        continue-on-error: true
-        uses: actions/github-script@v7
-        with:
-          script: |
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+              },
+              {
                 name: 'github-actions',
-                description: 'Pull requests that update GitHub Actions workflows',
+                description: 'Pull requests that update GitHub Actions',
                 color: '000000'
-              });
-              console.log('✅ Created label: github-actions');
-            } catch (error) {
-              if (error.status === 422) {
-                console.log('ℹ️  Label already exists: github-actions');
-              } else {
-                throw error;
+              }
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  description: label.description,
+                  color: label.color
+                });
+                console.log(`✅ Created label: ${label.name}`);
+              } catch (error) {
+                const isAlreadyExistsError =
+                  error.status === 422 &&
+                  error.response &&
+                  Array.isArray(error.response.data?.errors) &&
+                  error.response.data.errors.some(e => e?.code === 'already_exists');
+
+                if (isAlreadyExistsError) {
+                  console.log(`ℹ️ Label already exists: ${label.name}`);
+                } else {
+                  console.error(`❌ Failed to create label "${label.name}":`, error);
+                  throw error;
+                }
               }
             }
-
-      - name: Summary
-        run: |
-          echo "## Labels Setup Complete! ✅" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "The following labels have been created (or already existed):" >> $GITHUB_STEP_SUMMARY
-          echo "- \`dependencies\` - Pull requests that update a dependency file" >> $GITHUB_STEP_SUMMARY
-          echo "- \`automated\` - Automated pull requests from bots" >> $GITHUB_STEP_SUMMARY
-          echo "- \`github-actions\` - Pull requests that update GitHub Actions workflows" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
-          echo "These labels are now available for use by Dependabot!" >> $GITHUB_STEP_SUMMARY
-          echo "You can uncomment the labels sections in \`.github/dependabot.yml\` if desired." >> $GITHUB_STEP_SUMMARY

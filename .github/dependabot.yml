@@ -1,10 +1,6 @@
-# Note: Labels are currently commented out as a precaution.
-# The workflow .github/workflows/setup-labels.yml automatically creates these labels.
-# Once the workflow runs and labels are created, these can be uncommented:
-#   - "dependencies" - for all dependency updates
-#   - "automated" - for automated PRs
-#   - "github-actions" - for GitHub Actions updates
-# See .github/LABELS.md for more information.
+# Note: Labels are managed by the setup-labels.yml workflow.
+# That workflow runs automatically on pushes to main only when .github/workflows/setup-labels.yml changes,
+# and it can also be triggered manually from the Actions tab if labels need to be (re)created.
 
 version: 2
 updates:
@@ -20,9 +16,9 @@ updates:
       include: "scope"
     assignees:
       - "cannaplan"
-    # labels:
-    #   - "dependencies"
-    #   - "automated"
+    labels:
+      - "dependencies"
+      - "automated"
     open-pull-requests-limit: 10
     versioning-strategy: auto
 
@@ -38,7 +34,7 @@ updates:
       include: "scope"
     assignees:
       - "cannaplan"
-    # labels:
-    #   - "dependencies"
-    #   - "github-actions"
+    labels:
+      - "dependencies"
+      - "github-actions"
     open-pull-requests-limit: 5
