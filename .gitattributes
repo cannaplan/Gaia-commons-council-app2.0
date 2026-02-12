@@ -1,0 +1,51 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Source code
+*.ts text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.txt text eol=lf
+
+# Configuration
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+.editorconfig text eol=lf
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+# SQL
+*.sql text eol=lf
+
+# Docker
+Dockerfile text eol=lf
+*.dockerignore text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Windows scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+
+# Prevent git diff on package-lock.json
+package-lock.json -diff

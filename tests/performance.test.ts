@@ -184,7 +184,7 @@ describe('Performance Tests', () => {
 
       expect(response.status).toBe(200);
       expect(duration).toBeLessThan(100);
-      
+
       const contentLength = JSON.stringify(response.body).length;
       expect(contentLength).toBeLessThan(10000);
     });

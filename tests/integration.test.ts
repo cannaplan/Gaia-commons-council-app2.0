@@ -19,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let router: any;
 
 beforeAll(async () => {

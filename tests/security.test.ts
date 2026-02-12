@@ -38,7 +38,7 @@ describe('Security Tests', () => {
   describe('Security Headers', () => {
     it('should include helmet security headers', async () => {
       const response = await request(app).get('/api/health');
-      
+
       // Check for common security headers set by helmet
       expect(response.headers).toHaveProperty('x-content-type-options');
       expect(response.headers['x-content-type-options']).toBe('nosniff');
@@ -62,7 +62,7 @@ describe('Security Tests', () => {
       const response = await request(app)
         .get('/api/health')
         .set('Origin', 'http://localhost:3000');
-      
+
       expect(response.headers).toHaveProperty('access-control-allow-origin');
     });
 
@@ -71,7 +71,7 @@ describe('Security Tests', () => {
         .options('/api/health')
         .set('Origin', 'http://localhost:3000')
         .set('Access-Control-Request-Method', 'GET');
-      
+
       expect(response.status).toBeLessThan(500);
     });
   });
@@ -89,7 +89,7 @@ describe('Security Tests', () => {
         .map(() => request(app).get('/api/health'));
 
       const responses = await Promise.all(requests);
-      
+
       // All should succeed if we're under the limit (100 req/15min)
       responses.forEach((response) => {
         expect(response.status).toBeLessThan(500);
@@ -103,7 +103,7 @@ describe('Security Tests', () => {
       const response = await request(app)
         .post('/api/health')
         .send(largePayload);
-      
+
       // Should handle without crashing (may return 404 for POST to health)
       expect(response.status).toBeLessThan(500);
     });
@@ -113,7 +113,7 @@ describe('Security Tests', () => {
         .post('/api/health')
         .set('Content-Type', 'application/json')
         .send('{ invalid json }');
-      
+
       expect(response.status).toBeLessThan(500);
     });
 
@@ -129,7 +129,7 @@ describe('Security Tests', () => {
       const response = await request(app).get('/api/nonexistent');
       expect(response.status).toBe(404);
       expect(response.body).toHaveProperty('message');
-      
+
       // Should not expose stack traces in production
       if (process.env.NODE_ENV === 'production') {
         expect(response.body).not.toHaveProperty('stack');
@@ -141,7 +141,7 @@ describe('Security Tests', () => {
       const response = await request(app)
         .post('/api/health')
         .send({ invalid: 'data' });
-      
+
       expect(response.status).toBeLessThan(500);
       expect(response.body).toHaveProperty('status');
     });
@@ -170,7 +170,7 @@ describe('Security Tests', () => {
         .post('/api/health')
         .set('Content-Type', 'application/json')
         .send('{}');
-      
+
       expect(response.status).toBeLessThan(500);
     });
 
@@ -179,7 +179,7 @@ describe('Security Tests', () => {
         .post('/api/health')
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .send('key=value');
-      
+
       expect(response.status).toBeLessThan(500);
     });
   });
@@ -208,7 +208,7 @@ describe('Security Tests', () => {
       const response = await request(app)
         .post('/api/health')
         .send({ name: "'; DROP TABLE users; --" });
-      
+
       expect(response.status).toBeLessThan(500);
     });
   });
@@ -218,7 +218,7 @@ describe('Security Tests', () => {
       const response = await request(app)
         .post('/api/health')
         .send({ comment: '<script>alert("XSS")</script>' });
-      
+
       expect(response.status).toBeLessThan(500);
     });
 
@@ -226,7 +226,7 @@ describe('Security Tests', () => {
       const response = await request(app)
         .post('/api/health')
         .send({ data: '&lt;script&gt;alert(1)&lt;/script&gt;' });
-      
+
       expect(response.status).toBeLessThan(500);
     });
   });
@@ -249,7 +249,7 @@ describe('Security Tests', () => {
     it('should generate unique request IDs', async () => {
       const response1 = await request(app).get('/api/health');
       const response2 = await request(app).get('/api/health');
-      
+
       expect(response1.headers['x-request-id']).not.toBe(response2.headers['x-request-id']);
     });
   });

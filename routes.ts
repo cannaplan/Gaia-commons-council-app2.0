@@ -1990,10 +1990,10 @@ export async function registerRoutes(_server: Server) {
   // Kubernetes liveness probe
   router.get('/api/live', (_req: Request, res: Response) => {
     const uptime = Math.floor((Date.now() - serverStartTime) / 1000);
-    res.status(200).json({ 
-      status: 'alive', 
+    res.status(200).json({
+      status: 'alive',
       uptime: `${uptime}s`,
-      timestamp: new Date().toISOString() 
+      timestamp: new Date().toISOString()
     });
   });
 
@@ -2002,7 +2002,7 @@ export async function registerRoutes(_server: Server) {
     const { checkHealth } = await import('./db');
     const health = await checkHealth();
     const uptime = Math.floor((Date.now() - serverStartTime) / 1000);
-    
+
     res.json({
       uptime: uptime,
       database: {

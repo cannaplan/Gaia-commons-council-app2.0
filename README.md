@@ -6,6 +6,7 @@ Transforming education through regenerative agriculture.
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-blue)](https://www.postgresql.org/)
 [![CI Status](https://img.shields.io/github/actions/workflow/status/cannaplan/Gaia-commons-council-app2.0/ci.yml?branch=main&label=CI)](https://github.com/cannaplan/Gaia-commons-council-app2.0/actions)
+[![Security Scan](https://img.shields.io/github/actions/workflow/status/cannaplan/Gaia-commons-council-app2.0/security.yml?branch=main&label=Security)](https://github.com/cannaplan/Gaia-commons-council-app2.0/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
@@ -21,14 +22,17 @@ The Gaia Commons API powers a revolutionary initiative to transform education th
 
 ## Features
 
-- ⚡ **40 REST API endpoints** for complete data access
+- ⚡ **40+ REST API endpoints** for complete data access
 - 🗄️ **PostgreSQL database** with 39 tables
-- 🔐 **Rate limiting** (100 requests per 15 minutes)
+- 🔐 **Security hardened** with Helmet, CORS, and rate limiting
 - 📊 **Comprehensive seed data** for development
 - 🐳 **Docker support** for easy deployment
 - 📚 **Interactive API documentation** with Swagger UI
-- 🧪 **Comprehensive test suite** with 60%+ coverage
+- 🧪 **Comprehensive test suite** with integration, security, and performance tests
 - ✨ **Code quality tools** (ESLint, Prettier, TypeScript strict mode)
+- 🔄 **CI/CD pipeline** with automated testing and security scanning
+- 📈 **Monitoring endpoints** for health checks and metrics
+- 🚀 **Production ready** with graceful shutdown and error handling
 
 ## Quick Start
 

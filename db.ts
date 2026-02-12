@@ -71,7 +71,7 @@ pool.on('remove', () => {
 // Test connection with retry logic
 export async function testConnection(maxRetries: number = 3, retryDelay: number = 2000): Promise<boolean> {
   let lastError: Error | null = null;
-  
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const client = await pool.connect();
@@ -80,17 +80,17 @@ export async function testConnection(maxRetries: number = 3, retryDelay: number 
       console.log(`📊 Pool metrics: ${pool.totalCount} total, ${pool.idleCount} idle, ${pool.waitingCount} waiting`);
       client.release();
       return true;
-    } catch (err) {
-      lastError = err as Error;
-      console.error(`❌ Database connection attempt ${attempt}/${maxRetries} failed:`, err instanceof Error ? err.message : err);
-      
+    } catch (error) {
+      lastError = error as Error;
+      console.error(`❌ Database connection attempt ${attempt}/${maxRetries} failed:`, error instanceof Error ? error.message : error);
+
       if (attempt < maxRetries) {
         console.log(`⏳ Retrying in ${retryDelay}ms...`);
         await new Promise((resolve) => setTimeout(resolve, retryDelay));
       }
     }
   }
-  
+
   console.error('❌ Database connection failed after', maxRetries, 'attempts');
   if (lastError) {
     console.error('Last error:', lastError.message);
@@ -108,7 +108,7 @@ export async function checkHealth(): Promise<{ healthy: boolean; metrics: typeof
     const latency = Date.now() - start;
     updatePoolMetrics();
     return { healthy: true, metrics: poolMetrics, latency };
-  } catch (err) {
+  } catch {
     const latency = Date.now() - start;
     updatePoolMetrics();
     return { healthy: false, metrics: poolMetrics, latency };
@@ -121,14 +121,14 @@ export async function query(text: string, params?: unknown[]): Promise<QueryResu
   try {
     const result = await pool.query(text, params);
     const duration = Date.now() - start;
-    
+
     // Log slow queries (> 1 second)
     if (duration > 1000) {
       console.warn(`⚠️  Slow query detected (${duration}ms):`, text.substring(0, 100));
     } else if (process.env.NODE_ENV === 'development') {
       console.log('Executed query', { text: text.substring(0, 50), duration, rows: result.rowCount });
     }
-    
+
     return result;
   } catch (err) {
     const duration = Date.now() - start;
