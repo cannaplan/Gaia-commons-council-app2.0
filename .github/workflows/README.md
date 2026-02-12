@@ -62,7 +62,18 @@ permissions:
   issues: write
 ### Workflow doesn't trigger automatically
 
-Check the `on:` section to ensure the correct events are specified:
+Check the `on:` section to ensure the correct events are specified. Note that `setup-labels.yml` uses a `paths:` filter and only auto-runs when the workflow file itself changes:
+
+```yaml
+on:
+  workflow_dispatch:  # Manual trigger
+  push:
+    branches: [ main ]
+    paths:              # Only runs when these files change
+      - '.github/workflows/setup-labels.yml'
+```
+
+For workflows without `paths:` filters, a typical configuration might be:
 
 ```yaml
 on:
