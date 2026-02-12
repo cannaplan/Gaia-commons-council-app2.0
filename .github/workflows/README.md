@@ -24,10 +24,10 @@ Runs automated tests on every push and pull request to the main branch.
 Automatically creates the required labels for Dependabot to use.
 
 **What it does:**
-- Creates `dependencies` label (blue) for dependency updates
-- Creates `automated` label (gray) for automated PRs
-- Creates `github-actions` label (black) for GitHub Actions updates
-- Safely handles existing labels (no errors if they already exist)
+- Creates (if missing) a `dependencies` label with a default blue color for dependency updates
+- Creates (if missing) an `automated` label with a default gray color for automated PRs
+- Creates (if missing) a `github-actions` label with a default black color for GitHub Actions updates
+- Safely handles existing labels (no errors if they already exist, and existing colors/descriptions are not changed)
 
 **Triggers:**
 - Push to `main` branch (when this workflow file changes)
