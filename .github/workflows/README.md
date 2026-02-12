@@ -60,9 +60,6 @@ Check that the workflow has the required permissions in the YAML file:
 ```yaml
 permissions:
   issues: write
-  pull-requests: write
-```
-
 ### Workflow doesn't trigger automatically
 
 Check the `on:` section to ensure the correct events are specified:
