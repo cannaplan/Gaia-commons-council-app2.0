@@ -1,10 +1,17 @@
 # GitHub Labels for Dependabot
 
-This document explains how to create the labels referenced in `dependabot.yml`.
+This document explains the labels used by Dependabot and how they are created.
+
+## Automatic Label Creation
+
+The required labels are **automatically created** by the GitHub Actions workflow `.github/workflows/setup-labels.yml`. This workflow:
+- Runs automatically when pushed to main branch
+- Can be manually triggered from the Actions tab
+- Creates all required Dependabot labels if they don't exist
 
 ## Required Labels
 
-To use labels with Dependabot, you need to create them in your GitHub repository first. Here are the recommended labels:
+The following labels are used by Dependabot:
 
 ### 1. dependencies
 - **Name**: `dependencies`
@@ -21,9 +28,18 @@ To use labels with Dependabot, you need to create them in your GitHub repository
 - **Description**: Pull requests that update GitHub Actions workflows
 - **Color**: `#2088ff` (light blue)
 
-## How to Create Labels
+## How Labels are Created
 
-You can create these labels in multiple ways:
+### Automatic (Recommended)
+
+The labels are automatically created by the workflow `.github/workflows/setup-labels.yml`:
+1. The workflow runs when this file is pushed to the main branch
+2. You can also manually trigger it from the GitHub Actions tab
+3. Labels are created automatically - no manual intervention needed
+
+### Manual Methods (Alternative)
+
+If you prefer to create labels manually, you can use:
 
 ### Option 1: GitHub Web Interface
 
@@ -45,7 +61,17 @@ gh label create "automated" --description "Automated pull requests from bots" --
 gh label create "github-actions" --description "Pull requests that update GitHub Actions workflows" --color "2088ff"
 ```
 
-### Option 3: GitHub API
+### Option 3: Helper Script
+
+Use the provided script `.github/create-labels.sh`:
+
+```bash
+./.github/create-labels.sh
+```
+
+This script uses GitHub CLI to create all required labels.
+
+### Option 4: GitHub API
 
 You can also use the GitHub REST API to create labels:
 
@@ -74,8 +100,8 @@ labels:
   - "automated"
 ```
 
-## Why Labels are Currently Commented Out
+## Current Status
 
-The labels are currently commented out in `dependabot.yml` because they don't exist in the repository yet. Dependabot will fail if it tries to apply labels that don't exist, which is why they need to be created first.
+The labels are automatically created by the setup workflow when this PR is merged. Once the labels exist in the repository, Dependabot will be able to use them without any errors.
 
-Once you create the labels using one of the methods above, you can uncomment the relevant sections in the configuration file.
+The labels sections in `dependabot.yml` are currently commented out as a precaution, but they can be safely uncommented once the workflow has run and created the labels.

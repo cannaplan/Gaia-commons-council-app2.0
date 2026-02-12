@@ -1,22 +1,40 @@
-# Dependabot Labels Fix
+# Dependabot Labels Setup
 
 ## Problem
 
-Dependabot was reporting an error because the following labels were referenced in `.github/dependabot.yml` but didn't exist in the GitHub repository:
+Dependabot requires certain labels to exist in the GitHub repository before it can apply them to pull requests. The required labels are:
 
-- `automated`
-- `dependencies`
-- `github-actions`
+- `automated` - for automated PRs
+- `dependencies` - for all dependency updates
+- `github-actions` - for GitHub Actions updates
 
-## Solution
+## Automated Solution (Recommended)
 
-The labels references have been removed from `.github/dependabot.yml` to prevent Dependabot errors. Labels are optional in Dependabot configuration.
+The repository includes a GitHub Actions workflow (`.github/workflows/setup-labels.yml`) that automatically creates the required labels.
 
-## If You Want to Use Labels
+### How It Works
 
-If you want Dependabot to automatically add labels to its pull requests:
+1. The workflow runs automatically when changes to `.github/workflows/setup-labels.yml` are pushed to the `main` branch
+2. For other changes (e.g., code-only commits), it does not auto-run and must be triggered manually from the Actions tab
+3. When it runs, it ensures all three required labels exist. For any missing label, it creates it with the recommended color and description.
+4. If a label already exists, the workflow leaves it unchanged (it does not modify existing colors or descriptions, and it produces no errors)
 
-### Option 1: Using GitHub CLI (Recommended)
+### Manual Trigger
+
+If the labels don't exist yet and you need them immediately:
+
+1. Go to the repository's Actions tab: https://github.com/cannaplan/Gaia-commons-council-app2.0/actions
+2. Click on "Setup Repository Labels" workflow
+3. Click "Run workflow" button
+4. Select the branch and click "Run workflow"
+
+The labels will be created within seconds.
+
+## Alternative: Manual Creation
+
+If you prefer to create labels manually or the automated workflow is not available:
+
+### Option 1: Using GitHub CLI
 
 1. Install GitHub CLI: https://cli.github.com/
 2. Authenticate: `gh auth login`
@@ -74,22 +92,6 @@ curl -X POST \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/$REPO/labels \
   -d '{"name":"github-actions","description":"Pull requests that update GitHub Actions","color":"000000"}'
-```
-
-## Re-enabling Labels in dependabot.yml
-
-After creating the labels, you can add them back to `.github/dependabot.yml`:
-
-```yaml
-# For npm updates:
-labels:
-  - "dependencies"
-  - "automated"
-
-# For GitHub Actions updates:
-labels:
-  - "dependencies"
-  - "github-actions"
 ```
 
 ## References
