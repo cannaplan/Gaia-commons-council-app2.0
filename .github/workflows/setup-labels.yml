@@ -1,0 +1,64 @@
+name: Setup Repository Labels
+
+on:
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/setup-labels.yml'
+
+jobs:
+  create-labels:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Create required labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              {
+                name: 'dependencies',
+                description: 'Pull requests that update dependencies',
+                color: '0366d6'
+              },
+              {
+                name: 'automated',
+                description: 'Automated pull requests',
+                color: 'ededed'
+              },
+              {
+                name: 'github-actions',
+                description: 'Pull requests that update GitHub Actions',
+                color: '000000'
+              }
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  description: label.description,
+                  color: label.color
+                });
+                console.log(`✅ Created label: ${label.name}`);
+              } catch (error) {
+                const isAlreadyExistsError =
+                  error.status === 422 &&
+                  error.response &&
+                  Array.isArray(error.response.data?.errors) &&
+                  error.response.data.errors.some(e => e?.code === 'already_exists');
+
+                if (isAlreadyExistsError) {
+                  console.log(`ℹ️ Label already exists: ${label.name}`);
+                } else {
+                  console.error(`❌ Failed to create label "${label.name}":`, error);
+                  throw error;
+                }
+              }
+            }
