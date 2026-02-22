@@ -9,6 +9,7 @@ This directory contains GitHub Actions workflows for the Gaia Commons API reposi
 Runs automated tests on every push and pull request to the main branch.
 
 **What it does:**
+
 - Sets up PostgreSQL database
 - Installs dependencies
 - Builds TypeScript code
@@ -16,6 +17,7 @@ Runs automated tests on every push and pull request to the main branch.
 - Runs test suite
 
 **Triggers:**
+
 - Push to `main` branch
 - Pull requests to `main` branch
 
@@ -24,22 +26,26 @@ Runs automated tests on every push and pull request to the main branch.
 Automatically creates the required labels for Dependabot to use.
 
 **What it does:**
+
 - Creates (if missing) a `dependencies` label with a default blue color for dependency updates
 - Creates (if missing) an `automated` label with a default gray color for automated PRs
 - Creates (if missing) a `github-actions` label with a default black color for GitHub Actions updates
 - Safely handles existing labels (no errors if they already exist, and existing colors/descriptions are not changed)
 
 **Triggers:**
+
 - Push to `main` branch (when this workflow file changes)
 - Manual trigger via GitHub Actions UI
 
 **How to run manually:**
+
 1. Go to the [Actions tab](https://github.com/cannaplan/Gaia-commons-council-app2.0/actions)
 2. Click "Setup Repository Labels" in the left sidebar
 3. Click "Run workflow" button
 4. Select the branch and click "Run workflow"
 
 **Required permissions:**
+
 - `issues: write` - to create labels
 
 ## Adding New Workflows
@@ -57,7 +63,7 @@ When adding new workflows:
 
 Check that the workflow has the required permissions in the YAML file:
 
-```yaml
+````yaml
 permissions:
   issues: write
 ### Workflow doesn't trigger automatically
@@ -71,16 +77,16 @@ on:
     branches: [ main ]
     paths:              # Only runs when these files change
       - '.github/workflows/setup-labels.yml'
-```
+````
 
 For workflows without `paths:` filters, a typical configuration might be:
 
 ```yaml
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 ```
 
 ### Label creation fails

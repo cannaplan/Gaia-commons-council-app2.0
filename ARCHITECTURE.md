@@ -66,12 +66,14 @@ The Gaia Commons API is a RESTful backend service built with Node.js, TypeScript
 ### 1. Application Entry Point (index.ts)
 
 **Responsibilities:**
+
 - Server initialization and lifecycle management
 - Middleware configuration (order matters!)
 - Signal handling for graceful shutdown
 - Connection tracking for active requests
 
 **Key Features:**
+
 - Request ID generation for tracing
 - Request timeout middleware (30s default)
 - Graceful shutdown with 10s force timeout
@@ -81,12 +83,14 @@ The Gaia Commons API is a RESTful backend service built with Node.js, TypeScript
 ### 2. Database Layer (db.ts)
 
 **Responsibilities:**
+
 - Connection pool management
 - Query execution with logging
 - Health monitoring
 - Retry logic for failed connections
 
 **Key Features:**
+
 - Connection retry logic (3 attempts, 2s delay)
 - Pool metrics tracking (total, idle, waiting, errors)
 - Slow query logging (>1s)
@@ -94,6 +98,7 @@ The Gaia Commons API is a RESTful backend service built with Node.js, TypeScript
 - Query duration logging
 
 **Connection Pool Configuration:**
+
 ```typescript
 {
   max: 20,                    // Maximum connections
@@ -108,10 +113,12 @@ The Gaia Commons API is a RESTful backend service built with Node.js, TypeScript
 **Pattern:** Interface-based abstraction for flexibility
 
 **Implementations:**
+
 - **MemStorage**: In-memory storage for development/testing
 - **PgStorage**: PostgreSQL storage for production
 
 **Design Benefits:**
+
 - Easy testing with in-memory storage
 - Database-agnostic API endpoints
 - Simple storage layer swapping
@@ -120,12 +127,14 @@ The Gaia Commons API is a RESTful backend service built with Node.js, TypeScript
 ### 4. API Routes (routes.ts)
 
 **Organization:**
+
 - 40+ RESTful endpoints
 - Rate limiting middleware
 - Comprehensive seed data
 - Monitoring endpoints
 
 **Endpoint Categories:**
+
 1. **Core Metrics**: /api/pilot, /api/endowment, /api/financials
 2. **Data Lists**: /api/schools, /api/timeline, /api/climate
 3. **Monitoring**: /api/health, /api/ready, /api/live, /api/metrics
@@ -146,6 +155,7 @@ interface IStorage {
 ```
 
 **Benefits:**
+
 - Testability
 - Flexibility
 - Loose coupling
@@ -235,16 +245,20 @@ Express middleware executes in strict order:
 ### Health Endpoints
 
 **`/api/health`**: Basic health check
+
 - Returns: `{ status: 'healthy', timestamp }`
 
 **`/api/ready`**: Kubernetes readiness probe
+
 - Tests database connection
 - Returns: `{ status: 'ready', timestamp }` or 503
 
 **`/api/live`**: Kubernetes liveness probe
+
 - Returns: `{ status: 'alive', uptime, timestamp }`
 
 **`/api/metrics`**: Prometheus-style metrics
+
 - Uptime
 - Database health and latency
 - Pool metrics (connections, idle, waiting)
@@ -253,11 +267,13 @@ Express middleware executes in strict order:
 ### Logging Strategy
 
 **Development:**
+
 - Verbose query logging
 - Stack traces in errors
 - Request/response logging
 
 **Production:**
+
 - Error logging only
 - No stack traces exposed
 - Metric-based monitoring
@@ -330,6 +346,7 @@ Load Balancer
 ```
 
 **Considerations:**
+
 - Shared database connection pool
 - Session-less design
 - Request ID for distributed tracing
@@ -340,8 +357,8 @@ Load Balancer
 Database connection pool can be tuned:
 
 ```typescript
-DB_POOL_MAX=50        // Increase max connections
-DB_IDLE_TIMEOUT=10000 // Reduce idle timeout
+DB_POOL_MAX = 50; // Increase max connections
+DB_IDLE_TIMEOUT = 10000; // Reduce idle timeout
 ```
 
 ## Deployment Architecture

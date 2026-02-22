@@ -69,7 +69,10 @@ pool.on('remove', () => {
 });
 
 // Test connection with retry logic
-export async function testConnection(maxRetries: number = 3, retryDelay: number = 2000): Promise<boolean> {
+export async function testConnection(
+  maxRetries: number = 3,
+  retryDelay: number = 2000
+): Promise<boolean> {
   let lastError: Error | null = null;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -77,12 +80,17 @@ export async function testConnection(maxRetries: number = 3, retryDelay: number 
       const client = await pool.connect();
       const result = await client.query('SELECT NOW()');
       console.log('✅ Database connected:', result.rows[0].now);
-      console.log(`📊 Pool metrics: ${pool.totalCount} total, ${pool.idleCount} idle, ${pool.waitingCount} waiting`);
+      console.log(
+        `📊 Pool metrics: ${pool.totalCount} total, ${pool.idleCount} idle, ${pool.waitingCount} waiting`
+      );
       client.release();
       return true;
     } catch (error) {
       lastError = error as Error;
-      console.error(`❌ Database connection attempt ${attempt}/${maxRetries} failed:`, error instanceof Error ? error.message : error);
+      console.error(
+        `❌ Database connection attempt ${attempt}/${maxRetries} failed:`,
+        error instanceof Error ? error.message : error
+      );
 
       if (attempt < maxRetries) {
         console.log(`⏳ Retrying in ${retryDelay}ms...`);
@@ -99,7 +107,11 @@ export async function testConnection(maxRetries: number = 3, retryDelay: number 
 }
 
 // Health check for monitoring
-export async function checkHealth(): Promise<{ healthy: boolean; metrics: typeof poolMetrics; latency: number }> {
+export async function checkHealth(): Promise<{
+  healthy: boolean;
+  metrics: typeof poolMetrics;
+  latency: number;
+}> {
   const start = Date.now();
   try {
     const client = await pool.connect();
@@ -126,7 +138,11 @@ export async function query(text: string, params?: unknown[]): Promise<QueryResu
     if (duration > 1000) {
       console.warn(`⚠️  Slow query detected (${duration}ms):`, text.substring(0, 100));
     } else if (process.env.NODE_ENV === 'development') {
-      console.log('Executed query', { text: text.substring(0, 50), duration, rows: result.rowCount });
+      console.log('Executed query', {
+        text: text.substring(0, 50),
+        duration,
+        rows: result.rowCount,
+      });
     }
 
     return result;

@@ -35,6 +35,7 @@ app.use(helmet());
 ```
 
 **Headers Set:**
+
 - `X-Content-Type-Options: nosniff` - Prevents MIME type sniffing
 - `X-Frame-Options: DENY` - Prevents clickjacking
 - `X-XSS-Protection: 1; mode=block` - XSS filter
@@ -47,16 +48,17 @@ Cross-Origin Resource Sharing is configured to control access:
 
 ```typescript
 // Development (permissive)
-cors({ origin: true, credentials: true })
+cors({ origin: true, credentials: true });
 
 // Production (restrictive - recommended)
-cors({ 
-  origin: ['https://your-domain.com'], 
-  credentials: true 
-})
+cors({
+  origin: ['https://your-domain.com'],
+  credentials: true,
+});
 ```
 
 **Configuration:**
+
 - Set `CORS_ORIGIN` environment variable for production
 - Use specific domain whitelist, not `*`
 - Enable credentials only when necessary
@@ -67,13 +69,14 @@ Protection against brute force and DoS attacks:
 
 ```typescript
 rateLimit({
-  windowMs: 15 * 60 * 1000,  // 15 minutes
-  max: 100,                   // Limit per IP
-  message: 'Too many requests from this IP'
-})
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit per IP
+  message: 'Too many requests from this IP',
+});
 ```
 
 **Configuration:**
+
 - Adjust via `API_RATE_LIMIT` and `API_RATE_WINDOW` env vars
 - Consider per-endpoint limits for sensitive operations
 - Use Redis for distributed rate limiting in production
@@ -83,7 +86,7 @@ rateLimit({
 Prevents resource exhaustion from slow clients:
 
 ```typescript
-REQUEST_TIMEOUT=30000  // 30 seconds default
+REQUEST_TIMEOUT = 30000; // 30 seconds default
 ```
 
 #### Request ID Tracing
@@ -95,6 +98,7 @@ X-Request-Id: 550e8400-e29b-41d4-a716-446655440000
 ```
 
 **Benefits:**
+
 - Security audit trails
 - Request tracking
 - Debugging support
@@ -126,6 +130,7 @@ await pool.query(`SELECT * FROM users WHERE id = ${userId}`);
 ```
 
 **Recommendations:**
+
 - Use SSL/TLS for database connections in production
 - Rotate database credentials regularly
 - Use separate credentials for different environments
@@ -144,6 +149,7 @@ const password = 'my-secret-password';
 ```
 
 **Use secrets management:**
+
 - Kubernetes Secrets
 - AWS Secrets Manager
 - Azure Key Vault
@@ -154,20 +160,22 @@ const password = 'my-secret-password';
 #### JSON Payload Limits
 
 ```typescript
-express.json({ limit: '10mb' })
+express.json({ limit: '10mb' });
 ```
 
 **Prevents:**
+
 - Memory exhaustion attacks
 - Large payload DoS
 
 #### URL Encoding
 
 ```typescript
-express.urlencoded({ extended: true })
+express.urlencoded({ extended: true });
 ```
 
 **Security:**
+
 - Limits nested object depth
 - Prevents prototype pollution (with express 5.x)
 
@@ -186,6 +194,7 @@ res.json({ error: 'Internal server error' });
 ```
 
 **Never expose:**
+
 - Stack traces
 - Internal paths
 - Database error details
@@ -196,12 +205,14 @@ res.json({ error: 'Internal server error' });
 #### Environment Variables
 
 **Required secrets:**
+
 - `DB_PASSWORD` - Database password
 - `DB_USER` - Database username
 - Session secrets (if implementing auth)
 - API keys (if using third-party services)
 
 **Best Practices:**
+
 - Never commit `.env` files
 - Use `.env.example` for templates
 - Rotate secrets regularly
@@ -238,6 +249,7 @@ npm outdated
 #### Automated Security Scanning
 
 **GitHub Actions Security Workflow:**
+
 - Weekly security scans
 - npm audit on PR
 - CodeQL analysis
@@ -269,6 +281,7 @@ npm outdated
 #### HTTPS/TLS
 
 **Production Requirements:**
+
 - Always use HTTPS
 - TLS 1.2 minimum (1.3 preferred)
 - Valid SSL certificates
@@ -276,16 +289,19 @@ npm outdated
 
 ```typescript
 // Helmet HSTS configuration
-app.use(helmet.hsts({
-  maxAge: 31536000,  // 1 year
-  includeSubDomains: true,
-  preload: true
-}));
+app.use(
+  helmet.hsts({
+    maxAge: 31536000, // 1 year
+    includeSubDomains: true,
+    preload: true,
+  })
+);
 ```
 
 #### Firewall Rules
 
 **Recommended:**
+
 - Allow HTTPS (443) inbound
 - Allow HTTP (80) → HTTPS redirect
 - Block all other inbound ports
@@ -297,6 +313,7 @@ app.use(helmet.hsts({
 #### Security Logging
 
 **Log these events:**
+
 - Authentication attempts (when implemented)
 - Rate limit violations
 - Error conditions
@@ -304,6 +321,7 @@ app.use(helmet.hsts({
 - Unusual patterns
 
 **Don't log:**
+
 - Passwords
 - API keys
 - Personal data (PII)
@@ -312,6 +330,7 @@ app.use(helmet.hsts({
 #### Monitoring Alerts
 
 **Set up alerts for:**
+
 - High error rates
 - Database connection failures
 - Unusual traffic patterns
@@ -323,11 +342,13 @@ app.use(helmet.hsts({
 #### Sensitive Data Handling
 
 **Current Data:**
+
 - No personal data currently stored
 - Financial metrics (public data)
 - School information (public data)
 
 **Future Considerations:**
+
 - Encrypt sensitive data at rest
 - Use HTTPS for data in transit
 - Implement data retention policies
@@ -351,6 +372,7 @@ pg_dump gaia_commons | gzip | gpg --encrypt > backup.sql.gz.gpg
 #### Docker Best Practices
 
 **Implemented:**
+
 - Non-root user (nodejs:nodejs)
 - Multi-stage builds
 - Minimal base image (node:18-alpine)
@@ -358,6 +380,7 @@ pg_dump gaia_commons | gzip | gpg --encrypt > backup.sql.gz.gpg
 - No secrets in Dockerfile
 
 **Recommendations:**
+
 - Scan images for vulnerabilities
 - Use specific image tags (not `latest`)
 - Sign images
@@ -396,9 +419,9 @@ spec:
       app: gaia-commons-api
   ingress:
     - from:
-      - podSelector:
-          matchLabels:
-            role: frontend
+        - podSelector:
+            matchLabels:
+              role: frontend
       ports:
         - protocol: TCP
           port: 3000
@@ -467,6 +490,7 @@ The API follows security best practices from:
 **Current:** None
 
 **Planned:**
+
 - SOC 2 Type II
 - ISO 27001
 - GDPR compliance (if handling EU data)
@@ -508,6 +532,7 @@ The API follows security best practices from:
 ### Contact Information
 
 **Security Team:**
+
 - Email: security@gaia-commons.org
 - Emergency: [Phone number]
 - PGP Key: [Public key fingerprint]
