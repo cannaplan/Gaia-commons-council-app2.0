@@ -71,7 +71,7 @@ app.use(helmet());
 // CORS - allow all origins in development
 app.use(
   cors({
-    origin: true,
+    origin: false,
     credentials: true,
   })
 );
